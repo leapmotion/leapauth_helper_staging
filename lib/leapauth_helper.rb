@@ -1,4 +1,5 @@
 require "leapauth_helper/version"
+require "leapauth_helper/auth_user"
 
 module LeapauthHelper
   class << self
@@ -12,7 +13,18 @@ module LeapauthHelper
   end
 
   def self.included(o)
-    raise unless auth_host
+    case Rails.env
+    when 'development'
+      LeapauthHelper.auth_host = "local.leapmotion:4000"
+      LeapauthHelper.home = "https://leapmotion.com"
+    when 'test'
+      # who knows?
+    when 'staging'
+      LeapauthHelper.auth_host = "stage.leapmotion.com"
+      LeapauthHelper.home = "https://stage.leapmotion.com"
+    when 'production'
+    end
+
     o.class_eval do
       def authenticate_cookie_user!(message = nil)
         redirect_to(auth_sign_in_url, :notice => message) unless current_user_from_auth
@@ -22,15 +34,17 @@ module LeapauthHelper
 
   SECRET = "d1J90283!)98Qwc{}[d[d]sq\\e.. .E++1=-qe\\qe.we..ew//s-1=2=3--"
   COOKIE_AUTH_KEY = "_auth"
+  ENCRYPTOR = ActiveSupport::MessageEncryptor.new(SECRET)
 
-  def set_top_cookie_from_user(user)
+  def delete_auth_cookie
+    set_auth_cookie_from_user(nil)
+  end
+
+  def set_auth_cookie_from_user(user)
     cookie_present = cookies.key?(COOKIE_AUTH_KEY)
-    puts ""
     if user
-      val_data = { :id => user.id, :email => user.email, :admin => true }.to_json
-      data = "#{hash_for_data(val_data)}/#{val_data}"
       cookies[COOKIE_AUTH_KEY] = {
-        :value => data,
+        :value => ENCRYPTOR.encrypt_and_sign(hash_for_user(user).to_json),
         :domain => LeapauthHelper.auth_domain,
         :secure => use_secure?
       }
@@ -42,22 +56,17 @@ module LeapauthHelper
   end
 
   def current_user_from_auth
-    unless instance_variable_defined?(:@current_user)
-      @current_user ||= begin
+    unless instance_variable_defined?(:@current_user_from_auth)
+      @current_user_from_auth ||= begin
         if cookies[COOKIE_AUTH_KEY]
-          hash, data = cookies[COOKIE_AUTH_KEY].split('/', 2)
-          if hash == hash_for_data(data)
-            data = ActiveSupport::JSON.decode(data)
-            User.find(data['id'])
-          else
-            nil
-          end
+          data = ActiveSupport::JSON.decode(ENCRYPTOR.decrypt_and_verify(cookies[COOKIE_AUTH_KEY]))
+          LeapauthHelper::AuthUser.new(data)
         else
           nil
         end
       end
     end
-    @current_user
+    @current_user_from_auth
   end
 
   def auth_bar
@@ -76,7 +85,7 @@ module LeapauthHelper
   end
 
   def auth_sign_in_url(destination = current_url)
-    secure_url("/?r=#{URI.escape(destination)}")
+    secure_url("/?_r=#{URI.escape(destination)}")
   end
 
   def auth_edit_profile_url
@@ -87,9 +96,17 @@ module LeapauthHelper
     "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
   end
 
+  def authenticate_auth_user!
+    unless current_user_from_auth
+      redirect_to auth_sign_in_url
+    end
+  end
+
   private
-  def hash_for_data(d)
-    Digest::SHA1.hexdigest(d + SECRET)
+  def hash_for_user(user)
+    { :id => user.id,
+      :email => user.email,
+      :username => user.username }
   end
 
   def use_secure?
