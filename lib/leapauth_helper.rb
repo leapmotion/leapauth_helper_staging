@@ -16,7 +16,7 @@ module LeapauthHelper
     case Rails.env
     when 'development'
       LeapauthHelper.auth_host = "local.leapmotion:4000"
-      LeapauthHelper.home = "https://leapmotion.com"
+      LeapauthHelper.home = "http://local.leapmotion:3000/"
     when 'test'
       # who knows?
     when 'staging'
@@ -85,7 +85,7 @@ module LeapauthHelper
   end
 
   def auth_sign_in_url(destination = current_url)
-    secure_url("/?_r=#{URI.escape(destination)}")
+    secure_url("/users/sign_in?_r=#{URI.escape(destination)}")
   end
 
   def auth_edit_profile_url
