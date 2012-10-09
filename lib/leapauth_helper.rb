@@ -16,13 +16,15 @@ module LeapauthHelper
     case Rails.env
     when 'development'
       LeapauthHelper.auth_host = "local.leapmotion:4000"
-      LeapauthHelper.home = "http://local.leapmotion:3000/"
+      LeapauthHelper.home = "http://local.leapmotion:3000"
     when 'test'
       # who knows?
     when 'staging'
       LeapauthHelper.auth_host = "stage.leapmotion.com"
       LeapauthHelper.home = "https://stage.leapmotion.com"
     when 'production'
+      LeapauthHelper.auth_host = "leapmotion.com"
+      LeapauthHelper.home = "https://leapmotion.com"
     end
 
     o.class_eval do
