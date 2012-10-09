@@ -3,8 +3,7 @@ require "leapauth_helper/auth_user"
 
 module LeapauthHelper
   class << self
-    attr_reader :auth_host, :auth_domain
-    attr_accessor :home
+    attr_accessor :home, :auth_domain, :auth_host
 
     def auth_host=(auth_host)
       @auth_host = auth_host
@@ -16,14 +15,17 @@ module LeapauthHelper
     case Rails.env
     when 'development'
       LeapauthHelper.auth_host = "local.leapmotion:4000"
+      LeapauthHelper.auth_domain = "local.leapmotion"
       LeapauthHelper.home = "http://local.leapmotion:3000"
     when 'test'
       # who knows?
     when 'staging'
       LeapauthHelper.auth_host = "stage.leapmotion.com"
+      LeapauthHelper.auth_domain = ".stage.leapmotion.com"
       LeapauthHelper.home = "https://stage.leapmotion.com"
     when 'production'
       LeapauthHelper.auth_host = "leapmotion.com"
+      LeapauthHelper.auth_domain = ".leapmotion.com"
       LeapauthHelper.home = "https://leapmotion.com"
     end
 
