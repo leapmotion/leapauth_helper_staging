@@ -89,7 +89,7 @@ module LeapauthHelper
   end
 
   def auth_sign_in_url(destination = current_url)
-    secure_url("/users/sign_in?_r=#{URI.escape(destination)}")
+    secure_url("/users/auth?_r=#{URI.escape(destination)}")
   end
 
   def auth_edit_profile_url
