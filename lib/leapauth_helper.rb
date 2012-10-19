@@ -50,7 +50,8 @@ module LeapauthHelper
       cookies[COOKIE_AUTH_KEY] = {
         :value => ENCRYPTOR.encrypt_and_sign(hash_for_user(user).to_json),
         :domain => LeapauthHelper.auth_domain,
-        :secure => use_secure?
+        :secure => use_secure?,
+        :expires => cookie_expiration
       }
       !cookie_present
     else
@@ -70,7 +71,7 @@ module LeapauthHelper
         end
       end
     end
-    @current_user_from_auth
+    (@current_user_from_auth.nil? || @current_user_from_auth.expired?) ? nil : @current_user_from_auth
   end
 
   def auth_bar
@@ -85,7 +86,7 @@ module LeapauthHelper
   end
 
   def auth_destroy_session_url(destination = current_url)
-    secure_url("/users/sign_out?r=#{URI.escape(destination)}")
+    secure_url("/users/sign_out?_r=#{URI.escape(destination)}")
   end
 
   def auth_sign_in_url(destination = current_url)
@@ -110,7 +111,12 @@ module LeapauthHelper
   def hash_for_user(user)
     { :id => user.id,
       :email => user.email,
+      :expires_on => cookie_expiration.utc.to_i,
       :username => user.username }
+  end
+
+  def cookie_expiration
+    2.weeks.from_now
   end
 
   def use_secure?
