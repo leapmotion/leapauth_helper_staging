@@ -116,7 +116,7 @@ module LeapauthHelper
   end
 
   def cookie_expiration
-    2.minutes.from_now
+    2.weeks.from_now
   end
 
   def use_secure?
