@@ -5,7 +5,7 @@ module LeapauthHelper
     def initialize(opts)
       @id = opts['id']
       @email = opts['email']
-      @admin = opts['username']
+      @username = opts['username']
       @expires_on = opts['expires_on']
     end
 
