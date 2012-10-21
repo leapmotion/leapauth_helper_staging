@@ -85,8 +85,8 @@ module LeapauthHelper
     text.html_safe
   end
 
-  def auth_destroy_session_url(destination = current_url)
-    secure_url("/users/sign_out?_r=#{URI.escape(destination)}")
+  def auth_destroy_session_url
+    secure_url("/users/sign_out")
   end
 
   def auth_sign_in_url(destination = current_url)

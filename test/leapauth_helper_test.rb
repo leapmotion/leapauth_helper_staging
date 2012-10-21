@@ -85,8 +85,8 @@ describe LeapauthHelper do
     before { controller.stubs(:request).returns(stub(:protocol => "http://", :host_with_port => "local.leapmotion:4000", :fullpath => "/some-page")) }
 
     describe "#auth_destroy_session_url method" do
-      it "returns the URL with a redirect URL" do
-        assert_equal "http://local.leapmotion:3000/users/sign_out?_r=http://local.leapmotion:4000/some-page", controller.send(:auth_destroy_session_url)
+      it "returns the URL" do
+        assert_equal "http://local.leapmotion:3000/users/sign_out", controller.send(:auth_destroy_session_url)
       end
     end
 
