@@ -3,7 +3,7 @@ require "leapauth_helper/auth_user"
 
 module LeapauthHelper
   class << self
-    attr_accessor :home, :auth_domain, :auth_host
+    attr_accessor :home, :auth_domain, :auth_host, :cookie_auth_key
 
     def auth_host=(auth_host)
       @auth_host = auth_host
@@ -17,16 +17,19 @@ module LeapauthHelper
       LeapauthHelper.auth_host = "local.leapmotion:3000"
       LeapauthHelper.auth_domain = "local.leapmotion"
       LeapauthHelper.home = "http://local.leapmotion:3000"
+      LeapauthHelper.cookie_auth_key = "_dev_auth"
     when 'test'
       # who knows?
     when 'staging'
       LeapauthHelper.auth_host = "stage.leapmotion.com"
       LeapauthHelper.auth_domain = ".stage.leapmotion.com"
       LeapauthHelper.home = "https://stage.leapmotion.com"
+      LeapauthHelper.cookie_auth_key = "_stage_auth"
     when 'production'
       LeapauthHelper.auth_host = "leapmotion.com"
       LeapauthHelper.auth_domain = ".leapmotion.com"
       LeapauthHelper.home = "https://leapmotion.com"
+      LeapauthHelper.cookie_auth_key = "_auth"
     end
 
     o.class_eval do
@@ -37,7 +40,6 @@ module LeapauthHelper
   end
 
   SECRET = "d1J90283!)98Qwc{}[d[d]sq\\e.. .E++1=-qe\\qe.we..ew//s-1=2=3--"
-  COOKIE_AUTH_KEY = "_auth"
   ENCRYPTOR = ActiveSupport::MessageEncryptor.new(SECRET)
 
   def delete_auth_cookie
@@ -45,9 +47,9 @@ module LeapauthHelper
   end
 
   def set_auth_cookie_from_user(user)
-    cookie_present = cookies.key?(COOKIE_AUTH_KEY)
+    cookie_present = cookies.key?(LeapauthHelper.cookie_auth_key)
     if user
-      cookies[COOKIE_AUTH_KEY] = {
+      cookies[LeapauthHelper.cookie_auth_key] ||= {
         :value => ENCRYPTOR.encrypt_and_sign(hash_for_user(user).to_json),
         :domain => LeapauthHelper.auth_domain,
         :secure => use_secure?,
@@ -55,7 +57,7 @@ module LeapauthHelper
       }
       !cookie_present
     else
-      cookies.delete(COOKIE_AUTH_KEY, :domain => LeapauthHelper.auth_domain)
+      cookies.delete(LeapauthHelper.cookie_auth_key, :domain => LeapauthHelper.auth_domain)
       cookie_present
     end
   end
@@ -63,8 +65,8 @@ module LeapauthHelper
   def current_user_from_auth
     unless instance_variable_defined?(:@current_user_from_auth)
       @current_user_from_auth ||= begin
-        if cookies[COOKIE_AUTH_KEY]
-          data = ActiveSupport::JSON.decode(ENCRYPTOR.decrypt_and_verify(cookies[COOKIE_AUTH_KEY]))
+        if cookies[LeapauthHelper.cookie_auth_key]
+          data = ActiveSupport::JSON.decode(ENCRYPTOR.decrypt_and_verify(cookies[LeapauthHelper.cookie_auth_key]))
           LeapauthHelper::AuthUser.new(data)
         else
           nil

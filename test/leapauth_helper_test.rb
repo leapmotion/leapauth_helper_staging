@@ -15,7 +15,7 @@ describe LeapauthHelper do
     context "with valid user" do
       before do
         controller.set_auth_cookie_from_user(stub_everything)
-        @cookie = controller.cookie_jar[DummyController::COOKIE_AUTH_KEY]
+        @cookie = controller.cookie_jar[LeapauthHelper.cookie_auth_key]
       end
 
       it "sets an authentication cookie" do
@@ -29,7 +29,7 @@ describe LeapauthHelper do
 
       it "deletes the authentication cookie" do
         controller.set_auth_cookie_from_user(nil)
-        assert_nil controller.cookie_jar[DummyController::COOKIE_AUTH_KEY]
+        assert_nil controller.cookie_jar[LeapauthHelper.cookie_auth_key]
       end
     end
   end
@@ -62,7 +62,7 @@ describe LeapauthHelper do
       end
 
       it "returns nil" do
-        refute_nil controller.cookie_jar[DummyController::COOKIE_AUTH_KEY] # the cookie is really there
+        refute_nil controller.cookie_jar[LeapauthHelper.cookie_auth_key] # the cookie is really there
         assert_nil controller.current_user_from_auth
       end
     end
