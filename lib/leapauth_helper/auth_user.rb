@@ -10,7 +10,7 @@ module LeapauthHelper
     end
 
     def expired?
-      @expires_on < Time.now.utc.to_i
+      @expires_on.nil? or @expires_on < Time.now.utc.to_i
     end
   end
 end
