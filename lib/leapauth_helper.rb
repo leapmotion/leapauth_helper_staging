@@ -1,5 +1,6 @@
 require "leapauth_helper/version"
 require "leapauth_helper/auth_user"
+require "leapauth_helper/user_capabilities"
 
 module LeapauthHelper
   class << self
