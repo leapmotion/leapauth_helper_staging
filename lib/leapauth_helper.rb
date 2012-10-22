@@ -20,9 +20,9 @@ module LeapauthHelper
       LeapauthHelper.home = "http://local.leapmotion:3000"
       LeapauthHelper.cookie_auth_key = "_dev_auth"
     when 'test'
-      LeapauthHelper.auth_host = "test.leapmotion:3000"
+      LeapauthHelper.auth_host = "test.leapmotion"
       LeapauthHelper.auth_domain = "test.leapmotion"
-      LeapauthHelper.home = "http://test.leapmotion:3000"
+      LeapauthHelper.home = "http://test.leapmotion"
       LeapauthHelper.cookie_auth_key = "_test_auth"
     when 'staging'
       LeapauthHelper.auth_host = "stage.leapmotion.com"
