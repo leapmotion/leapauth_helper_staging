@@ -68,7 +68,7 @@ module LeapauthHelper
   def current_user_from_auth
     unless instance_variable_defined?(:@current_user_from_auth)
       @current_user_from_auth ||= begin
-        if cookies[LeapauthHelper.cookie_auth_key]
+        if cookies.signed[LeapauthHelper.cookie_auth_key]
           # signature not working for some strings, causing log in failures, must investigate
           data = ActiveSupport::JSON.decode(cookies[LeapauthHelper.cookie_auth_key])
           LeapauthHelper::AuthUser.new(data)
