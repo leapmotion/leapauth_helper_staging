@@ -1,3 +1,5 @@
+require 'cgi'
+
 require "leapauth_helper/version"
 require "leapauth_helper/auth_user"
 require "leapauth_helper/user_capabilities"
@@ -43,9 +45,6 @@ module LeapauthHelper
     end
   end
 
-  SECRET = "d1J90283!)98Qwc{}[d[d]sq\\e.. .E++1=-qe\\qe.we..ew//s-1=2=3--"
-  ENCRYPTOR = ActiveSupport::MessageEncryptor.new(SECRET)
-
   def delete_auth_cookie
     set_auth_cookie_from_user(nil)
   end
@@ -53,8 +52,8 @@ module LeapauthHelper
   def set_auth_cookie_from_user(user)
     cookie_present = cookies.key?(LeapauthHelper.cookie_auth_key)
     if user
-      cookies[LeapauthHelper.cookie_auth_key] ||= {
-        :value => ENCRYPTOR.encrypt(hash_for_user(user).to_json),
+      cookies.signed[LeapauthHelper.cookie_auth_key] ||= {
+        :value => hash_for_user(user).to_json,
         :domain => LeapauthHelper.auth_domain,
         :secure => use_secure?,
         :expires => cookie_expiration
@@ -71,7 +70,7 @@ module LeapauthHelper
       @current_user_from_auth ||= begin
         if cookies[LeapauthHelper.cookie_auth_key]
           # signature not working for some strings, causing log in failures, must investigate
-          data = ActiveSupport::JSON.decode(ENCRYPTOR.decrypt(cookies[LeapauthHelper.cookie_auth_key]))
+          data = ActiveSupport::JSON.decode(cookies[LeapauthHelper.cookie_auth_key])
           LeapauthHelper::AuthUser.new(data)
         else
           nil

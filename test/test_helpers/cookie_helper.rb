@@ -11,6 +11,10 @@ class CookieJar < Hash
     cookie.data = hash
     cookie
   end
+
+  def signed
+    self
+  end
 end
 
 class Cookie < String
