@@ -54,7 +54,7 @@ module LeapauthHelper
     cookie_present = cookies.key?(LeapauthHelper.cookie_auth_key)
     if user
       cookies[LeapauthHelper.cookie_auth_key] ||= {
-        :value => ENCRYPTOR.encrypt_and_sign(hash_for_user(user).to_json),
+        :value => ENCRYPTOR.encrypt(hash_for_user(user).to_json),
         :domain => LeapauthHelper.auth_domain,
         :secure => use_secure?,
         :expires => cookie_expiration
