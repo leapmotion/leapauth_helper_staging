@@ -1,7 +1,7 @@
 module LeapauthHelper
   module UserCapabilities
-    Flags = [ :super_admin, :admin, :representative, :preorder_admin, :developer ]
-    EmployeeFlags = [ :super_admin, :admin, :representative, :preorder_admin ]
+    Flags = [ :is_super_admin, :is_admin, :is_representative, :is_preorder_admin, :is_developer ]
+    EmployeeFlags = [ :is_super_admin, :is_admin, :is_representative, :is_preorder_admin ]
 
     def capabilities
       @capabilities ||= begin
