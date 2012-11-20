@@ -52,7 +52,7 @@ module LeapauthHelper
   def set_auth_cookie_from_user(user)
     cookie_present = cookies.key?(LeapauthHelper.cookie_auth_key)
     if user
-      cookies.signed[LeapauthHelper.cookie_auth_key] ||= {
+      cookies.signed[LeapauthHelper.cookie_auth_key] = {
         :value => hash_for_user(user).to_json,
         :domain => LeapauthHelper.auth_domain,
         :secure => use_secure?,
