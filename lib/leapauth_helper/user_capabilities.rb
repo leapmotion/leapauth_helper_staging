@@ -1,8 +1,9 @@
 module LeapauthHelper
   module UserCapabilities
-    Flags = [ :is_super_admin, :is_admin, :is_representative, :is_preorder_admin, :is_lm, :is_developer ]
-    EmployeeFlags = [ :is_super_admin, :is_admin, :is_representative, :is_preorder_admin, :is_lm ]
+    Flags = [ :is_super_admin, :is_admin, :is_representative, :is_preorder_admin, :is_lm, :is_developer, :is_content_admin ]
+    EmployeeFlags = [ :is_super_admin, :is_admin, :is_representative, :is_preorder_admin, :is_lm, :is_content_admin ]
 
+    # TODO This is probably deprecated since we now use can_can to manage abilities
     def capabilities
       @capabilities ||= begin
         cap = []
