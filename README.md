@@ -1,29 +1,49 @@
 # LeapauthHelper
 
-TODO: Write a gem description
+Helps you with authing with leapweb.
 
-## Installation
+do the single sign on dance.
 
-Add this line to your application's Gemfile:
+## Guide 
+
+### Install
+
+add to your Gemfile:
 
     gem 'leapauth_helper'
 
-And then execute:
+then execute:
 
     $ bundle
 
-Or install it yourself as:
+change your secret_token.rb to match the others.
 
-    $ gem install leapauth_helper
+### Usage
 
-## Usage
+```
+class ApplicationController < ActionController::Base
+  include LeapauthHelper
+  before_filter :authenticate_auth_user
 
-TODO: Write usage instructions here
+  def current_user
+    current_user_from_auth  # or keep your own User model
+  end
+  ...
+end
+```
 
-## Contributing
+### Halp
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Make sure you're on the same domain.
+
+for example, this should work:
+
+1. leapweb - local.leapmotion:3000
+
+2. leapdev - local.leapmotion:4000
+
+3. cert - local.leapmotion:5000
+
+this won't work
+
+3. cert - localhost:5000
