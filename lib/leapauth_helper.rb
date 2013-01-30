@@ -28,8 +28,8 @@ module LeapauthHelper
       LeapauthHelper.cookie_auth_key = "_test_auth"
     when 'staging'
       LeapauthHelper.auth_host = "stage.leapmotion.com"
-      LeapauthHelper.auth_domain = ".stage.leapmotion.com"
-      LeapauthHelper.home = "https://stage.leapmotion.com"
+      LeapauthHelper.auth_domain = "stage.leapmotion.com"
+      LeapauthHelper.home = "http://leapweb-stage1.herokuapp.com"
       LeapauthHelper.cookie_auth_key = "_stage_auth"
     when 'production'
       LeapauthHelper.auth_host = "leapmotion.com"
@@ -125,7 +125,7 @@ module LeapauthHelper
   end
 
   def use_secure?
-    %(production staging).include?(Rails.env)
+    %(production).include?(Rails.env)
   end
 
   def secure_url(path, opts = {})
