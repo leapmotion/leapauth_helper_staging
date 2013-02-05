@@ -90,6 +90,10 @@ module LeapauthHelper
     text.html_safe
   end
 
+  def auth_create_session_url
+    secure_url("/users/sign_in")
+  end
+
   def auth_destroy_session_url
     secure_url("/users/sign_out")
   end
