@@ -32,9 +32,9 @@ module LeapauthHelper
       LeapauthHelper.home = "http://leapweb-stage1.herokuapp.com"
       LeapauthHelper.cookie_auth_key = "_stage_auth"
     when 'production'
-      LeapauthHelper.auth_host = "leapmotion.com"
+      LeapauthHelper.auth_host = "www.leapmotion.com"
       LeapauthHelper.auth_domain = ".leapmotion.com"
-      LeapauthHelper.home = "https://leapmotion.com"
+      LeapauthHelper.home = "https://www.leapmotion.com"
       LeapauthHelper.cookie_auth_key = "_auth"
     end
 
@@ -81,7 +81,7 @@ module LeapauthHelper
 
   def auth_bar
     text = "Welcome "
-    text << "#{link_to "&#9733;".html_safe, "https://www.#{LeapauthHelper.auth_host}/admin"} " if current_user_from_auth.admin?
+    text << "#{link_to "&#9733;".html_safe, "https://#{LeapauthHelper.auth_host}/admin"} " if current_user_from_auth.admin?
     text << link_to(current_user_from_auth.email, auth_edit_profile_url)
     text << "! (#{link_to("Logout", auth_destroy_session_url) })"
     if session[:admin_user]
