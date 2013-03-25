@@ -50,9 +50,9 @@ module LeapauthHelper
   end
 
   def set_auth_cookie_from_user(user)
-    cookie_present = cookies.key?(LeapauthHelper.cookie_auth_key)
+    cookie_present = auth_cookie_jar.key?(LeapauthHelper.cookie_auth_key)
     if user
-      cookies.signed[LeapauthHelper.cookie_auth_key] = {
+      auth_cookie_jar.signed[LeapauthHelper.cookie_auth_key] = {
         :value => hash_for_user(user).to_json,
         :domain => LeapauthHelper.auth_domain,
         :secure => use_secure?,
@@ -60,7 +60,7 @@ module LeapauthHelper
       }
       !cookie_present
     else
-      cookies.delete(LeapauthHelper.cookie_auth_key, :domain => LeapauthHelper.auth_domain)
+      auth_cookie_jar.delete(LeapauthHelper.cookie_auth_key, :domain => LeapauthHelper.auth_domain)
       cookie_present
     end
   end
@@ -68,7 +68,7 @@ module LeapauthHelper
   def current_user_from_auth
     unless instance_variable_defined?(:@current_user_from_auth)
       @current_user_from_auth ||= begin
-        if body = cookies.signed[LeapauthHelper.cookie_auth_key]
+        if body = auth_cookie_jar.signed[LeapauthHelper.cookie_auth_key]
           data = ActiveSupport::JSON.decode(body)
           LeapauthHelper::AuthUser.new(data)
         else
@@ -114,6 +114,14 @@ module LeapauthHelper
     unless current_user_from_auth
       redirect_to auth_sign_in_url
     end
+  end
+
+  def auth_cookie_jar
+    @auth_cookie_jar || cookies
+  end
+
+  def use_auth_cookie_jar(cookie_jar)
+    @auth_cookie_jar = cookie_jar
   end
 
   private
