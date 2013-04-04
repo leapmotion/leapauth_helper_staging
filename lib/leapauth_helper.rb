@@ -94,6 +94,10 @@ module LeapauthHelper
     secure_url("/users/auth")
   end
 
+  def auth_update_user_json_url(user_id)
+    secure_url("/api/users/#{user_id}")
+  end
+
   def auth_destroy_session_url
     secure_url("/users/sign_out")
   end
