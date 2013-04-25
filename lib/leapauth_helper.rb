@@ -134,6 +134,7 @@ module LeapauthHelper
 
   def secure_url(path, opts = {})
     scheme = use_secure? ? "https" : "http"
-    "#{scheme}://#{LeapauthHelper.auth_host}#{path}"
+    url = "#{scheme}://#{LeapauthHelper.auth_host}#{path}"
+    opts.empty? ? url : "#{url}?#{Rack::Utils.build_query(opts)}"
   end
 end
