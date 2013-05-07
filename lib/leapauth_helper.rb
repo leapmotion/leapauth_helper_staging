@@ -19,7 +19,7 @@ module LeapauthHelper
     when 'development'
       LeapauthHelper.auth_host = "local.leapmotion:3010"
       LeapauthHelper.auth_domain = "local.leapmotion"
-      LeapauthHelper.home = "http://local.leapmotion:3010"
+      LeapauthHelper.home = "http://local.leapmotion:3000"
       LeapauthHelper.cookie_auth_key = "_dev_auth"
     when 'test'
       LeapauthHelper.auth_host = "test.leapmotion"
@@ -29,12 +29,12 @@ module LeapauthHelper
     when 'staging'
       LeapauthHelper.auth_host = "central-stage.leapmotion.com"
       LeapauthHelper.auth_domain = "leapmotion.com"
-      LeapauthHelper.home = "http://central-stage.herokuapp.com"
+      LeapauthHelper.home = "http://leapweb-stage1.herokuapp.com"
       LeapauthHelper.cookie_auth_key = "_stage_auth"
     when 'production'
-      LeapauthHelper.auth_host = "www.leapmotion.com"
+      LeapauthHelper.auth_host = "central.leapmotion.com"
       LeapauthHelper.auth_domain = "leapmotion.com"
-      LeapauthHelper.home = "https://central.leapmotion.com"
+      LeapauthHelper.home = "https://www.leapmotion.com"
       LeapauthHelper.cookie_auth_key = "_auth"
     end
 
