@@ -3,7 +3,7 @@ require File.expand_path('../test_helper', __FILE__)
 describe LeapauthHelper do
   describe ".included class callback" do
     it "sets host constants" do
-      assert_equal "local.leapmotion:3000", LeapauthHelper.auth_host
+      assert_equal "local.leapmotion:3010", LeapauthHelper.auth_host
       assert_equal "local.leapmotion", LeapauthHelper.auth_domain
       assert_equal "http://local.leapmotion:3000", LeapauthHelper.home
     end
@@ -86,13 +86,13 @@ describe LeapauthHelper do
 
     describe "#auth_destroy_session_url method" do
       it "returns the URL" do
-        assert_equal "http://local.leapmotion:3000/users/sign_out", controller.send(:auth_destroy_session_url)
+        assert_equal "http://local.leapmotion:3010/users/sign_out", controller.send(:auth_destroy_session_url)
       end
     end
 
     describe "#auth_sign_in_url method" do
       it "returns the URL with a redirect URL" do
-        assert_equal "http://local.leapmotion:3000/users/auth?_r=http://local.leapmotion:4000/some-page", controller.send(:auth_sign_in_url)
+        assert_equal "http://local.leapmotion:3010/users/auth?_r=http://local.leapmotion:4000/some-page", controller.send(:auth_sign_in_url)
       end
     end
   end
