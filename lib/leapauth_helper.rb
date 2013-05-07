@@ -17,9 +17,9 @@ module LeapauthHelper
   def self.included(o)
     case Rails.env
     when 'development'
-      LeapauthHelper.auth_host = "local.leapmotion:3000"
+      LeapauthHelper.auth_host = "local.leapmotion:3010"
       LeapauthHelper.auth_domain = "local.leapmotion"
-      LeapauthHelper.home = "http://local.leapmotion:3000"
+      LeapauthHelper.home = "http://local.leapmotion:3010"
       LeapauthHelper.cookie_auth_key = "_dev_auth"
     when 'test'
       LeapauthHelper.auth_host = "test.leapmotion"
