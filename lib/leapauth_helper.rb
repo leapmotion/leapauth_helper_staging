@@ -29,7 +29,7 @@ module LeapauthHelper
     when 'staging'
       LeapauthHelper.auth_host = "central-stage.leapmotion.com"
       LeapauthHelper.auth_domain = "leapmotion.com"
-      LeapauthHelper.home = "http://leapweb-stage1.herokuapp.com"
+      LeapauthHelper.home = "http://leapweb-stage7.herokuapp.com"
       LeapauthHelper.cookie_auth_key = "_stage_auth"
     when 'production'
       LeapauthHelper.auth_host = "central.leapmotion.com"
