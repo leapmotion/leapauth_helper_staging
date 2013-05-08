@@ -98,8 +98,8 @@ module LeapauthHelper
     secure_url("/api/users/#{user_id}")
   end
 
-  def auth_destroy_session_url
-    secure_url("/users/sign_out")
+  def auth_destroy_session_url(destination = current_url)
+    secure_url("/users/sign_out?_r=#{URI.escape(destination)}")
   end
 
   def auth_sign_in_url(destination = current_url)
