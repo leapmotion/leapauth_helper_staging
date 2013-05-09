@@ -86,7 +86,7 @@ describe LeapauthHelper do
 
     describe "#auth_destroy_session_url method" do
       it "returns the URL" do
-        assert_equal "http://local.leapmotion:3010/users/sign_out", controller.send(:auth_destroy_session_url)
+        assert_equal "http://local.leapmotion:3010/users/sign_out?_r=http://local.leapmotion:4000/some-page", controller.send(:auth_destroy_session_url)
       end
     end
 

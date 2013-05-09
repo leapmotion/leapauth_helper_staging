@@ -29,7 +29,7 @@ module LeapauthHelper
     when 'staging'
       LeapauthHelper.auth_host = "central-stage.leapmotion.com"
       LeapauthHelper.auth_domain = "leapmotion.com"
-      LeapauthHelper.home = "http://leapweb-stage1.herokuapp.com"
+      LeapauthHelper.home = "http://leapweb-stage7.herokuapp.com"
       LeapauthHelper.cookie_auth_key = "_stage_auth"
     when 'production'
       LeapauthHelper.auth_host = "central.leapmotion.com"
@@ -98,8 +98,8 @@ module LeapauthHelper
     secure_url("/api/users/#{user_id}")
   end
 
-  def auth_destroy_session_url
-    secure_url("/users/sign_out")
+  def auth_destroy_session_url(destination = current_url)
+    secure_url("/users/sign_out?_r=#{URI.escape(destination)}")
   end
 
   def auth_sign_in_url(destination = current_url)
