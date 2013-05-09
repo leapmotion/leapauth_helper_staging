@@ -15,6 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = LeapauthHelper::VERSION
 
+  gem.add_development_dependency "rake"
   gem.add_development_dependency "mocha"
   gem.add_development_dependency "minitest"
   gem.add_development_dependency "activesupport", ">= 3.2.0"
