@@ -110,6 +110,14 @@ module LeapauthHelper
     secure_url("/users/edit")
   end
 
+  def auth_revert_to_admin_url
+    secure_url("/revert")
+    end
+
+  def auth_admin_users_url
+    secure_url("/admin/users")
+  end
+
   def current_url
     "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
   end
