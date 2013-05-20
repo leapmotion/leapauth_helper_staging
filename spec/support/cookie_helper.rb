@@ -32,7 +32,7 @@ module Test
     attr_reader :cookie_jar
     def stub_cookies!
       @cookie_jar = CookieJar.new
-      stubs(:cookies).returns(@cookie_jar)
+      stub(:cookies => @cookie_jar)
     end
   end
 end
