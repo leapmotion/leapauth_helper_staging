@@ -2,7 +2,7 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
 require 'active_support/all'
 require 'leapauth_helper'
-require 'mocha_standalone'
+require 'mocha/api'
 require 'minitest/autorun'
 
 # Custom helpers
