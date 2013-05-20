@@ -1,5 +1,7 @@
 require File.expand_path('../test_helper', __FILE__)
 
+require "minitest-spec-context"
+
 describe LeapauthHelper do
   describe ".included class callback" do
     it "sets host constants" do
