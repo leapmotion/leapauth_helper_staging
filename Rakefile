@@ -1,9 +1,13 @@
 #!/usr/bin/env rake
 require "bundler/gem_tasks"
-require 'rake/testtask'
 
-task :default => :test
-Rake::TestTask.new("test") do |test|
-  test.pattern = "test/**/*_test.rb"
-  test.verbose = true
+begin
+  require 'rspec/core/rake_task'
+  
+  RSpec::Core::RakeTask.new(:spec)
+  
+  task :default => :spec
+
+rescue Exception => ex
+  puts "Failed to load rspec task.  Should be fine if you're not testing stuff"
 end
