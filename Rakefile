@@ -8,6 +8,7 @@ begin
   
   task :default => :spec
 
+  task :test => :spec
 rescue Exception => ex
   puts "Failed to load rspec task.  Should be fine if you're not testing stuff"
 end
