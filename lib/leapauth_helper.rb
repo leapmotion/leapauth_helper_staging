@@ -90,6 +90,10 @@ module LeapauthHelper
     text.html_safe
   end
 
+  def auth_get_user_id_json_url
+    secure_url("/api/whoami")
+  end
+
   def auth_create_session_json_url
     secure_url("/users/auth")
   end
