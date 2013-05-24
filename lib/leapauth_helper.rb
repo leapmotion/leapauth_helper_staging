@@ -131,7 +131,7 @@ module LeapauthHelper
   end
 
   def transactions_url
-    scheme = use_secure_transactions ? "https" : "http"
+    scheme = use_secure_transactions? ? "https" : "http"
     "#{scheme}://#{LeapauthHelper.transactions_host}/api/transactions"
   end
 
