@@ -2,7 +2,7 @@
 require File.expand_path('../lib/leapauth_helper/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Josh Hull", "Mr Rogers"]
+  gem.authors       = ["Josh Hull", "Mr Rogers", "Lee Lundrigan"]
   gem.email         = ["jhull@leapmotion.com", "jrogers@leapmotion.com"]
   gem.description   = %q{Authentication helpers for leap auth}
   gem.summary       = %q{Authentication helpers for leap auth.}
