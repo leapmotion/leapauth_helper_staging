@@ -21,21 +21,25 @@ module LeapauthHelper
       LeapauthHelper.auth_domain = ENV['DEVELOPMENT_AUTH_DOMAIN'] || "local.leapmotion"
       LeapauthHelper.home = ENV['DEVELOPMENT_AUTH_HOME'] || "http://local.leapmotion:3000"
       LeapauthHelper.cookie_auth_key = ENV['DEVELOPMENT_AUTH_KEY'] || "_dev_auth"
+      LeapauthHelper.transactions_host = ENV['TRANSACTIONS_HOST'] || "http://local.leapmotion:5001"
     when 'test'
       LeapauthHelper.auth_host = ENV['TEST_AUTH_HOST'] || "test.leapmotion"
       LeapauthHelper.auth_domain = ENV['TEST_AUTH_DOMAIN'] || "test.leapmotion"
       LeapauthHelper.home = ENV['TEST_AUTH_HOME'] || "http://test.leapmotion"
       LeapauthHelper.cookie_auth_key = ENV['TEST_AUTH_KEY'] || "_test_auth"
+      LeapauthHelper.transactions_host = ENV['TEST_TRANSACTIONS_HOST'] || "test.leapmotion"
     when 'staging'
       LeapauthHelper.auth_host = ENV['STAGING_AUTH_HOST'] || "central-stage.leapmotion.com"
       LeapauthHelper.auth_domain = ENV['STAGING_AUTH_DOMAIN'] || "leapmotion.com"
       LeapauthHelper.home = ENV['STAGING_AUTH_HOME'] || "http://leapweb-stage7.herokuapp.com"
       LeapauthHelper.cookie_auth_key = ENV['STAGING_AUTH_KEY'] || "_stage_auth"
+      LeapauthHelper.transactions_host = ENV['STAGING_TRANSACTIONS_HOST'] || "http://warehouse-stage.leapmotion.com"
     when 'production'
       LeapauthHelper.auth_host = ENV['PRODUCTION_AUTH_HOST'] || "central.leapmotion.com"
       LeapauthHelper.auth_domain = ENV['PRODUCTION_AUTH_DOMAIN'] || "leapmotion.com"
       LeapauthHelper.home = ENV['PRODUCTION_AUTH_HOME'] || "https://www.leapmotion.com"
       LeapauthHelper.cookie_auth_key = ENV['PRODUCTION_AUTH_KEY'] || "_auth"
+      LeapauthHelper.transactions_host = ENV['PRODUCTION_TRANSACTIONS_HOST'] || "https://warehouse.leapmotion.com"
     end
 
     o.class_eval do
