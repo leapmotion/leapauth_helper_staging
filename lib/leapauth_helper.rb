@@ -6,7 +6,7 @@ require "leapauth_helper/user_capabilities"
 
 module LeapauthHelper
   class << self
-    attr_accessor :home, :auth_domain, :auth_host, :cookie_auth_key
+    attr_accessor :home, :auth_domain, :auth_host, :cookie_auth_key, :transactions_host
 
     def auth_host=(auth_host)
       @auth_host = auth_host
