@@ -132,8 +132,7 @@ module LeapauthHelper
 
   def transactions_url
     scheme = use_secure? ? "https" : "http"
-    url = "#{scheme}://#{LeapauthHelper.transactions_host}/api/transactions"
-    opts.empty? ? url : "#{url}?#{Rack::Utils.build_query(opts)}"
+    "#{scheme}://#{LeapauthHelper.transactions_host}/api/transactions"
   end
 
   def authenticate_auth_user!
