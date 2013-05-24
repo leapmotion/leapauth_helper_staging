@@ -131,7 +131,7 @@ module LeapauthHelper
   end
 
   def transactions_url
-    scheme = use_secure? ? "https" : "http"
+    scheme = use_secure_transactions ? "https" : "http"
     "#{scheme}://#{LeapauthHelper.transactions_host}/api/transactions"
   end
 
@@ -159,6 +159,10 @@ module LeapauthHelper
 
   def cookie_expiration
     2.weeks.from_now
+  end
+
+  def use_secure_transactions?
+    %(production staging).include?(Rails.env)
   end
 
   def use_secure?
