@@ -130,6 +130,12 @@ module LeapauthHelper
     "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
   end
 
+  def transactions_url
+    scheme = use_secure? ? "https" : "http"
+    url = "#{scheme}://#{LeapauthHelper.transactions_host}/api/transactions"
+    opts.empty? ? url : "#{url}?#{Rack::Utils.build_query(opts)}"
+  end
+
   def authenticate_auth_user!
     unless current_user_from_auth
       redirect_to auth_sign_in_url
