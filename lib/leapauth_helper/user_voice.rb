@@ -1,3 +1,5 @@
+require 'ezcrypto'
+
 module LeapauthHelper
   module UserVoice
     # For details on UserVoice SSO, see: https://developer.uservoice.com/docs/site/single-sign-on/
@@ -10,7 +12,7 @@ module LeapauthHelper
       # TODO: Do we want auth tokens to expire?
       # options.merge!({ :expires => (Time.zone.now.utc + 5 * 60).to_s })
 
-      key = EzCrypto::Key.with_password(LeapauthHelper.config.uservoice_subdomain, LeapauthHelper.config.uservoice_sso_key)
+      key = ::EzCrypto::Key.with_password(LeapauthHelper.config.uservoice_subdomain, LeapauthHelper.config.uservoice_sso_key)
       encrypted = key.encrypt(options.to_json)
       uservoice_token = Base64.encode64(encrypted).gsub(/\n/,'') # Remove line returns which are otherwise annoyingly placed every 60 characters.
 
