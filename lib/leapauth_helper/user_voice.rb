@@ -3,7 +3,7 @@ module LeapauthHelper
     # For details on UserVoice SSO, see: https://developer.uservoice.com/docs/site/single-sign-on/
     def generate_uservoice_token(user_id, email, display_name)
       # If we don't have enough user info, bail.
-      raise "Must pass User ID, email, and display name to generate a UserVoice SSO token." if user_id.nil? || email.nil? || display_name.nil?
+      raise "Must pass User ID, email, and display name to generate a UserVoice SSO token." unless [user_id, email, display_name].all?(&:present?)
       
       # This is the data sent to UserVoice encrypted inside the token.
       options = { :guid => "#{ENV['RAILS_ENV']}-#{user_id}", :email => email, :display_name => display_name }
