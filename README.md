@@ -31,11 +31,11 @@ class ApplicationController < ActionController::Base
   ...
 end
 ```
-#### Version < 0.2.0
+#### Version < 1.0.0
  
-Before version 0.2.0,  you could configure LeapauthHelper using environment variables.
+Before version 1.0.0,  you could configure LeapauthHelper using environment variables.
 
-#### Version > 0.2.0
+#### Version > 1.0.0
 
 Configuration should happen with an initializer in your config/initializers folder like 
 `config/initializers/leapauth_helper.rb`.  In there, you can set configuration params as necessary like this:
