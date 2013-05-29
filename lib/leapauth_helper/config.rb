@@ -32,16 +32,22 @@ module LeapauthHelper
       "home"               =>  "https://www.leapmotion.com",
       "cookie_auth_key"    =>  "_auth",
       "transactions_host"  =>  "warehouse.leapmotion.com"
+    },
+    'all' => {
+      # If you're acme.uservoice.com then this value would be 'acme'.
+      "uservoice_subdomain" => "leapbeta",
+      # Get this from UserVoice General Settings page: https://leapbeta.uservoice.com/admin/settings
+      "uservoice_sso_key"   => "977cc7fa89438e2805111cf01c8cc993"
     }
   }
 
   def self.config
-    @@config ||= Config.new(DEFAULT_CONFIG[ ENV['RAILS_ENV'] ])
+    config_data = DEFAULT_CONFIG['all'].merge(DEFAULT_CONFIG[ ENV['RAILS_ENV'] ])
+    @@config ||= Config.new(config_data)
   end
 
   def self.configure
     yield self.config
   end
-
 
 end
