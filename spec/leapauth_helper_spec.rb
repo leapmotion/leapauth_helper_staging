@@ -4,9 +4,9 @@ describe LeapauthHelper do
   let(:controller) { DummyController.new }  
   describe ".included class callback" do
     it "sets host constants" do
-      expect( "local.leapmotion:3010").to eql LeapauthHelper.auth_host
-      expect( "local.leapmotion").to eql LeapauthHelper.auth_domain
-      expect( "http://local.leapmotion:3000").to eql LeapauthHelper.home
+      expect( "test.leapmotion:1234").to eql LeapauthHelper.config.auth_host
+      expect( "test.leapmotion").to eql LeapauthHelper.config.auth_domain
+      expect( "http://test.leapmotion").to eql LeapauthHelper.config.home
     end
   end
 
@@ -16,7 +16,7 @@ describe LeapauthHelper do
     context "with valid user" do
       before do
         controller.set_auth_cookie_from_user(double('user', :id => 2, :email => "remi@example.com", :username => 'remi'))
-        @cookie = controller.cookie_jar[LeapauthHelper.cookie_auth_key]
+        @cookie = controller.cookie_jar[LeapauthHelper.config.cookie_auth_key]
       end
 
       it "sets an authentication cookie" do
@@ -30,7 +30,7 @@ describe LeapauthHelper do
 
       it "deletes the authentication cookie" do
         controller.set_auth_cookie_from_user(nil)
-        expect(controller.cookie_jar[LeapauthHelper.cookie_auth_key]).to be_nil
+        expect(controller.cookie_jar[LeapauthHelper.config.cookie_auth_key]).to be_nil
       end
     end
   end
@@ -63,7 +63,7 @@ describe LeapauthHelper do
       end
 
       it "returns nil" do
-        expect(controller.cookie_jar[LeapauthHelper.cookie_auth_key]).to_not be_nil # the cookie is really there
+        expect(controller.cookie_jar[LeapauthHelper.config.cookie_auth_key]).to_not be_nil # the cookie is really there
         expect(controller.current_user_from_auth).to be_nil
       end
     end
@@ -87,13 +87,13 @@ describe LeapauthHelper do
 
     describe "#auth_destroy_session_url method" do
       it "returns the URL" do
-        expect( "http://local.leapmotion:3010/users/sign_out?_r=http://local.leapmotion:4000/some-page").to eql controller.send(:auth_destroy_session_url)
+        expect( "http://test.leapmotion:1234/users/sign_out?_r=http://local.leapmotion:4000/some-page").to eql controller.send(:auth_destroy_session_url)
       end
     end
 
     describe "#auth_sign_in_url method" do
       it "returns the URL with a redirect URL" do
-        expect( "http://local.leapmotion:3010/users/auth?_r=http://local.leapmotion:4000/some-page").to eql controller.send(:auth_sign_in_url)
+        expect( "http://test.leapmotion:1234/users/auth?_r=http://local.leapmotion:4000/some-page").to eql controller.send(:auth_sign_in_url)
       end
     end
   end
