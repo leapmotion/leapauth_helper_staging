@@ -44,4 +44,16 @@ describe LeapauthHelper::UrlGenerators do
     end
   end  
 
+  describe "#auth_forgot_password_url" do
+    it {
+      expect(controller.auth_forgot_password_url).to eql "http://#{LeapauthHelper.config.auth_host}/users/password/new"
+    }
+  end    
+
+  describe '#auth_require_username_url' do
+    it {
+      expect(controller.auth_require_username_url).to eql "http://#{LeapauthHelper.config.auth_host}/users/developer"
+    }
+  end    
+
 end

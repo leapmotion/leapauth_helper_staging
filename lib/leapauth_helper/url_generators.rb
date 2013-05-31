@@ -30,6 +30,14 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.secure_url("/users/edit")
     end
 
+    def auth_forgot_password_url
+      LeapauthHelper::UrlHelpers.secure_url("/users/password/new")
+    end
+
+    def auth_require_username_url
+      LeapauthHelper::UrlHelpers.secure_url("/users/developer")
+    end
+
     def auth_revert_to_admin_url
       LeapauthHelper::UrlHelpers.secure_url("/revert")
     end

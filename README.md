@@ -37,10 +37,10 @@ In your app, you should use the following methods to generate the URLs that you 
 * `auth_get_user_id_json_url`
 * `auth_create_session_json_url`
 * `auth_update_user_json_url(user_id)`
-* `auth_destroy_session_url(destination = current_url)`
-* `auth_sign_out_url(destination = current_url)`
-* `auth_sign_in_url(destination = current_url)`
-* `auth_create_session_url(destination = current_url)`
+* `auth_sign_in_url(destination = current_url)` (alias `auth_create_session_url`)
+* `auth_sign_out_url(destination = current_url)` (alias `auth_destroy_session_url`)
+* `auth_forgot_password_url`
+* `auth_require_username_url`
 * `auth_edit_profile_url`
 * `auth_revert_to_admin_url`
 * `auth_admin_users_url`
