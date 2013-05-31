@@ -15,6 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = LeapauthHelper::VERSION
 
+  gem.add_dependency 'rack',     '>= 1.4'
   gem.add_dependency 'json',     '>= 1.7'
   gem.add_dependency 'ezcrypto', '>= 0.7.0'
   gem.add_development_dependency "rake"

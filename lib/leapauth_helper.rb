@@ -5,9 +5,28 @@ require "leapauth_helper/version"
 require "leapauth_helper/auth_user"
 require "leapauth_helper/user_voice"
 require "leapauth_helper/user_capabilities"
+require "leapauth_helper/url_helpers"
+require "leapauth_helper/url_generators"
 
 module LeapauthHelper
-  
+
+  include UrlGenerators
+
+  class Internal
+    class << self 
+      def hash_for_user(user)
+        { :id => user.id,
+          :email => user.email,
+          :expires_on => cookie_expiration.utc.to_i,
+          :username => user.username }
+      end
+      
+      def cookie_expiration
+        2.weeks.from_now
+      end
+    end
+  end
+
   class << self
     def auth_host=(auth_host)
       self.configure do |cfg|
@@ -33,10 +52,10 @@ module LeapauthHelper
     cookie_present = auth_cookie_jar.key?(LeapauthHelper.config.cookie_auth_key)
     if user
       auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key] = {
-        :value => hash_for_user(user).to_json,
+        :value => Internal.hash_for_user(user).to_json,
         :domain => LeapauthHelper.config.auth_domain,
-        :secure => use_secure?,
-        :expires => cookie_expiration
+        :secure => UrlHelpers.use_secure?,
+        :expires => Internal.cookie_expiration
       }
       !cookie_present
     else
@@ -70,47 +89,6 @@ module LeapauthHelper
     text.html_safe
   end
 
-  def auth_get_user_id_json_url
-    secure_url("/api/whoami")
-  end
-
-  def auth_create_session_json_url
-    secure_url("/users/auth")
-  end
-
-  def auth_update_user_json_url(user_id)
-    secure_url("/api/users/#{user_id}")
-  end
-
-  def auth_destroy_session_url(destination = current_url)
-    secure_url("/users/sign_out?_r=#{URI.escape(destination)}")
-  end
-
-  def auth_sign_in_url(destination = current_url)
-    secure_url("/users/auth?_r=#{URI.escape(destination)}")
-  end
-
-  def auth_edit_profile_url
-    secure_url("/users/edit")
-  end
-
-  def auth_revert_to_admin_url
-    secure_url("/revert")
-    end
-
-  def auth_admin_users_url
-    secure_url("/admin/users")
-  end
-
-  def current_url
-    "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
-  end
-
-  def transactions_url
-    scheme = use_secure_transactions? ? "https" : "http"
-    "#{scheme}://#{LeapauthHelper.config.transactions_host}/api/transactions"
-  end
-
   def authenticate_auth_user!
     unless current_user_from_auth
       redirect_to auth_sign_in_url
@@ -125,29 +103,9 @@ module LeapauthHelper
     @auth_cookie_jar = cookie_jar
   end
 
-  private
-  def hash_for_user(user)
-    { :id => user.id,
-      :email => user.email,
-      :expires_on => cookie_expiration.utc.to_i,
-      :username => user.username }
+  def secure_url(*args)
+    warn "DEPRECATED: You should not be calling secure_url directly, but instead please use the url helper methods provided.\nThis method will go away in the future.  Plan accordingly"
+    LeapauthHelper::UrlHelpers.secure_url *args
   end
 
-  def cookie_expiration
-    2.weeks.from_now
-  end
-
-  def use_secure_transactions?
-    %(production staging).include?(Rails.env)
-  end
-
-  def use_secure?
-    %(production).include?(Rails.env)
-  end
-
-  def secure_url(path, opts = {})
-    scheme = use_secure? ? "https" : "http"
-    url = "#{scheme}://#{LeapauthHelper.config.auth_host}#{path}"
-    opts.empty? ? url : "#{url}?#{Rack::Utils.build_query(opts)}"
-  end
 end

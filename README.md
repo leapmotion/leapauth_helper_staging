@@ -29,9 +29,15 @@ class ApplicationController < ActionController::Base
   ...
 end
 ```
-#### Version < 1.0.0
- 
-Before version 1.0.0,  you could configure LeapauthHelper using environment variables.
+
+#### Version >= 1.1.0
+
+With version 1.1.0 we deprecated the `secure_url` method.  You should be able to upgrade without issues, but you'll get deprecation warning messages.
+
+There are now pair methods for sign in/sign out.
+
+`auth_create_session_url` and `auth_destroy_session_url`
+`auth_sign_in_url` and `auth_sign_out_url`
 
 #### Version >= 1.0.0
 
@@ -55,6 +61,11 @@ Available configuration params are:
 
 The gem provides default values for all params; in most cases, the default values should be fine.
 Beyond that, the most common connection point you may want to change is the `auth_host` as that represents the pointer to the authentication domain (i.e., Central).
+
+#### Version < 1.0.0
+ 
+Before version 1.0.0,  you could configure LeapauthHelper using environment variables.
+
 
 ### Halp
 
