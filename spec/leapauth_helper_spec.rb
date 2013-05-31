@@ -57,7 +57,7 @@ describe LeapauthHelper do
 
     context "with expired cookie" do
       before do
-        controller.stub(:cookie_expiration).and_return(2.days.ago)
+        LeapauthHelper::Internal.stub(:cookie_expiration).and_return(2.days.ago)
         controller.set_auth_cookie_from_user(double('user', :id => 2, :email => "remi@example.com", :username => 'remi'))
         controller.stub(:cookie_expiration).and_return(2.weeks.from_now)
       end
@@ -73,28 +73,16 @@ describe LeapauthHelper do
     end
   end
 
-  describe "#hash_for_user method" do
-    before { @user_hash = controller.send(:hash_for_user, mock(:id => 2, :email => "remi@example.com", :username => "remi")) }
-
-    it "returns a hash with user data" do
-      expect( "remi@example.com").to eql @user_hash[:email]
-      expect(@user_hash[:expires_on] >= (2.weeks.from_now - 1.second).utc.to_i).to be_true
-    end
-  end
-
-  describe "URL helpers" do
-    before { controller.stub(:request).and_return(stub(:protocol => "http://", :host_with_port => "local.leapmotion:4000", :fullpath => "/some-page")) }
-
-    describe "#auth_destroy_session_url method" do
-      it "returns the URL" do
-        expect( "http://test.leapmotion:1234/users/sign_out?_r=http://local.leapmotion:4000/some-page").to eql controller.send(:auth_destroy_session_url)
+  describe 'deprecated methods' do
+    describe "#secure_url" do
+      it 'warns the caller about deprecation' do
+        controller.should_receive(:warn)
+        controller.secure_url('/path')
       end
-    end
-
-    describe "#auth_sign_in_url method" do
-      it "returns the URL with a redirect URL" do
-        expect( "http://test.leapmotion:1234/users/auth?_r=http://local.leapmotion:4000/some-page").to eql controller.send(:auth_sign_in_url)
+      it 'returns a secured url' do
+        expect(controller.secure_url('/path', :query => 'params')).to eql 'http://test.leapmotion:1234/path?query=params'
       end
+
     end
   end
 end
