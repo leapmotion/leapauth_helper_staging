@@ -45,6 +45,7 @@ In your app, you should use the following methods to generate the URLs that you 
 * `auth_revert_to_admin_url`
 * `auth_admin_users_url`
 * `auth_admin_user_url(user_id)`
+* `auth_admin_user_edit_embed_url(user_id)`
 
 #### Version >= 1.1.0
 

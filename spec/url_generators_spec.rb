@@ -56,4 +56,9 @@ describe LeapauthHelper::UrlGenerators do
     }
   end    
 
+  describe '#auth_require_username_url' do
+    it {
+      expect(controller.auth_admin_user_edit_embed_url(1313)).to eql "http://#{LeapauthHelper.config.auth_host}/admin/users/1313/edit_embed"
+    }
+  end
 end
