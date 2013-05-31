@@ -16,7 +16,7 @@ module LeapauthHelper
       encrypted = key.encrypt(options.to_json)
       uservoice_token = Base64.encode64(encrypted).gsub(/\n/,'') # Remove line returns which are otherwise annoyingly placed every 60 characters.
 
-      return uservoice_token
+      return CGI.escape(uservoice_token)
     end
   end
 end
