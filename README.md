@@ -30,6 +30,22 @@ class ApplicationController < ActionController::Base
 end
 ```
 
+#### Url Generators
+
+In your app, you should use the following methods to generate the URLs that you need that talk with Central (the auth system).
+    
+* `auth_get_user_id_json_url`
+* `auth_create_session_json_url`
+* `auth_update_user_json_url(user_id)`
+* `auth_destroy_session_url(destination = current_url)`
+* `auth_sign_out_url(destination = current_url)`
+* `auth_sign_in_url(destination = current_url)`
+* `auth_create_session_url(destination = current_url)`
+* `auth_edit_profile_url`
+* `auth_revert_to_admin_url`
+* `auth_admin_users_url`
+* `auth_admin_user_url(user_id)`
+
 #### Version >= 1.1.0
 
 With version 1.1.0 we deprecated the `secure_url` method.  You should be able to upgrade without issues, but you'll get deprecation warning messages.
