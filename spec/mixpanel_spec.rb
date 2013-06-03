@@ -1,16 +1,15 @@
 require 'spec_helper'
 
-class DummyClass; include LeapauthHelper::Mixpanel; end
-
 describe LeapauthHelper::Mixpanel do
-  let (:testclass) { DummyClass.new }
+  let (:testclass) { LeapauthHelper::Mixpanel.new("My Site") }
 
   describe '#mixpanel_init' do
     it "initializes MixPanel correctly" do
-      site_name = "My Site"
-      init_string = testclass.mixpanel_init(site_name)
+      #site_name = "My Site"
+      #init_string = testclass.mixpanel_init(site_name)
+      init_string = testclass.render_init
 
-      expect(init_string).to match /Site:\s+\'#{site_name}\'/
+      expect(init_string).to match /Site:\s+\'My Site\'/
       expect(init_string).to match /<script.*>/
       expect(init_string).to match /<\/script>/
       expect(init_string).to match /#{LeapauthHelper.config.mixpanel_token}/
@@ -19,7 +18,7 @@ describe LeapauthHelper::Mixpanel do
 
   describe '#mixpanel_track' do
     it 'appends event to a list of events' do
-      testclass.mixpanel_track('event1', {"whatever" => 'yo'})
+      testclass.track('event1', {"whatever" => 'yo'})
       expect(testclass.instance_variable_get('@leapauth_helper_mixpanel_events')).to have(1).event
       expect(testclass.instance_variable_get('@leapauth_helper_mixpanel_events').first).to eql ['event1',{"whatever" => "yo"}]
     end
@@ -29,7 +28,7 @@ describe LeapauthHelper::Mixpanel do
     it 'renders the javascript to track the recorded events' do
       testclass.instance_variable_set('@leapauth_helper_mixpanel_events', [['my_event', {"attr1" => "val1"}],
                                                                            ['my_event', {"attr2" => "val2"}]])
-      js = testclass.mixpanel_render_events
+      js = testclass.render_events
       expect(js).to match /mixpanel.track.*mixpanel.track/ # we see it twice
       expect(js).to match /attr1.*attr2/
       expect(js).to match /val1.*val2/
@@ -38,7 +37,7 @@ describe LeapauthHelper::Mixpanel do
 
   describe '#mixpanel_track_link' do
     it 'renders a call to the mixpanel track_link' do
-      link_tracker = testclass.mixpanel_track_link('.the-link', 'The Event Name', {whatever: 'blah'})
+      link_tracker = testclass.track_link('.the-link', 'The Event Name', {whatever: 'blah'})
       expect(link_tracker).to include 'mixpanel.track_links'
       expect(link_tracker).to include '.the-link'
       expect(link_tracker).to include 'The Event Name'
@@ -47,7 +46,7 @@ describe LeapauthHelper::Mixpanel do
 
   describe '#mixpanel_track_form' do
     it "outputs a JavaScript call to the MixPanel API" do
-      form_tracker = testclass.mixpanel_track_form('.the-form', 'The Event Name', {whatever: 'blah'})
+      form_tracker = testclass.track_form('.the-form', 'The Event Name', {whatever: 'blah'})
       # expect(form_tracker).to match /mixpanel\.track_forms\(.*\'\.the-form\'.*\'The Event Name\'.*\{\}\s+\)/
       expect(form_tracker).to match /mixpanel\.track_forms/
       expect(form_tracker).to match /\'\.the-form\'/

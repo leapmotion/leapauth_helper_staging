@@ -2,7 +2,7 @@ module LeapauthHelper
   class Mixpanel
     #-----------------------------------------------------------------------------------------------
 
-    def initialize(site_name, current_user)
+    def initialize(site_name, current_user = nil)
       @site_name = site_name
       @current_user = current_user
       @leapauth_helper_mixpanel_events = []
