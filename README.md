@@ -75,6 +75,7 @@ Available configuration params are:
 - `transactions_host`
 - `uservoice_subdomain`
 - `uservoice_sso_key`
+- `mixpanel_token`
 
 The gem provides default values for all params; in most cases, the default values should be fine.
 Beyond that, the most common connection point you may want to change is the `auth_host` as that represents the pointer to the authentication domain (i.e., Central).
