@@ -13,6 +13,10 @@ module LeapauthHelper
       # single MixPanel token for all LeapMotion projects
       string += "mixpanel.init('#{LeapauthHelper.config.mixpanel_token}');"
 
+      # set up MixPanel config options
+      config_options = { :debug => !(Internal.environment == "production") }
+      string += "mixpanel.set_config(#{JSON.generate(config_options)});"
+
       # each site identifies with this arg
       string += "mixpanel.register({ Site: '#{site_name}' });"
 
@@ -38,7 +42,7 @@ module LeapauthHelper
 
     #-----------------------------------------------------------------------------------------------
 
-    def mixpanel_render
+    def mixpanel_render_events
       string = '<script type="text/javascript">'
 
       @leapauth_helper_mixpanel_events ||= []
@@ -63,6 +67,15 @@ module LeapauthHelper
     def mixpanel_track_link(selector, event, opts = {})
       string = '<script type="text/javascript">'
       string += "mixpanel.track_links('#{selector}', '#{event}', #{JSON.generate(opts).html_safe});"
+      string += "</script>"
+      return string.html_safe
+    end
+
+    #-----------------------------------------------------------------------------------------------
+
+    def mixpanel_track_form(selector, event, opts = {})
+      string = '<script type="text/javascript">'
+      string += "mixpanel.track_forms('#{selector}', '#{event}', #{JSON.generate(opts).html_safe});"
       string += "</script>"
       return string.html_safe
     end

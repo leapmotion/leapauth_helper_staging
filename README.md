@@ -47,6 +47,10 @@ In your app, you should use the following methods to generate the URLs that you 
 * `auth_admin_user_url(user_id)`
 * `auth_admin_user_edit_embed_url(user_id)`
 
+#### Using MixPanel
+
+
+
 #### Version >= 1.1.0
 
 With version 1.1.0 we deprecated the `secure_url` method.  You should be able to upgrade without issues, but you'll get deprecation warning messages.

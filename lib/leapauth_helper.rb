@@ -25,6 +25,10 @@ module LeapauthHelper
       def cookie_expiration
         2.weeks.from_now
       end
+
+      def environment
+        ENV["RAILS_ENV"] || ENV["RACK_ENV"]
+      end
     end
   end
 
