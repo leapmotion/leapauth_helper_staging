@@ -47,9 +47,58 @@ In your app, you should use the following methods to generate the URLs that you 
 * `auth_admin_user_url(user_id)`
 * `auth_admin_user_edit_embed_url(user_id)`
 
-#### Using MixPanel
+#### Mixpanel Helpers
+
+Where you want to use Mixpanel, you'll need to instatiate a Mixpanel helper.
+
+To make things available, add to your application controller
+
+    class ApplicationController
+    
+      ...
+ 
+      before_filter :initialize_mixpanel
+    
+      def initialize_mixpanel
+        @mixpanel ||= Mixpanel.new(site_name, current_user)
+      end
+
+      ...
+    end
+
+where `site_name` should be the value used for "Site" in the mixpanel event tracking.
 
 
+Then in your views, you'll need to render the Mixpanel initialization
+
+    <!-- in application.erb - maybe in the HEAD section -->
+    <%= @mixpanel.render_init %>
+    
+
+To track links and forms
+
+    <%= @mixpanel.track_form('.form-selector', 'The form to track', { my_param: 'my value'}) %>
+    <%= @mixpanel.track_link('a.my-trackable-link', 'The link to track', { my_param: 'my value'}) %>
+
+To track events that may happen in controllers (calling mixpanel.track), register the events like this
+
+* in controller method
+
+    @mixpanel.track 'my event'
+    @mixpanel.track 'my event with opts', { :opt1 => 'value 1' }
+
+* in a view
+
+    <%=
+        @mixpanel.track 'my event' 
+        @mixpanel.track 'my event with opts', { :opt1 => 'value 1' } 
+    %>
+
+Then call `render_events` at the end of the view
+
+     <% @mixpanel.render_events %>
+
+TaDa!
 
 #### Version >= 1.1.0
 
