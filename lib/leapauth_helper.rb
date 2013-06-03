@@ -3,6 +3,7 @@ require 'cgi'
 require "leapauth_helper/config"
 require "leapauth_helper/version"
 require "leapauth_helper/auth_user"
+require "leapauth_helper/mixpanel"
 require "leapauth_helper/user_voice"
 require "leapauth_helper/user_capabilities"
 require "leapauth_helper/url_helpers"
@@ -23,6 +24,10 @@ module LeapauthHelper
       
       def cookie_expiration
         2.weeks.from_now
+      end
+
+      def environment
+        ENV["RAILS_ENV"] || ENV["RACK_ENV"]
       end
     end
   end
