@@ -42,7 +42,7 @@ module LeapauthHelper
   }
 
   def self.config
-    config_data = DEFAULT_CONFIG['all'].merge(DEFAULT_CONFIG[ ENV['RAILS_ENV'] ])
+    config_data = DEFAULT_CONFIG['all'].merge(DEFAULT_CONFIG[ ENV['RAILS_ENV'] || ENV['RACK_ENV'] ])
     @@config ||= Config.new(config_data)
   end
 

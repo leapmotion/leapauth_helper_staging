@@ -86,8 +86,6 @@ Before version 1.0.0,  you could configure LeapauthHelper using environment vari
 
 ### Halp
 
-First, make sure you have your `RAILS_ENV` environment variable set (not just `RACK_ENV`).
-
 Then, make sure all your apps are on the same domain. For example, this should work:
 
 1. leapweb - local.leapmotion:3000
