@@ -1,8 +1,16 @@
 module LeapauthHelper
-  module Mixpanel
+  class Mixpanel
     #-----------------------------------------------------------------------------------------------
 
-    def mixpanel_init(site_name)
+    def initialize(site_name, current_user)
+      @site_name = site_name
+      @current_user = current_user
+      @leapauth_helper_mixpanel_events = []
+    end
+
+    #-----------------------------------------------------------------------------------------------
+
+    def render_init
       string = '<script type="text/javascript">'
 
       # MixPanel SDK
@@ -18,31 +26,29 @@ module LeapauthHelper
       string += "mixpanel.set_config(#{JSON.generate(config_options)});"
 
       # each site identifies with this arg
-      string += "mixpanel.register({ Site: '#{site_name}' });"
+      string += "mixpanel.register({ Site: '#{@site_name}' });"
 
       # set some super-properties if we have a user object
-      if defined?(current_user) && !current_user.nil?
+      unless @current_user.nil?
 
-        if current_user.respond_to?(:email) && !current_user.email.nil? && !current_user.email.empty?
-          string += "mixpanel.name_tag('#{current_user.email}');"
+        if @current_user.respond_to?(:email) && !@current_user.email.nil? && !@current_user.email.empty?
+          string += "mixpanel.name_tag('#{@current_user.email}');"
         end
 
-        if current_user.respond_to?(:sign_in_count)
-          string += "mixpanel.register({ 'First Launch': #{current_user.sign_in_count.to_i <= 1} });"
+        if @current_user.respond_to?(:sign_in_count)
+          string += "mixpanel.register({ 'First Launch': #{@current_user.sign_in_count.to_i <= 1} });"
         end
 
       end
 
       string += "</script>"
 
-      @leapauth_helper_mixpanel_events ||= []
-
       return string.html_safe
     end
 
     #-----------------------------------------------------------------------------------------------
 
-    def mixpanel_render_events
+    def render_events
       string = '<script type="text/javascript">'
 
       @leapauth_helper_mixpanel_events ||= []
@@ -57,14 +63,14 @@ module LeapauthHelper
 
     #-----------------------------------------------------------------------------------------------
 
-    def mixpanel_track(event, opts = {})
+    def track(event, opts = {})
       @leapauth_helper_mixpanel_events ||= []
       @leapauth_helper_mixpanel_events << [event, opts]
     end
 
     #-----------------------------------------------------------------------------------------------
 
-    def mixpanel_track_link(selector, event, opts = {})
+    def track_link(selector, event, opts = {})
       string = '<script type="text/javascript">'
       string += "mixpanel.track_links('#{selector}', '#{event}', #{JSON.generate(opts).html_safe});"
       string += "</script>"
@@ -73,7 +79,7 @@ module LeapauthHelper
 
     #-----------------------------------------------------------------------------------------------
 
-    def mixpanel_track_form(selector, event, opts = {})
+    def track_form(selector, event, opts = {})
       string = '<script type="text/javascript">'
       string += "mixpanel.track_forms('#{selector}', '#{event}', #{JSON.generate(opts).html_safe});"
       string += "</script>"
