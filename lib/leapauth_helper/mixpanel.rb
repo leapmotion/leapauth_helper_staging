@@ -74,29 +74,41 @@ module LeapauthHelper
     #-----------------------------------------------------------------------------------------------
 
     def track_link(selector, event, opts = {})
-      string = '<script type="text/javascript">'
-      string += "mixpanel.track_links('#{selector}', '#{event}'"
-      if !opts.nil? && !opts.empty?
-        string += ", #{JSON.generate(opts).html_safe});"
-      end
-      string += ");"
-      string += "</script>"
-      return string.html_safe
+      opts_string = JSON.generate(opts).html_safe if !opts.nil? && !opts.empty?
+      render_track_it_tag(:track_links, selector, event, opts_string)
+    end
+
+    #-----------------------------------------------------------------------------------------------
+
+    def track_link_with_callback(selector, event, callback)
+      render_track_it_tag(:track_links, selector, event, callback) 
     end
 
     #-----------------------------------------------------------------------------------------------
 
     def track_form(selector, event, opts = {})
-      string = '<script type="text/javascript">'
-      string += "mixpanel.track_forms('#{selector}', '#{event}'"
-      if !opts.nil? && !opts.empty?
-        string += ", #{JSON.generate(opts).html_safe});"
-      end
-      string += ");"
-      string += "</script>"
-      return string.html_safe
+      opts_string = JSON.generate(opts).html_safe if !opts.nil? && !opts.empty?
+      render_track_it_tag(:track_forms, selector, event, opts_string)
     end
 
     #-----------------------------------------------------------------------------------------------
+
+    def track_form_with_callback(selector, event, callback)
+      render_track_it_tag(:track_forms, selector, event, callback) 
+    end
+
+    #-----------------------------------------------------------------------------------------------
+
+    private 
+    def render_track_it_tag(mixpanel_method, selector, event, opts_string = nil)
+      string = '<script type="text/javascript">'
+      string += "mixpanel.#{mixpanel_method}('#{selector}', '#{event}'"
+      if !opts_string.nil? && !opts_string.empty?
+        string += ", #{opts_string}"
+      end
+      string += ");"
+      string += "</script>"
+      string.html_safe
+    end
   end
 end
