@@ -3,7 +3,7 @@ require 'spec_helper'
 describe LeapauthHelper::Mixpanel do
   let (:testclass) { LeapauthHelper::Mixpanel.new("My Site") }
 
-  describe '#mixpanel_init' do
+  describe '#render_init' do
     it "initializes MixPanel correctly" do
       #site_name = "My Site"
       #init_string = testclass.mixpanel_init(site_name)
@@ -16,7 +16,7 @@ describe LeapauthHelper::Mixpanel do
     end
   end
 
-  describe '#mixpanel_track' do
+  describe '#track' do
     it 'appends event to a list of events' do
       testclass.track('event1', {"whatever" => 'yo'})
       expect(testclass.instance_variable_get('@leapauth_helper_mixpanel_events')).to have(1).event
@@ -24,8 +24,9 @@ describe LeapauthHelper::Mixpanel do
     end
   end
 
-  describe '#mixpanel_render_events' do
+  describe '#render_events' do
     it 'renders the javascript to track the recorded events' do
+      JSON.generate({});
       testclass.instance_variable_set('@leapauth_helper_mixpanel_events', [['my_event', {"attr1" => "val1"}],
                                                                            ['my_event', {"attr2" => "val2"}]])
       js = testclass.render_events
@@ -35,22 +36,31 @@ describe LeapauthHelper::Mixpanel do
     end
   end
 
-  describe '#mixpanel_track_link' do
+  describe '#track_link' do
     it 'renders a call to the mixpanel track_link' do
       link_tracker = testclass.track_link('.the-link', 'The Event Name', {whatever: 'blah'})
-      expect(link_tracker).to include 'mixpanel.track_links'
-      expect(link_tracker).to include '.the-link'
-      expect(link_tracker).to include 'The Event Name'
+      expect(link_tracker).to include "mixpanel.track_links('.the-link', 'The Event Name',"
+      expect(link_tracker).to match /whatever.*blah/
     end
+
+    it 'renders a call to the mixpanel track_link without options' do
+      link_tracker = testclass.track_link('.the-link', 'The Event Name')
+      expect(link_tracker).to include "mixpanel.track_links('.the-link', 'The Event Name')"
+    end
+
   end
 
-  describe '#mixpanel_track_form' do
+  describe '#track_form' do
     it "outputs a JavaScript call to the MixPanel API" do
       form_tracker = testclass.track_form('.the-form', 'The Event Name', {whatever: 'blah'})
-      # expect(form_tracker).to match /mixpanel\.track_forms\(.*\'\.the-form\'.*\'The Event Name\'.*\{\}\s+\)/
-      expect(form_tracker).to match /mixpanel\.track_forms/
-      expect(form_tracker).to match /\'\.the-form\'/
-      expect(form_tracker).to match /\'The Event Name\'/
+
+      expect(form_tracker).to include "mixpanel.track_forms('.the-form', 'The Event Name',"
+      expect(form_tracker).to match /whatever.*blah/
+    end
+
+    it "outputs a JavaScript call to the MixPanel API without options" do
+      form_tracker = testclass.track_form('.the-form', 'The Event Name')
+      expect(form_tracker).to include "mixpanel.track_forms('.the-form', 'The Event Name')"
     end
   end
   

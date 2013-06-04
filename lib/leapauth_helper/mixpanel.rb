@@ -53,8 +53,11 @@ module LeapauthHelper
 
       @leapauth_helper_mixpanel_events ||= []
       @leapauth_helper_mixpanel_events.each do |e|
-        e[1] ||= {}
-        string += "mixpanel.track('#{e[0]}', #{JSON.generate(e[1]).html_safe});"
+        if !e[1].nil? && !e[1].empty? # empty hash blows JSON.generate
+          string += "mixpanel.track('#{e[0]}', #{JSON.generate(e[1]).html_safe});"
+        else
+          string += "mixpanel.track('#{e[0]}');"
+        end
       end
 
       string += "</script>"
@@ -72,7 +75,11 @@ module LeapauthHelper
 
     def track_link(selector, event, opts = {})
       string = '<script type="text/javascript">'
-      string += "mixpanel.track_links('#{selector}', '#{event}', #{JSON.generate(opts).html_safe});"
+      string += "mixpanel.track_links('#{selector}', '#{event}'"
+      if !opts.nil? && !opts.empty?
+        string += ", #{JSON.generate(opts).html_safe});"
+      end
+      string += ");"
       string += "</script>"
       return string.html_safe
     end
@@ -81,7 +88,11 @@ module LeapauthHelper
 
     def track_form(selector, event, opts = {})
       string = '<script type="text/javascript">'
-      string += "mixpanel.track_forms('#{selector}', '#{event}', #{JSON.generate(opts).html_safe});"
+      string += "mixpanel.track_forms('#{selector}', '#{event}'"
+      if !opts.nil? && !opts.empty?
+        string += ", #{JSON.generate(opts).html_safe});"
+      end
+      string += ");"
       string += "</script>"
       return string.html_safe
     end
