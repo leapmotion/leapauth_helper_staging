@@ -5,14 +5,20 @@ describe LeapauthHelper::Mixpanel do
 
   describe '#render_init' do
     it "initializes MixPanel correctly" do
-      #site_name = "My Site"
-      #init_string = testclass.mixpanel_init(site_name)
       init_string = testclass.render_init
 
       expect(init_string).to match /Site:\s+\'My Site\'/
       expect(init_string).to match /<script.*>/
       expect(init_string).to match /<\/script>/
       expect(init_string).to match /#{LeapauthHelper.config.mixpanel_token}/
+    end
+
+    it "calls Mixpanel People Analytics if it has user data, with the user data it has" do
+      user = OpenStruct.new(:email => "user@example.com", :sign_in_count => 1)
+      testclass = LeapauthHelper::Mixpanel.new("My Site", user)
+      init_string = testclass.render_init
+      expect(init_string).to include "mixpanel.people.set({ $email: 'user@example.com' });"
+      expect(init_string).to_not include "mixpanel.people.set({ $created: "
     end
   end
 

@@ -32,11 +32,26 @@ module LeapauthHelper
       unless @current_user.nil?
 
         if @current_user.respond_to?(:email) && !@current_user.email.nil? && !@current_user.email.empty?
+          string += "mixpanel.identify('#{@current_user.email}');"
           string += "mixpanel.name_tag('#{@current_user.email}');"
+          string += "mixpanel.people.set({ $email: '#{@current_user.email}' });"
         end
 
         if @current_user.respond_to?(:sign_in_count)
           string += "mixpanel.register({ 'First Launch': #{@current_user.sign_in_count.to_i <= 1} });"
+        end
+
+        if @current_user.respond_to?(:is_developer?)
+          string +=   "mixpanel.register({ is_developer: '#{@current_user.is_developer?}' });"
+          string += "mixpanel.people.set({ is_developer: '#{@current_user.is_developer?}' });"
+        end
+
+        if @current_user.respond_to?(:username) && !@current_user.username.nil? && !@current_user.username.empty?
+          string += "mixpanel.people.set({ $username: '#{@current_user.username}' });"
+        end
+
+        if @current_user.respond_to?(:created_at) && !@current_user.created_at.nil? && @current_user.created_at.respond_to?(:to_i)
+          string += "mixpanel.people.set({ $created: new Date(#{@current_user.created_at.to_i * 1000}) });"
         end
 
       end
