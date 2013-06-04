@@ -66,15 +66,14 @@ describe LeapauthHelper::Mixpanel do
 
   describe '#track_link_with_callback' do
     it 'renders a call to the mixpanel track_link_with_callback' do
-      link_tracker = testclass.track_link('.the-link', 'The Event Name', {whatever: 'blah'})
-      expect(link_tracker).to include "mixpanel.track_links('.the-link', 'The Event Name',"
-      expect(link_tracker).to match /whatever.*blah/
+      link_tracker = testclass.track_link_with_callback('.the-link', 'The Event Name', "function(event) { return {'text':$(ev).text()};}")
+      expect(link_tracker).to include "mixpanel.track_links('.the-link', 'The Event Name', function(event) {"
     end
   end
 
   describe '#track_form_with_callback' do
     it "outputs a JavaScript call to the MixPanel API" do
-      form_tracker = testclass.track_form_with_callback('.the-form', 'The Event Name', "function(ev) { return {'text':$(ev).text();};}")
+      form_tracker = testclass.track_form_with_callback('.the-form', 'The Event Name', "function(ev) { return {'text':$(ev).text()};}")
 
       expect(form_tracker).to include "mixpanel.track_forms('.the-form', 'The Event Name', function(ev) {"
     end

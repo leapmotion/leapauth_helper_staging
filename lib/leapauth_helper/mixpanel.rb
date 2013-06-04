@@ -81,7 +81,7 @@ module LeapauthHelper
     #-----------------------------------------------------------------------------------------------
 
     def track_link_with_callback(selector, event, callback)
-      render_track_it_tag(:track_links, selector, event, callback) 
+      render_track_it_tag(:track_links, selector, event, callback)
     end
 
     #-----------------------------------------------------------------------------------------------
@@ -94,12 +94,12 @@ module LeapauthHelper
     #-----------------------------------------------------------------------------------------------
 
     def track_form_with_callback(selector, event, callback)
-      render_track_it_tag(:track_forms, selector, event, callback) 
+      render_track_it_tag(:track_forms, selector, event, callback)
     end
 
     #-----------------------------------------------------------------------------------------------
 
-    private 
+    private
     def render_track_it_tag(mixpanel_method, selector, event, opts_string = nil)
       string = '<script type="text/javascript">'
       string += "mixpanel.#{mixpanel_method}('#{selector}', '#{event}'"
