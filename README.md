@@ -80,6 +80,13 @@ To track links and forms
     <%= @mixpanel.track_form('.form-selector', 'The form to track', { my_param: 'my value'}) %>
     <%= @mixpanel.track_link('a.my-trackable-link', 'The link to track', { my_param: 'my value'}) %>
 
+To track links and forms with callback methods instead of hashes
+
+    <%= @mixpanel.track_form_with_callback('.form-selector', 'The form to track', "function(f) { return {form_name: $(f).name} }") %>
+    <%= @mixpanel.track_link_with_callback( ... ) %>
+
+Read the mixpanel API docs for more about callbacks with the `track_link`/`track_form` method.
+
 To track events that may happen in controllers (calling mixpanel.track), register the events like this
 
 * in controller method
