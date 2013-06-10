@@ -33,7 +33,7 @@ module LeapauthHelper
       "cookie_auth_key"    =>  "_auth",
       "transactions_host"  =>  "warehouse.leapmotion.com",
       "mixpanel_token"     =>  "77d363605f0470115eb82352f14b2981",
-      "google_property_id" => "UA-31536531-1"
+      "google_property_id" =>  "UA-31536531-1"
     },
     'all' => {
       # If you're acme.uservoice.com then this value would be 'acme'.
