@@ -1,14 +1,14 @@
 module LeapauthHelper
   class GoogleAnalytics
     def self.render_init
-      return "" unless LeapauthHelper.config.google_analytics_id.present?
+      return "" unless LeapauthHelper.config.google_property_id.present?
 
       string = <<-EOS
         <script type="text/javascript">
           var _gaq = _gaq || [];
       EOS
 
-      string += "_gaq.push(['_setAccount',    '#{LeapauthHelper.config.google_analytics_id}']);"
+      string += "_gaq.push(['_setAccount',    '#{LeapauthHelper.config.google_property_id}']);"
       string += "_gaq.push(['_setDomainName', 'leapmotion.com']);"
 
       string += <<-EOS
