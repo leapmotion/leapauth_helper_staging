@@ -136,9 +136,13 @@ Available configuration params are:
 - `uservoice_subdomain`
 - `uservoice_sso_key`
 - `mixpanel_token`
+- `google_property_id`
 
-The gem provides default values for all params; in most cases, the default values should be fine.
+The gem provides default values for all params in all environments except the Google Analytics property ID; in most cases, the default values should be fine.
 Beyond that, the most common connection point you may want to change is the `auth_host` as that represents the pointer to the authentication domain (i.e., Central).
+
+By default, Google Analytics is configured to only render in production environments. You can add IDs for non-production environments in the same way
+as any other config param for LeapauthHelper.
 
 #### Version < 1.0.0
  
