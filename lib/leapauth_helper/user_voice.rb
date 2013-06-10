@@ -1,14 +1,17 @@
 require 'ezcrypto'
 
+class UserVoiceError < StandardError; end
+
 module LeapauthHelper
   module UserVoice
     # For details on UserVoice SSO, see: https://developer.uservoice.com/docs/site/single-sign-on/
-    def generate_uservoice_token(user_id, email, display_name)
+    # use extras to encode extra params as per the Uservoice SSO docs indicated above
+    def generate_uservoice_token(user_id, email, display_name, extras = {})
       # If we don't have enough user info, bail.
-      raise "Must pass User ID, email, and display name to generate a UserVoice SSO token." unless [user_id, email, display_name].all?(&:present?)
+      raise UserVoiceError.new("Must pass User ID, email, and display name to generate a UserVoice SSO token.") unless [user_id, email, display_name].all?(&:present?)
       
       # This is the data sent to UserVoice encrypted inside the token.
-      options = { :guid => "#{ENV['RAILS_ENV'] || ENV['RACK_ENV']}-#{user_id}", :email => email, :display_name => display_name }
+      options = { :guid => "#{ENV['RAILS_ENV'] || ENV['RACK_ENV']}-#{user_id}", :email => email, :display_name => display_name }.merge(extras)
       # TODO: Do we want auth tokens to expire?
       # options.merge!({ :expires => (Time.zone.now.utc + 5 * 60).to_s })
 
