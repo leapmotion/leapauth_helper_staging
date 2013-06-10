@@ -107,6 +107,15 @@ Then call `render_events` at the end of the view
 
 TaDa!
 
+#### Google Analytics Helper
+
+All Leap Motion properties use the same Google Analytics property ID and in fact the exact same tracking script. Everything is already baked into this gem
+and properly configured to only call GA in production environments, so integration is literally one line:
+
+`<%= LeapauthHelper::GoogleAnalytics.render_init() %>`
+
+Put that one line into the `<head>` of your base application layout, and you're done!
+
 #### Version >= 1.1.0
 
 With version 1.1.0 we deprecated the `secure_url` method.  You should be able to upgrade without issues, but you'll get deprecation warning messages.
@@ -136,9 +145,13 @@ Available configuration params are:
 - `uservoice_subdomain`
 - `uservoice_sso_key`
 - `mixpanel_token`
+- `google_property_id`
 
-The gem provides default values for all params; in most cases, the default values should be fine.
+The gem provides default values for all params in all environments except the Google Analytics property ID; in most cases, the default values should be fine.
 Beyond that, the most common connection point you may want to change is the `auth_host` as that represents the pointer to the authentication domain (i.e., Central).
+
+By default, Google Analytics is configured to only render in production environments. You can add IDs for non-production environments in the same way
+as any other config param for LeapauthHelper.
 
 #### Version < 1.0.0
  

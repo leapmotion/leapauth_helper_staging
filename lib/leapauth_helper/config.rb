@@ -32,13 +32,15 @@ module LeapauthHelper
       "home"               =>  "https://www.leapmotion.com",
       "cookie_auth_key"    =>  "_auth",
       "transactions_host"  =>  "warehouse.leapmotion.com",
-      "mixpanel_token"     =>  "77d363605f0470115eb82352f14b2981"
+      "mixpanel_token"     =>  "77d363605f0470115eb82352f14b2981",
+      "google_property_id" =>  "UA-31536531-1"
     },
     'all' => {
       # If you're acme.uservoice.com then this value would be 'acme'.
       "uservoice_subdomain" => "leapbeta",
       # Get this from UserVoice General Settings page: https://leapbeta.uservoice.com/admin/settings
       "uservoice_sso_key"   => "977cc7fa89438e2805111cf01c8cc993",
+      # This is our catch-all token for all non-production environments.
       "mixpanel_token"      => "64a624e0f5fd5fec35dff6b08281664e"
     }
   }
