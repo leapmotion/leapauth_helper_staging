@@ -22,7 +22,7 @@ module LeapauthHelper
         </script>
       EOS
 
-      return string
+      return string.html_safe
     end
   end
 end
