@@ -46,6 +46,11 @@ module LeapauthHelper
           string += "mixpanel.people.set({ is_developer: '#{@current_user.is_developer?}' });"
         end
 
+        if @current_user.respond_to?(:is_beta?)
+          string +=   "mixpanel.register({ is_beta: '#{@current_user.is_beta?}' });"
+          string += "mixpanel.people.set({ is_beta: '#{@current_user.is_beta?}' });"
+        end
+
         if @current_user.respond_to?(:username) && !@current_user.username.nil? && !@current_user.username.empty?
           string += "mixpanel.people.set({ $username: '#{@current_user.username}' });"
         end
