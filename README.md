@@ -51,59 +51,71 @@ In your app, you should use the following methods to generate the URLs that you 
 
 Where you want to use Mixpanel, you'll need to instatiate a Mixpanel helper.
 
-To make things available, add to your application controller
+To make things available, add this to your ApplicationController:
 
-    class ApplicationController
-    
-      ...
- 
-      before_filter :initialize_mixpanel
-    
-      def initialize_mixpanel
-        @mixpanel ||= Mixpanel.new(site_name, current_user)
-      end
+```ruby
+class ApplicationController
 
-      ...
-    end
+  ...
+
+  before_filter :initialize_mixpanel
+
+  def initialize_mixpanel
+    @mixpanel ||= Mixpanel.new(site_name, current_user)
+  end
+
+  ...
+end
+```
 
 where `site_name` should be the value used for "Site" in the mixpanel event tracking.
 
+Then in your views, you'll need to render the Mixpanel initialization:
 
-Then in your views, you'll need to render the Mixpanel initialization
+```erb
+<!-- in application.erb - maybe in the HEAD section -->
+<%= @mixpanel.render_init %>
+```
 
-    <!-- in application.erb - maybe in the HEAD section -->
-    <%= @mixpanel.render_init %>
-    
+To track links and forms:
 
-To track links and forms
+```erb
+<%= @mixpanel.track_form('.form-selector',      'The form to track', { my_param: 'my value'}) %>
+<%= @mixpanel.track_link('a.my-trackable-link', 'The link to track', { my_param: 'my value'}) %>
+```
 
-    <%= @mixpanel.track_form('.form-selector', 'The form to track', { my_param: 'my value'}) %>
-    <%= @mixpanel.track_link('a.my-trackable-link', 'The link to track', { my_param: 'my value'}) %>
+To track links and forms with callback methods instead of hashes:
 
-To track links and forms with callback methods instead of hashes
+```erb
+<%= @mixpanel.track_form_with_callback('.form-selector', 'The form to track', "function(f) { return {form_name: $(f).name} }") %>
+<%= @mixpanel.track_link_with_callback( ... ) %>
+```
 
-    <%= @mixpanel.track_form_with_callback('.form-selector', 'The form to track', "function(f) { return {form_name: $(f).name} }") %>
-    <%= @mixpanel.track_link_with_callback( ... ) %>
+Read the mixpanel API docs for more about callbacks with the `track_link`/`track_form` methods.
 
-Read the mixpanel API docs for more about callbacks with the `track_link`/`track_form` method.
+To track events that may happen in controllers (calling mixpanel.track), register the events before the end of the rendered `<body>`:
 
-To track events that may happen in controllers (calling mixpanel.track), register the events like this
+* In controller methods:
 
-* in controller method
+```ruby
+@mixpanel.track 'my event'
+@mixpanel.track 'my event with opts', { :opt1 => 'value 1' }
+```
 
-    @mixpanel.track 'my event'
-    @mixpanel.track 'my event with opts', { :opt1 => 'value 1' }
+* In a view:
 
-* in a view
+```erb
+<%=
+    @mixpanel.track 'my event' 
+    @mixpanel.track 'my event with opts', { :opt1 => 'value 1' } 
+%>
+```
 
-    <%=
-        @mixpanel.track 'my event' 
-        @mixpanel.track 'my event with opts', { :opt1 => 'value 1' } 
-    %>
+At the end of the `<body>`, call `render_events`:
 
-Then call `render_events` at the end of the view
-
-     <% @mixpanel.render_events %>
+```erb
+<%= @mixpanel.render_events %>
+```
 
 TaDa!
 
