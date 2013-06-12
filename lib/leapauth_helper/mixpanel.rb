@@ -46,6 +46,11 @@ module LeapauthHelper
           string += "mixpanel.people.set({ is_developer: '#{@current_user.is_developer?}' });"
         end
 
+        if @current_user.respond_to?(:is_beta?)
+          string +=   "mixpanel.register({ is_beta: '#{@current_user.is_beta?}' });"
+          string += "mixpanel.people.set({ is_beta: '#{@current_user.is_beta?}' });"
+        end
+
         if @current_user.respond_to?(:username) && !@current_user.username.nil? && !@current_user.username.empty?
           string += "mixpanel.people.set({ $username: '#{@current_user.username}' });"
         end
@@ -84,6 +89,8 @@ module LeapauthHelper
     def track(event, opts = {})
       @leapauth_helper_mixpanel_events ||= []
       @leapauth_helper_mixpanel_events << [event, opts]
+      # Just in case this is called with <%= instead of <% this will prevent crap from going onto the page.
+      return nil
     end
 
     #-----------------------------------------------------------------------------------------------
