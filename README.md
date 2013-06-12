@@ -106,8 +106,8 @@ To track events that may happen in controllers (calling mixpanel.track), registe
 
 ```erb
 <%=
-    @mixpanel.track 'my event' 
-    @mixpanel.track 'my event with opts', { :opt1 => 'value 1' } 
+    @mixpanel.track 'my event'
+    @mixpanel.track 'my event with opts', { :opt1 => 'value 1' }
 %>
 ```
 
