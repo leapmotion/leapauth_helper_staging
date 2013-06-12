@@ -89,6 +89,8 @@ module LeapauthHelper
     def track(event, opts = {})
       @leapauth_helper_mixpanel_events ||= []
       @leapauth_helper_mixpanel_events << [event, opts]
+      # Just in case this is called with <%= instead of <% this will prevent crap from going onto the page.
+      return nil
     end
 
     #-----------------------------------------------------------------------------------------------
