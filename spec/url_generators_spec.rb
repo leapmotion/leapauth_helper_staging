@@ -22,13 +22,13 @@ describe LeapauthHelper::UrlGenerators do
   
   describe "#auth_sign_in_url method" do
     it "returns the URL with a redirect URL" do
-      expect( "http://#{LeapauthHelper.config.auth_host}/users/auth?_r=http://local.leapmotion:4000/some-page").to eql controller.auth_sign_in_url
+      expect( "http://#{LeapauthHelper.config.auth_host}/users/sign_in?_r=http://local.leapmotion:4000/some-page").to eql controller.auth_sign_in_url
     end
   end
   
   describe "#auth_create_session_url method" do
     it "returns the URL with a redirect URL" do
-      expect( "http://#{LeapauthHelper.config.auth_host}/users/auth?_r=http://local.leapmotion:4000/some-page").to eql controller.auth_create_session_url
+      expect( "http://#{LeapauthHelper.config.auth_host}/users/sign_in?_r=http://local.leapmotion:4000/some-page").to eql controller.auth_create_session_url
     end
   end
 
