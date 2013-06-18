@@ -22,7 +22,7 @@ module LeapauthHelper
     alias_method :auth_sign_out_url, :auth_destroy_session_url
 
     def auth_sign_in_url(destination = current_url)
-      LeapauthHelper::UrlHelpers.secure_url("/users/auth?_r=#{URI.escape(destination)}")
+      LeapauthHelper::UrlHelpers.secure_url("/users/sign_in?_r=#{URI.escape(destination)}")
     end
     alias_method :auth_create_session_url, :auth_sign_in_url 
 
