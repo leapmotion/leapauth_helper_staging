@@ -15,14 +15,14 @@ module LeapauthHelper
   include UrlGenerators
 
   class Internal
-    class << self 
+    class << self
       def hash_for_user(user)
         { :id => user.id,
           :email => user.email,
           :expires_on => cookie_expiration.utc.to_i,
           :username => user.username }
       end
-      
+
       def cookie_expiration
         2.weeks.from_now
       end
@@ -77,6 +77,7 @@ module LeapauthHelper
           data = ActiveSupport::JSON.decode(body)
           LeapauthHelper::AuthUser.new(data)
         else
+          warn "your secret_token is not set correctly" if auth_cookie_jar[LeapauthHelper.config.cookie_auth_key]
           nil
         end
       end
