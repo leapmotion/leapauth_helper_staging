@@ -26,6 +26,10 @@ module LeapauthHelper
     end
     alias_method :auth_create_session_url, :auth_sign_in_url 
 
+    def auth_sign_up_url(destination = current_url)
+      LeapauthHelper::UrlHelpers.secure_url("/users/sign_up?_r=#{URI.escape(destination)}")
+    end
+
     def auth_edit_profile_url
       LeapauthHelper::UrlHelpers.secure_url("/users/edit")
     end

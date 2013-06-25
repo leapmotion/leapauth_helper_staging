@@ -20,6 +20,12 @@ describe LeapauthHelper::UrlGenerators do
     end
   end
   
+  describe "#auth_sign_up_url method" do
+    it "returns the URL to sign up with a redirect" do
+      expect( "http://#{LeapauthHelper.config.auth_host}/users/sign_up?_r=http://local.leapmotion:4000/some-page").to eql controller.auth_sign_up_url
+    end
+  end
+
   describe "#auth_sign_in_url method" do
     it "returns the URL with a redirect URL" do
       expect( "http://#{LeapauthHelper.config.auth_host}/users/sign_in?_r=http%3A%2F%2Flocal.leapmotion%3A4000%2Fsome-page").to eql controller.auth_sign_in_url
