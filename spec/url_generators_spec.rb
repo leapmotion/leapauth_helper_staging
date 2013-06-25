@@ -10,25 +10,25 @@ describe LeapauthHelper::UrlGenerators do
   
   describe "#auth_destroy_session_url method" do
     it "returns the URL" do
-      expect( "http://#{LeapauthHelper.config.auth_host}/users/sign_out?_r=http://local.leapmotion:4000/some-page").to eql controller.auth_destroy_session_url
+      expect( "http://#{LeapauthHelper.config.auth_host}/users/sign_out?_r=http%3A%2F%2Flocal.leapmotion%3A4000%2Fsome-page").to eql controller.auth_destroy_session_url
     end
   end
   
   describe "#auth_sign_out_url method" do
     it "returns the URL" do
-      expect( "http://#{LeapauthHelper.config.auth_host}/users/sign_out?_r=http://local.leapmotion:4000/some-page").to eql controller.auth_sign_out_url
+      expect( "http://#{LeapauthHelper.config.auth_host}/users/sign_out?_r=http%3A%2F%2Flocal.leapmotion%3A4000%2Fsome-page").to eql controller.auth_sign_out_url
     end
   end
   
   describe "#auth_sign_in_url method" do
     it "returns the URL with a redirect URL" do
-      expect( "http://#{LeapauthHelper.config.auth_host}/users/sign_in?_r=http://local.leapmotion:4000/some-page").to eql controller.auth_sign_in_url
+      expect( "http://#{LeapauthHelper.config.auth_host}/users/sign_in?_r=http%3A%2F%2Flocal.leapmotion%3A4000%2Fsome-page").to eql controller.auth_sign_in_url
     end
   end
   
   describe "#auth_create_session_url method" do
     it "returns the URL with a redirect URL" do
-      expect( "http://#{LeapauthHelper.config.auth_host}/users/sign_in?_r=http://local.leapmotion:4000/some-page").to eql controller.auth_create_session_url
+      expect( "http://#{LeapauthHelper.config.auth_host}/users/sign_in?_r=http%3A%2F%2Flocal.leapmotion%3A4000%2Fsome-page").to eql controller.auth_create_session_url
     end
   end
 
