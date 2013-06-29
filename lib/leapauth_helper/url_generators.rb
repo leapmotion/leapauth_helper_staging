@@ -17,14 +17,18 @@ module LeapauthHelper
     end
 
     def auth_destroy_session_url(destination = current_url)
-      LeapauthHelper::UrlHelpers.secure_url("/users/sign_out?_r=#{URI.escape(destination)}")
+      LeapauthHelper::UrlHelpers.secure_url("/users/sign_out?_r=#{CGI.escape(destination)}")
     end
     alias_method :auth_sign_out_url, :auth_destroy_session_url
 
     def auth_sign_in_url(destination = current_url)
-      LeapauthHelper::UrlHelpers.secure_url("/users/sign_in?_r=#{URI.escape(destination)}")
+      LeapauthHelper::UrlHelpers.secure_url("/users/sign_in?_r=#{CGI.escape(destination)}")
     end
     alias_method :auth_create_session_url, :auth_sign_in_url 
+
+    def auth_sign_up_url(destination = current_url)
+      LeapauthHelper::UrlHelpers.secure_url("/users/sign_up?_r=#{CGI.escape(destination)}")
+    end
 
     def auth_edit_profile_url
       LeapauthHelper::UrlHelpers.secure_url("/users/edit")
