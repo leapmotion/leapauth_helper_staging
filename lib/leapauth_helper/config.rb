@@ -3,7 +3,7 @@ require 'ostruct'
 module LeapauthHelper
   class Config < OpenStruct
   end
-  
+
   DEFAULT_CONFIG = {
     'development' => {
       "auth_host"          => "local.leapmotion:3010",
@@ -20,11 +20,11 @@ module LeapauthHelper
       "transactions_host"  =>  "test.leapmotion"
     },
     'staging' => {
-      "auth_host"          =>  "central-stage.leapmotion.com",       
-      "auth_domain"        =>  "leapmotion.com",                     
+      "auth_host"          =>  "central-stage.leapmotion.com",
+      "auth_domain"        =>  "leapmotion.com",
       "home"               =>  "http://leapweb-stage7.herokuapp.com",
-      "cookie_auth_key"    =>  "_stage_auth",                        
-      "transactions_host"  =>  "warehouse-stage.leapmotion.com"     
+      "cookie_auth_key"    =>  "_stage_auth",
+      "transactions_host"  =>  "warehouse-stage.leapmotion.com"
     },
     'production' => {
       "auth_host"          =>  "central.leapmotion.com",
@@ -46,7 +46,7 @@ module LeapauthHelper
   }
 
   def self.config
-    config_data = DEFAULT_CONFIG['all'].merge(DEFAULT_CONFIG[ ENV['RAILS_ENV'] || ENV['RACK_ENV'] ])
+    config_data = DEFAULT_CONFIG['all'].merge(DEFAULT_CONFIG[ ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development'])
     @@config ||= Config.new(config_data)
   end
 
