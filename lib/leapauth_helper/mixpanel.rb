@@ -120,15 +120,24 @@ module LeapauthHelper
     end
 
     #-----------------------------------------------------------------------------------------------
-
     private
+    #-----------------------------------------------------------------------------------------------
+
     def render_track_it_tag(mixpanel_method, selector, event, opts_string = nil)
       string = '<script type="text/javascript">'
+
+      # MixPanel is too dumb to fail gracefully if it can't find the selector on the page, so we'll do this.
+      # NOTE: This now introduces a dependency on jQuery.
+      string += "if ($('#{selector}').length > 0) {"
+
       string += "mixpanel.#{mixpanel_method}('#{selector}', '#{event}'"
       if !opts_string.nil? && !opts_string.empty?
         string += ", #{opts_string}"
       end
       string += ");"
+
+      # Close the jQuery if-block.
+      string += "}"
       string += "</script>"
       string.html_safe
     end
