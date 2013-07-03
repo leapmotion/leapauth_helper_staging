@@ -135,7 +135,7 @@ module LeapauthHelper
         string += ", #{opts_string}"
       end
       string += ");"
-  
+
       # Close the jQuery if-block.
       string += "}"
       string += "</script>"
