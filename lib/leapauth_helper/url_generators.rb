@@ -68,5 +68,9 @@ module LeapauthHelper
       "#{scheme}://#{LeapauthHelper.config.transactions_host}/api/transactions"
     end
 
+    def central_orders_url
+      LeapauthHelper::UrlHelpers.secure_url("/order")
+    end
+
   end
 end
