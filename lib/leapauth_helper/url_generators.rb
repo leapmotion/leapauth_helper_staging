@@ -63,9 +63,13 @@ module LeapauthHelper
       "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
     end
 
-    def transactions_url
+    def app_transactions_url
       scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
       "#{scheme}://#{LeapauthHelper.config.transactions_host}/api/transactions"
+    end
+
+    def central_orders_url
+      LeapauthHelper::UrlHelpers.secure_url("/order")
     end
 
   end
