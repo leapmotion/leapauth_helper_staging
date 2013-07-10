@@ -10,7 +10,7 @@ module LeapauthHelper
       "auth_domain"        => "local.leapmotion",
       "home"               => "http://local.leapmotion:3000",
       "cookie_auth_key"    => "_dev_auth",
-      "transactions_host"  => "local.leapmotion:5001"
+      "transactions_host"  => "local.leapmotion:5001",
       "airspace_host"      => "local.leapmotion:5002"
     },
     'test' => {
@@ -18,7 +18,7 @@ module LeapauthHelper
       "auth_domain"        =>  "test.leapmotion",
       "home"               =>  "http://test.leapmotion",
       "cookie_auth_key"    =>  "_test_auth",
-      "transactions_host"  =>  "test.leapmotion"
+      "transactions_host"  =>  "test.leapmotion",
       "airspace_host"      =>  "test.leapmotion"
     },
     'staging' => {
@@ -26,7 +26,7 @@ module LeapauthHelper
       "auth_domain"        =>  "leapmotion.com",
       "home"               =>  "http://leapweb-stage7.herokuapp.com",
       "cookie_auth_key"    =>  "_stage_auth",
-      "transactions_host"  =>  "warehouse-stage.leapmotion.com"
+      "transactions_host"  =>  "warehouse-stage.leapmotion.com",
       "airspace_host"      =>  "airspace-staging.leapmotion.com"
     },
     'production' => {
@@ -35,7 +35,7 @@ module LeapauthHelper
       "home"               =>  "https://www.leapmotion.com",
       "cookie_auth_key"    =>  "_auth",
       "transactions_host"  =>  "warehouse.leapmotion.com",
-      "airspace_host"      =>  "airspace.leapmotion.com"
+      "airspace_host"      =>  "airspace.leapmotion.com",
       "mixpanel_token"     =>  "77d363605f0470115eb82352f14b2981",
       "google_property_id" =>  "UA-31536531-1"
     },
