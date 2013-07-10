@@ -68,6 +68,11 @@ module LeapauthHelper
       "#{scheme}://#{LeapauthHelper.config.transactions_host}/api/transactions"
     end
 
+    def reauth_url
+      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
+      "#{scheme}://#{LeapauthHelper.config.transactions_host}/users/confirm_password"
+    end
+
     def central_orders_url
       LeapauthHelper::UrlHelpers.secure_url("/order")
     end
