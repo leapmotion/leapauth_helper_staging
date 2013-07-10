@@ -78,6 +78,10 @@ module LeapauthHelper
       "#{scheme}://#{LeapauthHelper.config.airspace_host}"
     end
 
+    def central_reauth_url
+      LeapauthHelper::UrlHelpers.secure_url("/users/confirm_password")
+    end
+
     def central_orders_url
       LeapauthHelper::UrlHelpers.secure_url("/order")
     end
