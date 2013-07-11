@@ -86,5 +86,9 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.secure_url("/order")
     end
 
+    def central_new_payment_method_url
+      LeapauthHelper::UrlHelpers.secure_url("/payment_method/new")
+    end
+
   end
 end
