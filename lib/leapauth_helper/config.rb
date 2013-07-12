@@ -22,12 +22,12 @@ module LeapauthHelper
       "airspace_host"      =>  "test.leapmotion"
     },
     'staging' => {
-      "auth_host"          =>  "central-stage.leapmotion.com",
+      "auth_host"          =>  "leap:L4!!pStag0ing@central-stage.leapmotion.com",
       "auth_domain"        =>  "leapmotion.com",
       "home"               =>  "http://leapweb-stage7.herokuapp.com",
       "cookie_auth_key"    =>  "_stage_auth",
-      "transactions_host"  =>  "warehouse-stage.leapmotion.com",
-      "airspace_host"      =>  "airspace-staging.leapmotion.com"
+      "transactions_host"  =>  "leap:200hands500fingers@warehouse-stage.leapmotion.com",
+      "airspace_host"      =>  "leap:h0t$tud10d3v@airspace-staging.leapmotion.com"
     },
     'production' => {
       "auth_host"          =>  "central.leapmotion.com",
