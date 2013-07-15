@@ -83,7 +83,7 @@ module LeapauthHelper
     end
 
     def central_orders_url
-      LeapauthHelper::UrlHelpers.secure_url("/order")
+      LeapauthHelper::UrlHelpers.secure_url("/orders")
     end
 
     def central_new_payment_method_url
