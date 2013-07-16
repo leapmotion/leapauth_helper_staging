@@ -58,6 +58,10 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.secure_url("/admin/users/#{user_id}/edit_embed")
     end
 
+    def auth_user_account_url()
+      LeapauthHelper::UrlHelpers.secure_url("/account")
+    end
+
     def current_url
       #JR is there a reason we're not using request.url here?
       "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
