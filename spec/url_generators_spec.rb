@@ -52,6 +52,12 @@ describe LeapauthHelper::UrlGenerators do
     end
   end  
 
+  describe "#auth_user_account_url method" do
+    it "returns the URL to the account page" do
+      expect( "http://#{LeapauthHelper.config.auth_host}/account").to eql controller.auth_user_account_url
+    end
+  end
+
   describe "#auth_forgot_password_url" do
     it {
       expect(controller.auth_forgot_password_url).to eql "http://#{LeapauthHelper.config.auth_host}/users/password/new"
