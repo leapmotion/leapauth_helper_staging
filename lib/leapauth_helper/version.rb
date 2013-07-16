@@ -1,3 +1,3 @@
 module LeapauthHelper
-  VERSION = "1.4.0"
+  VERSION = "1.3.10"
 end
