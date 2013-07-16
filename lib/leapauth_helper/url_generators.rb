@@ -31,6 +31,7 @@ module LeapauthHelper
     end
 
     def auth_edit_profile_url
+      warn "DEPRECATED: Use auth_user_account_url for redirects back to user profile.\nThis method will go away in the future.  Plan accordingly"
       LeapauthHelper::UrlHelpers.secure_url("/users/edit")
     end
 
