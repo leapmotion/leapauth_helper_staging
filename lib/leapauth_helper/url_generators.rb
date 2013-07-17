@@ -91,9 +91,9 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.secure_url("/orders")
     end
 
-    def central_new_payment_method_url
+    def central_new_payment_method_url(destination = current_url)
       scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
-      "#{scheme}://#{LeapauthHelper.config.auth_host}/payment_method/new"
+      "#{scheme}://#{LeapauthHelper.config.auth_host}/payment_method/new?_r=#{CGI.escape(destination)}"
     end
 
   end
