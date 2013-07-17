@@ -4,6 +4,8 @@ module LeapauthHelper
   class Config < OpenStruct
   end
 
+  # TODO: When we bump the major version, remove the scheme that is hard-coded in the values for the "home" key here.
+
   DEFAULT_CONFIG = {
     'development' => {
       "auth_host"          => "local.leapmotion:3010",
