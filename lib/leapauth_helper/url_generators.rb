@@ -93,7 +93,7 @@ module LeapauthHelper
 
     def central_new_payment_method_url
       scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
-      "#{scheme}://#{LeapauthHelper.config.airspace_host}/payment_method/new"
+      "#{scheme}://#{LeapauthHelper.config.auth_host}/payment_method/new"
     end
 
   end
