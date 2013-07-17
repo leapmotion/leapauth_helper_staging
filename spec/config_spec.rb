@@ -18,7 +18,7 @@ describe LeapauthHelper do
     it 'has default config' do
       LeapauthHelper.configure do |config|
       end
-      expect(LeapauthHelper.config.home).to eql 'http://test.leapmotion'
+      expect(LeapauthHelper.config.home).to eql 'test.leapmotion:3000'
     end
 
     it "stores configuration" do

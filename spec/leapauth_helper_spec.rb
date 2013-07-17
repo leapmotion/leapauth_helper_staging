@@ -5,8 +5,8 @@ describe LeapauthHelper do
   describe ".included class callback" do
     it "sets host constants" do
       expect( "test.leapmotion:1234").to eql LeapauthHelper.config.auth_host
-      expect( "test.leapmotion").to eql LeapauthHelper.config.auth_domain
-      expect( "http://test.leapmotion").to eql LeapauthHelper.config.home
+      expect( "test.leapmotion").to      eql LeapauthHelper.config.auth_domain
+      expect( "test.leapmotion:3000").to eql LeapauthHelper.config.home
     end
   end
 
