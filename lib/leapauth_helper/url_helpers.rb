@@ -2,7 +2,7 @@ require 'rack'
 module LeapauthHelper
   class UrlHelpers
     class << self
-      # make these kinda private
+      # TODO: make these kinda private.
       def use_secure_transactions?
         %(production staging).include?(Rails.env)
       end
@@ -18,9 +18,8 @@ module LeapauthHelper
       end
 
       def home_url(path, opts = {})
-        # For some reason, config.home has the scheme baked in, but the others don't.
-        # Just in case changing it would be a breaking change, I won't change it. But... WTF.
-        url = "#{LeapauthHelper.config.home}#{path}"
+        scheme = use_secure? ? "https" : "http"
+        url = "#{scheme}://#{LeapauthHelper.config.home}#{path}"
         opts.empty? ? url : "#{url}?#{Rack::Utils.build_query(opts)}"
       end
     end
