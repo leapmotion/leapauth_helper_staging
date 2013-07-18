@@ -96,9 +96,9 @@ module LeapauthHelper
       "#{scheme}://#{LeapauthHelper.config.auth_host}/payment_method/new?_r=#{CGI.escape(destination)}"
     end
 
-    def central_edit_payment_method_url(id, destination = current_url)
+    def central_edit_payment_method_url(destination = current_url)
       scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
-      "#{scheme}://#{LeapauthHelper.config.auth_host}/payment_method/edit.#{id}?_r=#{CGI.escape(destination)}"
+      "#{scheme}://#{LeapauthHelper.config.auth_host}/payment_method/edit?_r=#{CGI.escape(destination)}"
     end
 
   end
