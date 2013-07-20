@@ -2,13 +2,13 @@ require 'rack'
 module LeapauthHelper
   class UrlHelpers
     class << self
-      # TODO: make these kinda private.
+      # TODO: make these kinda private. Do we need both of the following?
       def use_secure_transactions?
         %(production staging).include?(Rails.env)
       end
       
       def use_secure?
-        %(production).include?(Rails.env)
+        %(production staging).include?(Rails.env)
       end
       
       def secure_url(path, opts = {})
