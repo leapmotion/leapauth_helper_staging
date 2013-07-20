@@ -115,4 +115,8 @@ module LeapauthHelper
     LeapauthHelper::UrlHelpers.secure_url *args
   end
 
+  def home_url(*args)
+    LeapauthHelper::UrlHelpers.home_url *args
+  end
+
 end

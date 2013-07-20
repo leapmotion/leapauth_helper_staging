@@ -1,4 +1,5 @@
 require 'rack'
+
 module LeapauthHelper
   class UrlHelpers
     class << self
