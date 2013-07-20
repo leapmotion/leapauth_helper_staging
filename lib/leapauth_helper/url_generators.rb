@@ -22,7 +22,8 @@ module LeapauthHelper
     alias_method :auth_sign_out_url, :auth_destroy_session_url
 
     def auth_sign_in_url(destination = current_url)
-      LeapauthHelper::UrlHelpers.secure_url("/users/sign_in?_r=#{CGI.escape(destination)}")
+      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
+      "#{scheme}://#{LeapauthHelper.config.auth_host}/users/sign_in?_r=#{CGI.escape(destination)}"
     end
     alias_method :auth_create_session_url, :auth_sign_in_url 
 

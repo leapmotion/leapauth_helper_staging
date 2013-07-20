@@ -8,7 +8,7 @@ module LeapauthHelper
       end
       
       def use_secure?
-        %(production staging).include?(Rails.env)
+        %(production).include?(Rails.env)
       end
       
       def secure_url(path, opts = {})
