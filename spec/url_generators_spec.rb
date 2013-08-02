@@ -75,4 +75,8 @@ describe LeapauthHelper::UrlGenerators do
       expect(controller.auth_admin_user_edit_embed_url(1313)).to eql "http://#{LeapauthHelper.config.auth_host}/admin/users/1313/edit_embed"
     }
   end
+
+  describe "#central_sdk_agreement_url" do
+    it { expect("http://#{LeapauthHelper.config.auth_host}/agreements/SdkAgreement?_r=#{expected_redirect}").to eql controller.central_sdk_agreement_url }
+  end
 end

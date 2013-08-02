@@ -102,5 +102,8 @@ module LeapauthHelper
       "#{scheme}://#{LeapauthHelper.config.auth_host}/payment_method/edit?_r=#{CGI.escape(destination)}"
     end
 
+    def central_sdk_agreement_url(destination = current_url)
+      LeapauthHelper::UrlHelpers.secure_url("/agreements/SdkAgreement", :_r => destination)
+    end
   end
 end
