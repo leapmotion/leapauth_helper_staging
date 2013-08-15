@@ -55,22 +55,27 @@ module LeapauthHelper
   }
 
   def self.config
-    if cluster_name = ENV['LEAPCLUSTER']
-      raise "cluster name not in [a-z0-9]" unless cluster_name =~ /^[a-z0-9]{1,20}$/
-      cluster = {
-        "auth_host"          =>  "leap:L4!!pStag0ing@central-#{cluster_name}.herokuapp.com",
-        "auth_domain"        =>  "herokuapp.com",
-        "home"               =>  "leapweb-#{cluster_name}.herokuapp.com",
-        "cookie_auth_key"    =>  "_cluster_auth",
-        "transactions_host"  =>  "leap:200hands500fingers@warehouse-#{cluster_name}.herokuapp.com",
-        "airspace_host"      =>  "leap:h0t$tud10d3v@airspace-#{cluster_name}.herokuapp.com",
-        "developer_host"     =>  "leap:L4!!pStag0ing@developer-#{cluster_name}.leapmotion.com"
-      }
-      config_data = DEFAULT_CONFIG['all'].merge(cluster)
-    else
-      config_data = DEFAULT_CONFIG['all'].merge(DEFAULT_CONFIG[ ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development'])
+    @@config ||= begin
+      cluster_name = ENV['LEAP_CLUSTER_NAME']
+      cluster_password = ENV['LEAP_CLUSTER_PASSWORD']
+      if cluster_name or cluster_password
+        raise "cluster name not in [a-z0-9]{1,20}" unless cluster_name =~ /^[a-z0-9]{1,20}$/
+        raise "cluster password not in [0-9a-f]{32,32} (Hint: Use SecureRandom.hex)" unless cluster_password =~ /^[0-9a-f]{32,32}$/
+        cluster = {
+          "auth_host"          =>  "leap:#{cluster_password}@central-#{cluster_name}.herokuapp.com",
+          "auth_domain"        =>  "herokuapp.com",
+          "home"               =>  "leap:#{cluster_password}@leapweb-#{cluster_name}.herokuapp.com",
+          "cookie_auth_key"    =>  "_cluster_auth",
+          "transactions_host"  =>  "leap:#{cluster_password}@warehouse-#{cluster_name}.herokuapp.com",
+          "airspace_host"      =>  "leap:#{cluster_password}@airspace-#{cluster_name}.herokuapp.com",
+          "developer_host"     =>  "leap:#{cluster_password}@developer-#{cluster_name}.leapmotion.com"
+        }
+        config_data = DEFAULT_CONFIG['all'].merge(cluster)
+      else
+        config_data = DEFAULT_CONFIG['all'].merge(DEFAULT_CONFIG[ ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development'])
+      end
+      Config.new(config_data)
     end
-    @@config ||= Config.new(config_data)
   end
 
   def self.configure
