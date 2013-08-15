@@ -105,5 +105,20 @@ module LeapauthHelper
     def central_sdk_agreement_url(destination = current_url)
       LeapauthHelper::UrlHelpers.secure_url("/agreements/SdkAgreement", :_r => destination)
     end
+    
+    def central_root_url
+      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
+      "#{scheme}://#{LeapauthHelper.config.auth_host}"
+    end
+
+    def home_root_url
+      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
+      "#{scheme}://#{LeapauthHelper.config.home}"
+    end
+
+    def developer_root_url
+      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
+      "#{scheme}://#{LeapauthHelper.config.developer_host}"
+    end
   end
 end
