@@ -79,4 +79,8 @@ describe LeapauthHelper::UrlGenerators do
   describe "#central_sdk_agreement_url" do
     it { expect("http://#{LeapauthHelper.config.auth_host}/agreements/SdkAgreement?_r=#{expected_redirect}").to eql controller.central_sdk_agreement_url }
   end
+
+  describe '#central_sign_up_or_sign_in_url' do
+    it { expect("http://#{LeapauthHelper.config.auth_host}/authenticate?_r=#{expected_redirect}").to eql controller.central_sign_up_or_sign_in_url }
+  end
 end
