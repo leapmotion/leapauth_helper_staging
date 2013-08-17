@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__), "url_helpers")
 
-module LeapauthHelper
- 
+module LeapauthHelper 
   module UrlGenerators
     
     def auth_get_user_id_json_url
@@ -111,6 +110,10 @@ module LeapauthHelper
       "#{scheme}://#{LeapauthHelper.config.auth_host}"
     end
 
+    def central_sign_up_or_sign_in_url(destination = current_url)
+      LeapauthHelper::UrlHelpers.secure_url("/authenticate", :_r => destination)
+    end
+
     def home_root_url
       scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
       "#{scheme}://#{LeapauthHelper.config.home}"
@@ -120,5 +123,6 @@ module LeapauthHelper
       scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
       "#{scheme}://#{LeapauthHelper.config.developer_host}"
     end
+
   end
 end
