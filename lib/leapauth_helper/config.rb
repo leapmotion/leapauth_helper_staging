@@ -62,13 +62,13 @@ module LeapauthHelper
         raise "cluster name not in [a-z0-9]{1,20}" unless cluster_name =~ /^[a-z0-9]{1,20}$/
         raise "cluster password not in [0-9a-f]{32,32} (Hint: Use SecureRandom.hex)" unless cluster_password =~ /^[0-9a-f]{32,32}$/
         cluster = {
-          "auth_host"          =>  "leap:#{cluster_password}@central-stage-#{cluster_name}.herokuapp.com",
+          "auth_host"          =>  "leap:#{cluster_password}@#{cluster_name}-stage-central.herokuapp.com",
+          "home"               =>  "leap:#{cluster_password}@#{cluster_name}-stage-leapweb.herokuapp.com",
+          "transactions_host"  =>  "leap:#{cluster_password}@#{cluster_name}-stage-warehouse.herokuapp.com",
+          "airspace_host"      =>  "leap:#{cluster_password}@#{cluster_name}-stage-airspace.herokuapp.com",
+          "developer_host"     =>  "leap:#{cluster_password}@#{cluster_name}-stage-developer.leapmotion.com",
           "auth_domain"        =>  "herokuapp.com",
-          "home"               =>  "leap:#{cluster_password}@leapweb-stage-#{cluster_name}.herokuapp.com",
-          "cookie_auth_key"    =>  "_cluster_auth",
-          "transactions_host"  =>  "leap:#{cluster_password}@warehouse-stage-#{cluster_name}.herokuapp.com",
-          "airspace_host"      =>  "leap:#{cluster_password}@airspace-stage-#{cluster_name}.herokuapp.com",
-          "developer_host"     =>  "leap:#{cluster_password}@developer-stage-#{cluster_name}.leapmotion.com"
+          "cookie_auth_key"    =>  "_cluster_auth"
         }
         config_data = DEFAULT_CONFIG['all'].merge(cluster)
       else
