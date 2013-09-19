@@ -73,6 +73,11 @@ module LeapauthHelper
       "#{scheme}://#{LeapauthHelper.config.transactions_host}/api/transactions"
     end
 
+    def app_check_entitlements_url
+      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
+      "#{scheme}://#{LeapauthHelper.config.transactions_host}/api/check_entitlements"
+    end
+
     def reauth_url
       scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
       "#{scheme}://#{LeapauthHelper.config.transactions_host}/users/confirm_password"
