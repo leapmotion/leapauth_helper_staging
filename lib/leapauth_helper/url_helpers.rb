@@ -23,6 +23,12 @@ module LeapauthHelper
         url = "#{scheme}://#{LeapauthHelper.config.home}#{path}"
         opts.empty? ? url : "#{url}?#{Rack::Utils.build_query(opts)}"
       end
+
+      def warehouse_url(path, opts = {})
+        scheme = use_secure_transactions? ? "https" : "http"
+        url = "#{scheme}://#{LeapauthHelper.config.transactions_host}#{path}"
+        opts.empty? ? url : "#{url}?#{Rack::Utils.build_query(opts)}"
+      end
     end
   end
 end

@@ -128,6 +128,5 @@ module LeapauthHelper
       scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
       "#{scheme}://#{LeapauthHelper.config.developer_host}"
     end
-
   end
 end

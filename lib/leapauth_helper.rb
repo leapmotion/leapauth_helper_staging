@@ -111,12 +111,16 @@ module LeapauthHelper
   end
 
   def secure_url(*args)
-    warn "DEPRECATED: You should not be calling secure_url directly, but instead please use the url helper methods provided.\nThis method will go away in the future.  Plan accordingly"
+    warn "DEPRECATED: You should not be calling secure_url directly.  Instead, please use the url helper methods provided.\nThis method will go away in the future.  Plan accordingly."
     LeapauthHelper::UrlHelpers.secure_url *args
   end
 
   def home_url(*args)
     LeapauthHelper::UrlHelpers.home_url *args
+  end
+
+  def warehouse_url(*args)
+    LeapauthHelper::UrlHelpers.warehouse_url *args
   end
 
 end
