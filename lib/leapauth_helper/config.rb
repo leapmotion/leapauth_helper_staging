@@ -42,7 +42,8 @@ module LeapauthHelper
       "airspace_host"      =>  "airspace.leapmotion.com",
       "developer_host"     =>  "developer.leapmotion.com",
       "mixpanel_token"     =>  "77d363605f0470115eb82352f14b2981",
-      "google_property_id" =>  "UA-31536531-1"
+      "google_property_id" =>  "UA-31536531-1",
+      "gtm_container_id"   =>  "GTM-WXGVFM"
     },
     'all' => {
       # If you're acme.uservoice.com then this value would be 'acme'.
