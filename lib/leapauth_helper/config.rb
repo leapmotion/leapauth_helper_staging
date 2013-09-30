@@ -4,7 +4,6 @@ module LeapauthHelper
   class Config < OpenStruct
   end
 
-  # TODO: When we bump the major version, remove the scheme that is hard-coded in the values for the "home" key here.
   DEFAULT_CONFIG = {
     'development' => {
       "auth_host"          => "local.leapmotion:3010",
@@ -57,20 +56,32 @@ module LeapauthHelper
 
   def self.config
     @@config ||= begin
-      cluster_name = ENV['LEAP_CLUSTER_NAME']
+      cluster_name     = ENV['LEAP_CLUSTER_NAME']
       cluster_password = ENV['LEAP_CLUSTER_PASSWORD']
-      if cluster_name or cluster_password
-        raise "cluster name not in [a-z0-9]{1,20}" unless cluster_name =~ /^[a-z0-9]{1,20}$/
-        raise "cluster password not in [0-9a-f]{32,32} (Hint: Use SecureRandom.hex)" unless cluster_password =~ /^[0-9a-f]{32,32}$/
-        cluster = {
-          "auth_host"          =>  "leap:#{cluster_password}@#{cluster_name}-stage-central.herokuapp.com",
-          "home"               =>  "leap:#{cluster_password}@#{cluster_name}-stage-leapweb.herokuapp.com",
-          "transactions_host"  =>  "leap:#{cluster_password}@#{cluster_name}-stage-warehouse.herokuapp.com",
-          "airspace_host"      =>  "leap:#{cluster_password}@#{cluster_name}-stage-airspace.herokuapp.com",
-          "developer_host"     =>  "leap:#{cluster_password}@#{cluster_name}-stage-developer.leapmotion.com",
-          "auth_domain"        =>  "herokuapp.com",
-          "cookie_auth_key"    =>  "_cluster_auth"
+      if cluster_name || cluster_password
+        raise "cluster name not in [a-z0-9]{1,15}" unless cluster_name =~ /^[a-z0-9]{1,15}$/
+        raise "cluster password not in [0-9a-f]{32,32} (hint: use SecureRandom.hex(16))" unless cluster_password =~ /^[0-9a-f]{32,32}$/
+
+        cluster_apps = {
+          "auth_host"         =>  "central",
+          "home"              =>  "leapweb",
+          "transactions_host" =>  "warehouse",
+          "airspace_host"     =>  "airspace",
+          "developer_host"    =>  "developer"
         }
+
+        # Heroku allows a max of 30 characters for the name, so let's leave the boilerplate as short as possible.
+        # The below approach allows for a max cluster_name length of 15 characters (because "lm-s-warehouse-".length == 15).
+        cluster_apps.each do |k, v|
+          cluster_apps[k] = "leap:#{cluster_password}@lm-s-#{v}-#{cluster_name}"
+        end
+
+        cluster_defaults = {
+          "auth_domain"        =>  "herokuapp.com",
+          "cookie_auth_key"    =>  "_lm_cluster_#{cluster_name}_auth"
+        }
+
+        cluster = cluster_apps.merge(cluster_defaults)
         config_data = DEFAULT_CONFIG['all'].merge(cluster)
       else
         config_data = DEFAULT_CONFIG['all'].merge(DEFAULT_CONFIG[ ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development'])
