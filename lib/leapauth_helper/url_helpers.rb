@@ -5,7 +5,7 @@ module LeapauthHelper
     class << self
       # TODO: make these kinda private. Do we need both of the following?
       def use_secure_transactions?
-        Rails.env == 'production' or (Rails.env == 'staging' and ENV['LEAP_CLUSTER_NAME'].nil?)
+        %(production staging).include?(Rails.env)
       end
       
       def use_secure?
