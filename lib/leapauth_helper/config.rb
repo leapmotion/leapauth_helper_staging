@@ -73,7 +73,7 @@ module LeapauthHelper
         # Heroku allows a max of 30 characters for the name, so let's leave the boilerplate as short as possible.
         # The below approach allows for a max cluster_name length of 15 characters (because "lm-s-warehouse-".length == 15).
         cluster_apps.each do |k, v|
-          cluster_apps[k] = "leap:#{cluster_password}@lm-s-#{v}-#{cluster_name}"
+          cluster_apps[k] = "leap:#{cluster_password}@lm-s-#{v}-#{cluster_name}.herokuapp.com"
         end
 
         cluster_defaults = {
