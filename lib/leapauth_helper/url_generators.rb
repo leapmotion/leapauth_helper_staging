@@ -2,7 +2,10 @@ require File.expand_path(File.dirname(__FILE__), "url_helpers")
 
 module LeapauthHelper 
   module UrlGenerators
-    
+    #-----------------------------------------------------------------------------------------------
+    # Central
+    #-----------------------------------------------------------------------------------------------
+
     def auth_get_user_id_json_url
       LeapauthHelper::UrlHelpers.secure_url("/api/whoami")
     end
@@ -62,27 +65,6 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.secure_url("/account")
     end
 
-    def current_url
-      #JR is there a reason we're not using request.url here?
-      "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
-    end
-
-    def app_transactions_url
-      LeapauthHelper::UrlHelpers.warehouse_url("/api/transactions")
-    end
-
-    def app_check_entitlements_url
-      LeapauthHelper::UrlHelpers.warehouse_url("/users/check_entitlements")
-    end
-
-    def reauth_url
-      LeapauthHelper::UrlHelpers.warehouse_url("/users/confirm_password")
-    end
-
-    def airspace_root_url
-      LeapauthHelper::UrlHelpers.airspace_url("/")
-    end
-
     def central_reauth_url
       LeapauthHelper::UrlHelpers.secure_url("/users/confirm_password")
     end
@@ -111,12 +93,53 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.secure_url("/authenticate", :_r => destination)
     end
 
+    #-----------------------------------------------------------------------------------------------
+    # Warehouse
+    #-----------------------------------------------------------------------------------------------
+
+    def app_transactions_url
+      LeapauthHelper::UrlHelpers.warehouse_url("/api/transactions")
+    end
+
+    def app_check_entitlements_url
+      LeapauthHelper::UrlHelpers.warehouse_url("/users/check_entitlements")
+    end
+
+    def reauth_url
+      LeapauthHelper::UrlHelpers.warehouse_url("/users/confirm_password")
+    end
+
+    #-----------------------------------------------------------------------------------------------
+    # Airspace
+    #-----------------------------------------------------------------------------------------------
+
+    def airspace_root_url
+      LeapauthHelper::UrlHelpers.airspace_url("/")
+    end
+
+    #-----------------------------------------------------------------------------------------------
+    # Home
+    #-----------------------------------------------------------------------------------------------
+
     def home_root_url
       LeapauthHelper::UrlHelpers.home_url("/")
     end
 
+    #-----------------------------------------------------------------------------------------------
+    # Developer
+    #-----------------------------------------------------------------------------------------------
+
     def developer_root_url
       LeapauthHelper::UrlHelpers.developer_url("/")
+    end
+
+    #-----------------------------------------------------------------------------------------------
+    # Etc.
+    #-----------------------------------------------------------------------------------------------
+
+    def current_url
+      #JR is there a reason we're not using request.url here?
+      "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
     end
   end
 end
