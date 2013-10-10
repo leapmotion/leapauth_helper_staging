@@ -117,6 +117,18 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.airspace_url("/")
     end
 
+    def airspace_app_url(app_slug)
+      LeapauthHelper::UrlHelpers.airspace_url("/apps/#{app_slug}")
+    end
+
+    def airspace_app_version_preview_url(app_slug, app_version_id)
+      LeapauthHelper::UrlHelpers.airspace_url("/apps/#{app_slug}/versions/#{app_version_id}")
+    end
+
+    def airspace_web_link_preview_url(web_link_slug)
+      LeapauthHelper::UrlHelpers.airspace_url("/links/#{web_link_slug}")
+    end
+
     #-----------------------------------------------------------------------------------------------
     # Home
     #-----------------------------------------------------------------------------------------------
