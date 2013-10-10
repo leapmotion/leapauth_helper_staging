@@ -16,6 +16,14 @@ module LeapauthHelper
         build_url LeapauthHelper.config.transactions_host, path, opts
       end
 
+      def airspace_url(path, opts = {})
+        build_url LeapauthHelper.config.airspace_host, path, opts
+      end
+
+      def developer_url(path, opts = {})
+        build_url LeapauthHelper.config.developer_host, path, opts
+      end
+
       def use_secure?
         %(production staging).include?(Rails.env)
       end

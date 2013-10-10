@@ -16,22 +16,21 @@ module LeapauthHelper
     end
 
     def auth_destroy_session_url(destination = current_url)
-      LeapauthHelper::UrlHelpers.secure_url("/users/sign_out?_r=#{CGI.escape(destination)}")
+      LeapauthHelper::UrlHelpers.secure_url("/users/sign_out", :_r => destination)
     end
     alias_method :auth_sign_out_url, :auth_destroy_session_url
 
     def auth_sign_in_url(destination = current_url)
-      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
-      "#{scheme}://#{LeapauthHelper.config.auth_host}/users/sign_in?_r=#{CGI.escape(destination)}"
+      LeapauthHelper::UrlHelpers.secure_url("/users/sign_in", :_r => destination)
     end
     alias_method :auth_create_session_url, :auth_sign_in_url 
 
     def auth_sign_up_url(destination = current_url)
-      LeapauthHelper::UrlHelpers.secure_url("/users/sign_up?_r=#{CGI.escape(destination)}")
+      LeapauthHelper::UrlHelpers.secure_url("/users/sign_up", :_r => destination)
     end
 
     def auth_edit_profile_url
-      warn "DEPRECATED: Use auth_user_account_url for redirects back to user profile.\nThis method will go away in the future.  Plan accordingly"
+      warn "DEPRECATED: Use auth_user_account_url for redirects back to user profile.\nThis method will go away in the future.  Plan accordingly."
       LeapauthHelper::UrlHelpers.secure_url("/users/edit")
     end
 
@@ -69,23 +68,19 @@ module LeapauthHelper
     end
 
     def app_transactions_url
-      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
-      "#{scheme}://#{LeapauthHelper.config.transactions_host}/api/transactions"
+      LeapauthHelper::UrlHelpers.warehouse_url("/api/transactions")
     end
 
     def app_check_entitlements_url
-      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
-      "#{scheme}://#{LeapauthHelper.config.transactions_host}/users/check_entitlements"
+      LeapauthHelper::UrlHelpers.warehouse_url("/users/check_entitlements")
     end
 
     def reauth_url
-      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
-      "#{scheme}://#{LeapauthHelper.config.transactions_host}/users/confirm_password"
+      LeapauthHelper::UrlHelpers.warehouse_url("/users/confirm_password")
     end
 
     def airspace_root_url
-      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
-      "#{scheme}://#{LeapauthHelper.config.airspace_host}"
+      LeapauthHelper::UrlHelpers.airspace_url("/")
     end
 
     def central_reauth_url
@@ -97,13 +92,11 @@ module LeapauthHelper
     end
 
     def central_new_payment_method_url(destination = current_url)
-      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
-      "#{scheme}://#{LeapauthHelper.config.auth_host}/payment_method/new?_r=#{CGI.escape(destination)}"
+      LeapauthHelper::UrlHelpers.secure_url("/payment_method/new",  :_r => destination)
     end
 
     def central_edit_payment_method_url(destination = current_url)
-      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
-      "#{scheme}://#{LeapauthHelper.config.auth_host}/payment_method/edit?_r=#{CGI.escape(destination)}"
+      LeapauthHelper::UrlHelpers.secure_url("/payment_method/edit", :_r => destination)
     end
 
     def central_sdk_agreement_url(destination = current_url)
@@ -111,8 +104,7 @@ module LeapauthHelper
     end
     
     def central_root_url
-      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
-      "#{scheme}://#{LeapauthHelper.config.auth_host}"
+      LeapauthHelper::UrlHelpers.secure_url("/")
     end
 
     def central_sign_up_or_sign_in_url(destination = current_url)
@@ -120,13 +112,11 @@ module LeapauthHelper
     end
 
     def home_root_url
-      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
-      "#{scheme}://#{LeapauthHelper.config.home}"
+      LeapauthHelper::UrlHelpers.home_url("/")
     end
 
     def developer_root_url
-      scheme = LeapauthHelper::UrlHelpers.use_secure_transactions? ? "https" : "http"
-      "#{scheme}://#{LeapauthHelper.config.developer_host}"
+      LeapauthHelper::UrlHelpers.developer_url("/")
     end
   end
 end
