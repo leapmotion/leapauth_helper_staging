@@ -121,6 +121,10 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.airspace_url("/apps/#{app_slug}")
     end
 
+    def airspace_promotion_url(cross_promotion_uuid)
+      LeapauthHelper::UrlHelpers.airspace_url("/promotions/#{cross_promotion_uuid}")
+    end
+
     def airspace_app_version_preview_url(app_slug, app_version_id)
       LeapauthHelper::UrlHelpers.airspace_url("/apps/#{app_slug}/versions/#{app_version_id}")
     end
