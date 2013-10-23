@@ -81,7 +81,7 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.secure_url("/payment_method/edit", :_r => destination)
     end
 
-    def central_add_billing_address_url(destination = current_url)
+    def central_new_billing_address_url(destination = current_url)
       LeapauthHelper::UrlHelpers.secure_url("/address/new",  :_r => destination)
     end
 
