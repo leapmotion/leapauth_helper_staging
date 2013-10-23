@@ -65,6 +65,10 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.secure_url("/account")
     end
 
+    def auth_add_billing_address_url(destination = current_url)
+      LeapauthHelper::UrlHelpers.secure_url("/address/new",  :_r => destination)
+    end
+
     def central_reauth_url
       LeapauthHelper::UrlHelpers.secure_url("/users/confirm_password")
     end
