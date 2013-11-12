@@ -77,6 +77,10 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.secure_url("/payment_method/new",  :_r => destination)
     end
 
+    def central_add_airspace_credit_url(destination = current_url)
+      LeapauthHelper::UrlHelpers.secure_url("/account/airspace_credit",  :_r => destination)
+    end
+
     def central_edit_payment_method_url(destination = current_url)
       LeapauthHelper::UrlHelpers.secure_url("/payment_method/edit", :_r => destination)
     end
