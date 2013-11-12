@@ -112,18 +112,28 @@ module LeapauthHelper
   end
 
   def secure_url(*args)
-    warn "DEPRECATED: You should not be calling secure_url directly.  Instead, please use the url helper methods provided.\nThis method will go away in the future.  Plan accordingly."
+    warn "DEPRECATED: You should not be calling secure_url directly.  Instead, please use the URL helper methods provided or add one.\nThis method will go away in the future.  Plan accordingly."
     LeapauthHelper::UrlHelpers.secure_url *args
   end
 
   def home_url(*args)
-    warn "DEPRECATED: You should not be calling home_url directly.  Instead, please use the url helper methods provided.\nThis method will go away in the future.  Plan accordingly."
+    warn "DEPRECATED: You should not be calling home_url directly.  Instead, please use the URL helper methods provided or add one.\nThis method will go away in the future.  Plan accordingly."
     LeapauthHelper::UrlHelpers.home_url *args
   end
 
   def warehouse_url(*args)
-    warn "DEPRECATED: You should not be calling warehouse_url directly.  Instead, please use the url helper methods provided.\nThis method will go away in the future.  Plan accordingly."
+    warn "DEPRECATED: You should not be calling warehouse_url directly.  Instead, please use the URL helper methods provided or add one.\nThis method will go away in the future.  Plan accordingly."
     LeapauthHelper::UrlHelpers.warehouse_url *args
+  end
+
+  def airspace_url(*args)
+    warn "DEPRECATED: You should not be calling warehouse_url directly.  Instead, please use the URL helper methods provided or add one.\nThis method will go away in the future.  Plan accordingly."
+    LeapauthHelper::UrlHelpers.airspace_url *args
+  end
+
+  def developer_url(*args)
+    warn "DEPRECATED: You should not be calling warehouse_url directly.  Instead, please use the URL helper methods provided or add one.\nThis method will go away in the future.  Plan accordingly."
+    LeapauthHelper::UrlHelpers.developer_url *args
   end
 
 end
