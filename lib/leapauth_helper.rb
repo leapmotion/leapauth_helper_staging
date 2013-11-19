@@ -136,4 +136,8 @@ module LeapauthHelper
     LeapauthHelper::UrlHelpers.developer_url *args
   end
 
+  def self.use_secure_leap_urls?
+    LeapauthHelper::UrlHelpers.use_secure?
+  end
+
 end
