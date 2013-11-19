@@ -4,6 +4,8 @@ module LeapauthHelper
   class Config < OpenStruct
   end
 
+  MAGIC_STRING_TO_DISABLE_CLUSTER_PASSWORDS = "THIS_CLUSTER_HAS_NO_PASSWORD"
+
   DEFAULT_CONFIG = {
     'development' => {
       "auth_host"          => "local.leapmotion:3010",
@@ -50,7 +52,9 @@ module LeapauthHelper
       # Get this from UserVoice General Settings page: https://leapbeta.uservoice.com/admin/settings
       "uservoice_sso_key"   => "977cc7fa89438e2805111cf01c8cc993",
       # This is our catch-all token for all non-production environments.
-      "mixpanel_token"      => "64a624e0f5fd5fec35dff6b08281664e"
+      "mixpanel_token"      => "64a624e0f5fd5fec35dff6b08281664e",
+      # Apps will need to access this in their config/staging.rb, so we'll stuff it into the Config ostruct.
+      "magic_string_to_disable_cluster_passwords" => MAGIC_STRING_TO_DISABLE_CLUSTER_PASSWORDS
     }
   }
 
@@ -60,7 +64,7 @@ module LeapauthHelper
       cluster_password = ENV['LEAP_CLUSTER_PASSWORD']
       if cluster_name || cluster_password
         raise "cluster name not in [a-z0-9]{1,15}" unless cluster_name =~ /^[a-z0-9]{1,15}$/
-        raise "cluster password not in [0-9a-f]{32,32} (hint: use SecureRandom.hex(16))" unless cluster_password =~ /^[0-9a-f]{32,32}$/
+        raise "cluster password not in [0-9a-f]{32,32} (hint: use SecureRandom.hex(16))" unless (cluster_password =~ /^[0-9a-f]{32,32}$/ || cluster_password == MAGIC_STRING_TO_DISABLE_CLUSTER_PASSWORDS)
 
         cluster_apps = {
           "auth_host"         =>  "central",
@@ -73,7 +77,11 @@ module LeapauthHelper
         # Heroku allows a max of 30 characters for the name, so let's leave the boilerplate as short as possible.
         # The below approach allows for a max cluster_name length of 15 characters (because "lm-s-warehouse-".length == 15).
         cluster_apps.each do |k, v|
-          cluster_apps[k] = "leap:#{cluster_password}@lm-s-#{v}-#{cluster_name}.herokuapp.com"
+          if cluster_password == MAGIC_STRING_TO_DISABLE_CLUSTER_PASSWORDS
+            cluster_apps[k] = "lm-s-#{v}-#{cluster_name}.herokuapp.com"
+          else
+            cluster_apps[k] = "leap:#{cluster_password}@lm-s-#{v}-#{cluster_name}.herokuapp.com"
+          end
         end
 
         cluster_defaults = {
