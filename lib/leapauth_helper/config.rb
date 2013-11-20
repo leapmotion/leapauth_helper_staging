@@ -90,7 +90,7 @@ module LeapauthHelper
 
         cluster_defaults = {
           "auth_domain"        =>  "herokuapp.com",
-          "cookie_auth_key"    =>  "_lm_cluster_#{cluster_name}_auth"
+          "cookie_auth_key"    =>  "_lm_cluster_#{cluster_name}_auth",
           "cookie_purchase_key"=>  "can_purchase"
         }
 
