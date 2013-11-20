@@ -54,7 +54,9 @@ module LeapauthHelper
       # This is our catch-all token for all non-production environments.
       "mixpanel_token"      => "64a624e0f5fd5fec35dff6b08281664e",
       # Apps will need to access this in their config/staging.rb, so we'll stuff it into the Config ostruct.
-      "magic_string_to_disable_cluster_passwords" => MAGIC_STRING_TO_DISABLE_CLUSTER_PASSWORDS
+      "magic_string_to_disable_cluster_passwords" => MAGIC_STRING_TO_DISABLE_CLUSTER_PASSWORDS,
+      # Allows user to make purchases on Airspace, set by Central via Signing In/Out or the Confirm Password dialog
+      "cookie_purchase_key"=>  "can_purchase"
     }
   }
 
