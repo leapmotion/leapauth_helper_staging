@@ -71,6 +71,26 @@ module LeapauthHelper
     end
   end
 
+  def set_can_purchase_cookie_from_user(user)
+    cookie_present = auth_cookie_jar.key?(LeapauthHelper.config.cookie_purchase_key)
+    if user
+      cookies[:can_purchase] = {
+        value: user.generate_purchase_key!,
+        expires: 10.minutes.from_now,
+        secure: LeapauthHelper.use_secure_leap_urls?,
+        domain: LeapauthHelper.config.auth_domain # Ensure to share across Airspace, Central, Warehouse
+      }
+      !cookie_present
+    else
+      auth_cookie_jar.delete(LeapauthHelper.config.cookie_purchase_key, :domain => LeapauthHelper.config.auth_domain)
+      cookie_present
+    end
+  end
+
+  def delete_can_purchase_cookie
+    set_can_purchase_cookie_from_user(nil)
+  end
+
   def current_user_from_auth
     unless instance_variable_defined?(:@current_user_from_auth)
       @current_user_from_auth ||= begin

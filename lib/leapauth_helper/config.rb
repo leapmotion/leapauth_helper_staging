@@ -12,6 +12,7 @@ module LeapauthHelper
       "auth_domain"        => "local.leapmotion",
       "home"               => "local.leapmotion:3000",
       "cookie_auth_key"    => "_dev_auth",
+      "cookie_purchase_key"=> "can_purchase",
       "transactions_host"  => "local.leapmotion:5001",
       "airspace_host"      => "local.leapmotion:5002",
       "developer_host"     => "local.leapmotion:4000"
@@ -21,6 +22,7 @@ module LeapauthHelper
       "auth_domain"        =>  "test.leapmotion",
       "home"               =>  "test.leapmotion:3000",
       "cookie_auth_key"    =>  "_test_auth",
+      "cookie_purchase_key"=>  "can_purchase",
       "transactions_host"  =>  "test.leapmotion",
       "airspace_host"      =>  "test.leapmotion",
       "developer_host"     =>  "test.leapmotion"
@@ -30,6 +32,7 @@ module LeapauthHelper
       "auth_domain"        =>  "leapmotion.com",
       "home"               =>  "leapweb-stage7.herokuapp.com",
       "cookie_auth_key"    =>  "_stage_auth",
+      "cookie_purchase_key"=>  "can_purchase",
       "transactions_host"  =>  "leap:200hands500fingers@warehouse-stage.leapmotion.com",
       "airspace_host"      =>  "leap:h0t$tud10d3v@airspace-staging.leapmotion.com",
       "developer_host"     =>  "leap:L4!!pStag0ing@developer-stage2.leapmotion.com"
@@ -39,6 +42,7 @@ module LeapauthHelper
       "auth_domain"        =>  "leapmotion.com",
       "home"               =>  "www.leapmotion.com",
       "cookie_auth_key"    =>  "_auth",
+      "cookie_purchase_key"=>  "can_purchase",
       "transactions_host"  =>  "warehouse.leapmotion.com",
       "airspace_host"      =>  "airspace.leapmotion.com",
       "developer_host"     =>  "developer.leapmotion.com",
@@ -87,6 +91,7 @@ module LeapauthHelper
         cluster_defaults = {
           "auth_domain"        =>  "herokuapp.com",
           "cookie_auth_key"    =>  "_lm_cluster_#{cluster_name}_auth"
+          "cookie_purchase_key"=>  "can_purchase"
         }
 
         cluster = cluster_apps.merge(cluster_defaults)
