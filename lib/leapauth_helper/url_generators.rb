@@ -117,6 +117,10 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.warehouse_url("/users/confirm_password")
     end
 
+    def warehouse_admin_user_url(user)
+      LeapauthHelper::UrlHelpers.warehouse_url("/admin/data/users/#{user.id}")
+    end
+
     #-----------------------------------------------------------------------------------------------
     # Airspace
     #-----------------------------------------------------------------------------------------------
