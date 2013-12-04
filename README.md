@@ -34,7 +34,7 @@ end
 
 In your app, you should use the following methods to generate the URLs that you need that talk with Central (the auth system).
     
-* `auth_get_user_id_json_url`
+* `auth_get_user_id_json_url(access_token)`
 * `auth_create_session_json_url`
 * `auth_update_user_json_url(user_id)`
 * `auth_sign_in_url(destination = current_url)` (alias `auth_create_session_url`)
