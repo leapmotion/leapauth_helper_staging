@@ -6,8 +6,8 @@ module LeapauthHelper
     # Central
     #-----------------------------------------------------------------------------------------------
 
-    def auth_get_user_id_json_url
-      LeapauthHelper::UrlHelpers.secure_url("/api/whoami")
+    def auth_get_user_id_json_url(access_token)
+      LeapauthHelper::UrlHelpers.secure_url("/api/whoami", :access_token => access_token)
     end
 
     def auth_create_session_json_url
