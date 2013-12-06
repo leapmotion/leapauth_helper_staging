@@ -11,8 +11,8 @@ describe LeapauthHelper::GoogleTagManager do
     end
 
     context "when it does not have a Google Tag Manager Container ID" do
-      it "does not do GTM things" do
-        expect(@init_string).to eql ""
+      it "creates a mock dataLayer object" do
+        expect(@init_string).to include "dataLayer={push:function(e)"
       end
     end
 
