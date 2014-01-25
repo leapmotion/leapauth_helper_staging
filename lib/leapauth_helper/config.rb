@@ -73,7 +73,7 @@ module LeapauthHelper
           "home"              =>  "leapweb",
           "transactions_host" =>  "warehouse",
           "airspace_host"     =>  "airspace",
-          "developer_host"    =>  "developer"
+          "developer_host"    =>  "leapdev"
         }
 
         # Heroku allows a max of 30 characters for the name, so let's leave the boilerplate as short as possible.
