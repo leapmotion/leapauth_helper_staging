@@ -31,6 +31,7 @@ module LeapauthHelper
       def build_url(domain, path, opts = {})
         scheme = use_secure? ? "https" : "http"
         url = "#{scheme}://#{domain}#{path}"
+        opts = opts.delete_if { |key, value| value.nil? }
         opts.empty? ? url : "#{url}?#{Rack::Utils.build_query(opts)}"
       end
 
