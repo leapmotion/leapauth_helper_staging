@@ -24,5 +24,38 @@ module LeapauthHelper
 
       return string.html_safe
     end
+
+    #
+    # Renders a Google Analytics virtual link track-ready javascript to
+    # ensure the click is registered as a GA page view.
+    #
+    # NOTE: Virtual page view plumbing ws originally setup within
+    # Google Tag manager, which enables us to use the sendVirtualPageView
+    # GA event.
+    #
+    # @param  selector  The selector to use for the link (i.e. '#about_link')
+    # @param  page_url  Page url to track (i.e. '/apps/purchase')
+    #
+    def self.track_link(selector, page_url)
+      string = <<-EOS
+        <script type="text/javascript">
+      EOS
+
+      string += <<-EOS
+          if ($('#{selector}').length > 0) {
+            $('#{selector}').click(function() {
+              if (dataLayer) {
+                dataLayer.push({
+                  'event':'sendVirtualPageView',
+                  'virtualUrl': '#{page_url}'
+                });
+              }
+            }
+          }
+        </script>
+      EOS
+
+      return string.html_safe
+    end
   end
 end
