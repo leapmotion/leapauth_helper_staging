@@ -57,7 +57,7 @@ module LeapauthHelper
                 'virtualUrl': '#{page_url}'
               });
             }
-          }
+          });
         </script>
       EOS
 
