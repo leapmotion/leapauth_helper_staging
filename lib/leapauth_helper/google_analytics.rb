@@ -50,14 +50,12 @@ module LeapauthHelper
       EOS
 
       string += <<-EOS
-          if ($('#{selector}').length > 0) {
-            $('#{selector}').click(function() {
-              if (dataLayer) {
-                dataLayer.push({
-                  'event':'sendVirtualPageView',
-                  'virtualUrl': '#{page_url}'
-                });
-              }
+          $('#{selector}').click(function() {
+            if (dataLayer) {
+              dataLayer.push({
+                'event':'sendVirtualPageView',
+                'virtualUrl': '#{page_url}'
+              });
             }
           }
         </script>
