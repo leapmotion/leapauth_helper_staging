@@ -29,9 +29,17 @@ module LeapauthHelper
     # Renders a Google Analytics virtual link track-ready javascript to
     # ensure the click is registered as a GA page view.
     #
-    # NOTE: Virtual page view plumbing ws originally setup within
+    # NOTE: Virtual page view plumbing was originally setup within
     # Google Tag manager, which enables us to use the sendVirtualPageView
     # GA event.
+    #
+    # Example usage:
+    #
+    # // HTML Link
+    # <%= link_to "ABOUT US", company_url, :id => "about" %>
+    #
+    # // Generates link click handler javascript and GA pageview track on-click.
+    # <%= LeapauthHelper::GoogleAnalytics::track_link('#about', 'links/about/click') %>
     #
     # @param  selector  The selector to use for the link (i.e. '#about_link')
     # @param  page_url  Page url to track (i.e. '/apps/purchase')
