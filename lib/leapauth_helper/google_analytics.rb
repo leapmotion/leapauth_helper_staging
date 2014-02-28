@@ -43,18 +43,26 @@ module LeapauthHelper
     #
     # @param  selector  The selector to use for the link (i.e. '#about_link')
     # @param  page_url  Page url to track (i.e. '/apps/purchase')
+    # @param  callback  (Optional) String-based Javascript method for invoking and creating additional
+    #                   parameters to append to page_url, i.e. 'AnalyticsHelper.extract_title' may return
+    #                   'my_footer_link', which can them be appened as /nav/click/my_footer_link.
     #
-    def self.track_link(selector, page_url)
+    def self.track_link(selector, page_url, callback=nil)
       string = <<-EOS
         <script type="text/javascript">
       EOS
 
       string += <<-EOS
           $('#{selector}').click(function() {
+            var extra_params = '';
+            if ('#{callback}' != '') {
+              extra_params = '/' + eval('#{callback}'+'($(this));');
+            }
+
             if (dataLayer) {
               dataLayer.push({
                 'event':'sendVirtualPageView',
-                'virtualUrl': '#{page_url}'
+                'virtualUrl': '#{page_url}' + extra_params
               });
             }
           });
