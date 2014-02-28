@@ -54,15 +54,15 @@ module LeapauthHelper
 
       string += <<-EOS
           $('#{selector}').click(function() {
+            var extra_params = '';
             if ('#{callback}' != '') {
-              var extra_params = eval('#{callback}'+'($(this));');
-              page_url = page_url + '/' + extra_params;
+              extra_params = '/' + eval('#{callback}'+'($(this));');
             }
 
             if (dataLayer) {
               dataLayer.push({
                 'event':'sendVirtualPageView',
-                'virtualUrl': '#{page_url}'
+                'virtualUrl': '#{page_url}' + extra_params
               });
             }
           });
