@@ -48,12 +48,10 @@ module LeapauthHelper
     #                   'my_footer_link', which can them be appened as /nav/click/my_footer_link.
     # @param  method    Jquery method to listen for, default is 'click', 'submit' can also be used for forms.
     #
-    def self.track_link(selector, page_url, callback=nil, method=nil)
+    def self.track_link(selector, page_url, callback=nil, method='click')
       string = <<-EOS
         <script type="text/javascript">
       EOS
-
-      method = 'click' if method.nil?
 
       string += <<-EOS
           $('#{selector}').#{method}(function() {
