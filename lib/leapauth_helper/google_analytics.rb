@@ -46,14 +46,15 @@ module LeapauthHelper
     # @param  callback  (Optional) String-based Javascript method for invoking and creating additional
     #                   parameters to append to page_url, i.e. 'AnalyticsHelper.extract_title' may return
     #                   'my_footer_link', which can them be appened as /nav/click/my_footer_link.
+    # @param  method    Jquery method to listen for, default is 'click', 'submit' can also be used for forms.
     #
-    def self.track_link(selector, page_url, callback=nil)
+    def self.track_link(selector, page_url, callback=nil, method='click')
       string = <<-EOS
         <script type="text/javascript">
       EOS
 
       string += <<-EOS
-          $('#{selector}').click(function() {
+          $('#{selector}').#{method}(function() {
             var extra_params = '';
             if ('#{callback}' != '') {
               extra_params = '/' + eval('#{callback}'+'($(this));');
