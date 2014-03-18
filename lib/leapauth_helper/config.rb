@@ -56,7 +56,9 @@ module LeapauthHelper
       # Apps will need to access this in their config/staging.rb, so we'll stuff it into the Config ostruct.
       "magic_string_to_disable_cluster_passwords" => MAGIC_STRING_TO_DISABLE_CLUSTER_PASSWORDS,
       # Allows user to make purchases on Airspace, set by Central via Signing In/Out or the Confirm Password dialog
-      "cookie_purchase_key"=>  "can_purchase"
+      "cookie_purchase_key"=>  "can_purchase",
+      # Airspace Home auth key for launching DRM apps, delete after signing out.
+      "cookie_desktop_auth_key"=>  "_desktop_auth"
     }
   }
 
