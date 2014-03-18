@@ -28,6 +28,10 @@ module LeapauthHelper
         2.weeks.from_now
       end
 
+      def long_cookie_expiration
+        50.years.from_now
+      end
+
       def environment
         ENV["RAILS_ENV"] || ENV["RACK_ENV"]
       end
@@ -49,6 +53,26 @@ module LeapauthHelper
         redirect_to(auth_sign_in_url, :notice => message) unless current_user_from_auth
       end
     end
+  end
+
+  def desktop_auth_for_user(user)
+    {
+      :user_id => user.id,
+      :username => user.username,
+      :email => user.email,
+      :expires_on => Internal.long_cookie_expiration.utc.to_i,
+      :auth_id => 4000,
+      :secret_token => generate_secret_token_for_user(user)
+    }
+  end
+
+  def generate_secret_token_for_user(user)
+    unless ENV['USER_SECRET_TOKEN_SALT']
+      puts "Warning: ENV['USER_SECRET_TOKEN_SALT'] must be set!"
+      return
+    end
+
+    Digest::SHA1.hexdigest(user.id.to_s + ENV['USER_SECRET_TOKEN_SALT'])
   end
 
   def delete_auth_cookie
@@ -89,6 +113,41 @@ module LeapauthHelper
 
   def delete_can_purchase_cookie
     set_can_purchase_cookie_from_user(nil)
+  end
+
+  #
+  # Airspace Home auth key for launching DRM'ed apps, delete after signing out.
+  #
+
+  def get_current_desktop_auth
+    desktop_auth = {}
+    if body = auth_cookie_jar.signed[LeapauthHelper.config.cookie_desktop_auth_key]
+      desktop_auth = ActiveSupport::JSON.decode(body)
+    else
+      warn "your secret_token is not set correctly" if auth_cookie_jar[LeapauthHelper.config.cookie_desktop_auth_key]
+    end
+
+    desktop_auth
+  end
+
+  def set_desktop_auth_cookie_from_user(user)
+    cookie_present = auth_cookie_jar.key?(LeapauthHelper.config.cookie_desktop_auth_key)
+    if user
+      auth_cookie_jar.signed[LeapauthHelper.config.cookie_desktop_auth_key] = {
+        :value => desktop_auth_for_user(user).to_json,
+        :domain => LeapauthHelper.config.auth_domain,
+        :secure => UrlHelpers.use_secure?,
+        :expires => Internal.long_cookie_expiration
+      }
+      !cookie_present
+    else
+      auth_cookie_jar.delete(LeapauthHelper.config.cookie_desktop_auth_key, :domain => LeapauthHelper.config.auth_domain)
+      cookie_present
+    end
+  end
+
+  def delete_desktop_auth_cookie
+    set_desktop_auth_cookie_from_user(nil)
   end
 
   def current_user_from_auth
