@@ -82,14 +82,14 @@ module LeapauthHelper
         # The below approach allows for a max cluster_name length of 15 characters (because "lm-s-warehouse-".length == 15).
         cluster_apps.each do |k, v|
           if cluster_password == MAGIC_STRING_TO_DISABLE_CLUSTER_PASSWORDS
-            cluster_apps[k] = "lm-s-#{v}-#{cluster_name}.herokuapp.com"
+            cluster_apps[k] = "lm-s-#{v}-#{cluster_name}.leapmotion.com"
           else
-            cluster_apps[k] = "leap:#{cluster_password}@lm-s-#{v}-#{cluster_name}.herokuapp.com"
+            cluster_apps[k] = "leap:#{cluster_password}@lm-s-#{v}-#{cluster_name}.leapmotion.com"
           end
         end
 
         cluster_defaults = {
-          "auth_domain"        =>  "herokuapp.com",
+          "auth_domain"        =>  "leapmotion.com",
           "cookie_auth_key"    =>  "_lm_cluster_#{cluster_name}_auth"
         }
 
