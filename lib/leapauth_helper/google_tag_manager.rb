@@ -1,7 +1,7 @@
 module LeapauthHelper
   class GoogleTagManager
-    def self.render_init
-      if LeapauthHelper.config.gtm_container_id.present?
+    def self.render_init(enabled = true)
+      if LeapauthHelper.config.gtm_container_id.present? && enabled
         "<noscript><iframe src='//www.googletagmanager.com/ns.html?id=#{LeapauthHelper.config.gtm_container_id}'
         height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript>
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
