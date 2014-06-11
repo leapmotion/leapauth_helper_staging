@@ -1,7 +1,7 @@
 module LeapauthHelper
   class GoogleAnalytics
-    def self.render_init
-      return "" unless LeapauthHelper.config.google_property_id.present?
+    def self.render_init(enabled = true)
+      return "" unless LeapauthHelper.config.google_property_id.present? && enabled
 
       string = <<-EOS
         <script type="text/javascript">
