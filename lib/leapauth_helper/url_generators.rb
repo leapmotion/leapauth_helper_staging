@@ -32,10 +32,6 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.secure_url("/users/sign_up", options.merge(:_r => destination))
     end
 
-    def auth_sign_up_as_ghost_url(destination = current_url, options = {})
-      LeapauthHelper::UrlHelpers.secure_url("/users/new_as_ghost", options.merge(:_r => destination))
-    end
-
     def auth_edit_profile_url(options = {})
       warn "DEPRECATED: Use auth_user_account_url for redirects back to user profile.\nThis method will go away in the future.  Plan accordingly."
       LeapauthHelper::UrlHelpers.secure_url("/users/edit", options)
