@@ -81,6 +81,10 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.secure_url("/account/airspace_credit", options.merge(:_r => destination))
     end
 
+    def central_add_app_store_credit_url(destination = current_url, options = {})
+      LeapauthHelper::UrlHelpers.secure_url("/account/airspace_credit", options.merge(:_r => destination))
+    end
+
     def central_edit_payment_method_url(destination = current_url, options = {})
       LeapauthHelper::UrlHelpers.secure_url("/payment_method/edit", options.merge(:_r => destination))
     end
@@ -129,12 +133,24 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.airspace_url("/", options)
     end
 
+    def app_store_root_url(options = {})
+      LeapauthHelper::UrlHelpers.app_store_url("/", options)
+    end
+
     def airspace_app_url(app_slug, options = {})
       LeapauthHelper::UrlHelpers.airspace_url("/apps/#{app_slug}", options)
     end
 
+    def app_store_app_url(app_slug, options = {})
+      LeapauthHelper::UrlHelpers.app_store_url("/apps/#{app_slug}", options)
+    end
+
     def airspace_promotion_url(cross_promotion_uuid, options = {})
       LeapauthHelper::UrlHelpers.airspace_url("/promotions/#{cross_promotion_uuid}", options)
+    end
+
+    def app_store_promotion_url(cross_promotion_uuid, options = {})
+      LeapauthHelper::UrlHelpers.app_store_url("/promotions/#{cross_promotion_uuid}", options)
     end
 
     def airspace_app_version_preview_url(app_slug, app_version_id, options = {})
