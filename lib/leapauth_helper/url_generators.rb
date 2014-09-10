@@ -141,8 +141,16 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.airspace_url("/apps/#{app_slug}/versions/#{app_version_id}", options)
     end
 
+    def app_store_app_version_preview_url(app_slug, app_version_id, options = {})
+      LeapauthHelper::UrlHelpers.app_store_url("/apps/#{app_slug}/versions/#{app_version_id}", options)
+    end
+
     def airspace_web_link_preview_url(web_link_slug, options = {})
       LeapauthHelper::UrlHelpers.airspace_url("/links/#{web_link_slug}", options)
+    end
+
+    def app_store_web_link_preview_url(web_link_slug, options = {})
+      LeapauthHelper::UrlHelpers.app_store_url("/links/#{web_link_slug}", options)
     end
 
     #-----------------------------------------------------------------------------------------------
