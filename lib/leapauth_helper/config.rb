@@ -59,6 +59,9 @@ module LeapauthHelper
       "mixpanel_token"      => "64a624e0f5fd5fec35dff6b08281664e",
       # Apps will need to access this in their config/staging.rb, so we'll stuff it into the Config ostruct.
       "magic_string_to_disable_cluster_passwords" => MAGIC_STRING_TO_DISABLE_CLUSTER_PASSWORDS,
+      "leap_motion_ips" => [
+        '173.247.193.180', # Leap Motion office at 333 Bryant St. Added Oct 29th
+      ],
       # Allows user to make purchases on Airspace, set by Central via Signing In/Out or the Confirm Password dialog
       "cookie_purchase_key"=>  "can_purchase",
       # Airspace Home auth key for launching DRM apps, delete after signing out.
