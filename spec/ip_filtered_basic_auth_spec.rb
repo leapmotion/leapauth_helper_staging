@@ -16,9 +16,7 @@ describe LeapauthHelper::IpFilteredBasicAuth do
 
     it "provides access from no IP with a password" do
       pending # seems MockRequest does not support this.
-      mw = LeapauthHelper::IpFilteredBasicAuth.new(app, 'raimo') do |u,p|
-        [u,p] == ['leap', ENV['LEAP_CLUSTER_PASSWORD']]
-      end
+      mw = LeapauthHelper::IpFilteredBasicAuth.new(app, 'raimo')
       code, env = mw.call(env_for("https://youhost.leapmotion.com", 'HTTP_AUTHENTICATION' => "Basic " + Base64::encode64("leap:#{ENV['LEAP_CLUSTER_PASSWORD']}")))
 
       expect(code).to eq 200
