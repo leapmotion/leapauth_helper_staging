@@ -15,6 +15,7 @@ module LeapauthHelper
       "transactions_host"  => "local.leapmotion:5001",
       "airspace_host"      => "local.leapmotion:5002",
       "app_store_host"     => "local.leapmotion:5002",
+      "community_host"     => "local.leapmotion:5000",
       "developer_host"     => "local.leapmotion:4000"
     },
     'test' => {
@@ -25,6 +26,7 @@ module LeapauthHelper
       "transactions_host"  =>  "test.leapmotion",
       "airspace_host"      =>  "test.leapmotion",
       "app_store_host"     =>  "test.leapmotion",
+      "community_host"     =>  "test.leapmotion",
       "developer_host"     =>  "test.leapmotion"
     },
     'staging' => {
@@ -35,6 +37,7 @@ module LeapauthHelper
       "transactions_host"  =>  "leap:200hands500fingers@warehouse-stage.leapmotion.com",
       "airspace_host"      =>  "leap:h0t$tud10d3v@airspace-staging.leapmotion.com",
       "app_store_host"     =>  "leap:h0t$tud10d3v@app-home-staging.leapmotion.com",
+      "community_host"     =>  "leap:h0t$tud10d3v@community-staging.leapmotion.com",
       "developer_host"     =>  "leap:L4!!pStag0ing@developer-stage2.leapmotion.com"
     },
     'production' => {
@@ -45,6 +48,7 @@ module LeapauthHelper
       "transactions_host"  =>  "warehouse.leapmotion.com",
       "airspace_host"      =>  "airspace.leapmotion.com",
       "app_store_host"     =>  "apps.leapmotion.com",
+      "community_host"     =>  "community.leapmotion.com",
       "developer_host"     =>  "developer.leapmotion.com",
       "mixpanel_token"     =>  "77d363605f0470115eb82352f14b2981",
       "google_property_id" =>  "UA-31536531-1",
@@ -79,6 +83,7 @@ module LeapauthHelper
 
         cluster_apps = {
           "auth_host"         =>  "central",
+          "community_host"    =>  "community",
           "home"              =>  "leapweb",
           "transactions_host" =>  "warehouse",
           "airspace_host"     =>  "airspace",
