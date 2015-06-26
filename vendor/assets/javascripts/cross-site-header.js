@@ -40,24 +40,20 @@ $(document).ready(function () {
     }
   };
 
-  var areThereBindableElements = function () {
-    if ($('.cross-site-dropdown-toggle').length > 0) { return true; }
-    return ($('.cross-site-narrow-nav-toggle').length > 0);
-  };
-
   var bindEvents = function () {
-    $('.cross-site-dropdown-toggle')
-      .on('click', function (e) {
+    // Bind to body as some sites load header HTML asynchronously,
+    // e.g. documentation.
+    $('body')
+      .on('click', '.cross-site-dropdown-toggle', function (e) {
         var $target = $(e.target);
         toggleDropdownOnParent($target);
       })
-      .on('mouseover', function (e) {
+      .on('mouseover', '.cross-site-dropdown-toggle', function (e) {
         var $target = $(e.target);
         var onlyOpen = true;
         toggleDropdownOnParent($target, onlyOpen);
-      });
-    $('.cross-site-narrow-nav-toggle')
-      .on('click', function () {
+      })
+      .on('click', '.cross-site-narrow-nav-toggle', function () {
         var $nav = $('.cross-site-nav');
         if ($nav.hasClass('active')) {
           $nav.removeClass('active');
@@ -68,26 +64,6 @@ $(document).ready(function () {
       });
   };
 
-  // On some pages, header is added after document load
-  // so we will try once every second to find the header
-  // if it doesn't exist initially.
-  var tryBindingRecursive = function (count) {
-    if (count <= 0) { return; }
-    setTimeout(function () {
-      if (areThereBindableElements()) {
-        bindEvents();
-      }
-      else {
-        tryBindingRecursive(count - 1);
-      }
-    }, 1000);
-  };
-
-  if (areThereBindableElements()) {
-    bindEvents();
-  }
-  else {
-    tryBindingRecursive(10);
-  }
+  bindEvents();
 
 });
