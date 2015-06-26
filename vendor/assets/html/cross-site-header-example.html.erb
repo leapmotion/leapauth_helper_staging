@@ -1,0 +1,91 @@
+<div class="cross-site-header-wrapper">
+  <header class="cross-site-header cross-site-solid-background">
+
+    <div class="cross-site-logo-area">
+
+      <div class="cross-site-dropdown">
+        <div class="cross-site-dropdown-menu">
+          <%= link_to 'Leap Motion', home_root_url, :id => "nav_leap_motion", :class => 'cross-site-dropdown-item' %>
+          <%= link_to 'Apps', app_store_root_url, :id => "nav_airspace", :class => 'cross-site-dropdown-item' %>
+          <%= link_to 'Developer', developer_root_url, :id => "nav_developers", :class => 'cross-site-dropdown-item' %>
+          <%= link_to 'Community', community_root_url, :id => "nav_community", :class => 'cross-site-dropdown-item' %>
+          <%= link_to 'Blog', blog_root_url, :id => "nav_blog", :class => 'cross-site-dropdown-item' %>
+          <%= link_to 'Buy', buy_root_url, :id => "menu_preorder_button", :class => 'cross-site-dropdown-item' %>
+        </div>
+        <div class="cross-site-dropdown-toggle">
+          <span class="cross-site-logo-container">
+            <%= image_tag "logo_desktop.png" %>
+          </span>
+        </div>
+      </div>
+
+      <div class="cross-site-name-container">
+        <a href="/">
+          <span class="cross-site-name">/ Developers</span>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="cross-site-auth-area">
+
+      <span class="cross-site-button cross-site-narrow-nav-toggle"></span>
+
+      <div class="cross-site-dropdown cross-site-user-area">
+        <div class="cross-site-dropdown-menu" data-dropdown-anchor="right">
+          <a class="cross-site-dropdown-item" href="#">Account</a>
+          <a class="cross-site-dropdown-item" href="#">Sign Out</a>
+        </div>
+        <div class="cross-site-dropdown-toggle">
+          <span class="cross-site-narrow-variant">
+            <span class="cross-site-button cross-site-narrow-user-toggle"></span>
+          </span>
+          <span class="cross-site-wide-variant">
+            <span class="cross-site-username">really_long_username</span>
+            <span class="caret"></span>
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cross-site-nav">
+      <span class="cross-site-nav-item" data-action="content-product">
+        <%= link_to 'Product', product_url, :id => "nav_product" %>
+      </span>
+      <span class="cross-site-nav-item" data-action="content-vr">
+        <%= link_to 'VR', vr_path, :id => "nav_vr" %>
+      </span>
+      <span class="cross-site-nav-item" data-action="content-apps">
+        <%= link_to 'Apps', app_store_root_url, :id => "nav_airspace" %>
+      </span>
+      <span class="cross-site-nav-item" data-action="content-developers">
+        <%= link_to 'Developer', developer_root_url, :id => "nav_developers" %>
+      </span>
+      <span class="cross-site-nav-item" data-action="solutions-index">
+        <%= link_to 'Solutions', solutions_path, :id => "nav_solutions" %>
+      </span>
+      <span class="cross-site-nav-item" data-action="community-index">
+        <div class="cross-site-dropdown">
+          <div class="cross-site-dropdown-menu" data-dropdown-anchor="right">
+            <%= link_to 'Forum', community_root_url, :id => "nav_community", :class => 'cross-site-dropdown-item' %>
+          </div>
+          <div class="cross-site-dropdown-toggle">
+            <span>Community</span>
+            <span class="caret"></span>
+          </div>
+        </div>
+      </span>
+      <span class="cross-site-nav-item" data-action="downloads-setup">
+        <%= link_to 'Setup', setup_url, :id => "nav_setup" %>
+      </span>
+      <span class="cross-site-nav-item emphasis" data-action="buy">
+        <%= link_to(buy_root_url, :id => "menu_preorder_button") do -%>
+          <i class="fa fa-shopping-cart"></i>
+          <%= 'Buy' %>
+        <%- end -%>
+      </span>
+    </div>
+
+  </header>
+</div>
