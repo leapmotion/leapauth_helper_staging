@@ -199,6 +199,7 @@ a.cross-site-button:hover {
 a.cross-site-dropdown-item {
   display: block;
   text-transform: uppercase;
+  text-decoration: none;
   font-size: 18px;
   line-height: 20px;
   padding: 3px 15px;
@@ -241,6 +242,10 @@ a.cross-site-dropdown-item:hover,
   text-transform: uppercase;
   font-size: 20px;
   line-height: 20px;
+}
+
+a.cross-site-name {
+  text-decoration: none;
 }
 
 .cross-site-name img {
