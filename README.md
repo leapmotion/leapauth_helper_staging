@@ -47,6 +47,26 @@ In your app, you should use the following methods to generate the URLs that you 
 * `auth_admin_user_url(user_id)`
 * `auth_admin_user_edit_embed_url(user_id)`
 
+#### Cross Site Header
+
+Cross site header offers similar header style and behaviour between all
+Leap Motion domains.
+
+```
+// To application.css.scss
+//= require cross-site-fonts
+//= require cross-site-header
+```
+
+```
+// To application.js
+//= require cross-site-header
+```
+
+Header elements may still vary e.g. the main navigation items and not all sites
+have sign in functionality. There is an example HTML markup at
+`vendor/assets/html/cross-site-header-example.html.erb`.
+
 #### Mixpanel Helpers
 
 Where you want to use Mixpanel, you'll need to instatiate a Mixpanel helper.

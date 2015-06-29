@@ -2,6 +2,7 @@ require 'cgi'
 
 require "leapauth_helper/config"
 require "leapauth_helper/version"
+require 'leapauth_helper/engine'
 require "leapauth_helper/auth_user"
 require "leapauth_helper/google_analytics"
 require "leapauth_helper/google_tag_manager"

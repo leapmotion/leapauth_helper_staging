@@ -1,7 +1,8 @@
 require File.expand_path(File.dirname(__FILE__), "url_helpers")
 
-module LeapauthHelper 
+module LeapauthHelper
   module UrlGenerators
+
     #-----------------------------------------------------------------------------------------------
     # Central
     #-----------------------------------------------------------------------------------------------
@@ -21,12 +22,14 @@ module LeapauthHelper
     def auth_destroy_session_url(destination = current_url, options = {})
       LeapauthHelper::UrlHelpers.secure_url("/users/sign_out", options.merge(:_r => destination))
     end
+
     alias_method :auth_sign_out_url, :auth_destroy_session_url
 
     def auth_sign_in_url(destination = current_url, options = {})
       LeapauthHelper::UrlHelpers.secure_url("/users/sign_in", options.merge(:_r => destination))
     end
-    alias_method :auth_create_session_url, :auth_sign_in_url 
+
+    alias_method :auth_create_session_url, :auth_sign_in_url
 
     def auth_sign_up_url(destination = current_url, options = {})
       LeapauthHelper::UrlHelpers.secure_url("/users/sign_up", options.merge(:_r => destination))
@@ -96,7 +99,7 @@ module LeapauthHelper
     def central_sdk_agreement_url(destination = current_url, options = {})
       LeapauthHelper::UrlHelpers.secure_url("/agreements/SdkAgreement", options.merge(:_r => destination))
     end
-    
+
     def central_root_url(options = {})
       LeapauthHelper::UrlHelpers.secure_url("/", options)
     end
@@ -183,6 +186,38 @@ module LeapauthHelper
 
     def developer_root_url(options = {})
       LeapauthHelper::UrlHelpers.developer_url("/", options)
+    end
+
+    #-----------------------------------------------------------------------------------------------
+    # Community
+    #-----------------------------------------------------------------------------------------------
+
+    def community_root_url(options = {})
+      LeapauthHelper::UrlHelpers.community_url("/", options)
+    end
+
+    #-----------------------------------------------------------------------------------------------
+    # Blog
+    #-----------------------------------------------------------------------------------------------
+
+    def blog_root_url(options = {})
+      LeapauthHelper::UrlHelpers.home_url("/blog", options)
+    end
+
+    #-----------------------------------------------------------------------------------------------
+    # Buy (Leap Motion Store)
+    #-----------------------------------------------------------------------------------------------
+
+    def buy_root_url(item = :peripheral, options = {})
+      # caller must offer request.china? and client_region functions
+      # TODO: Add china? and client_region functions to LeapauthHelper
+      if request.china? && item == :peripheral
+        # here we make a special case, for users physically in china
+        # (not just w/ chinese lang selected) we use chinese price and store.
+        "http://item.jd.com/1174528.html"
+      else
+        "http://store-#{client_region}.leapmotion.com"
+      end
     end
 
     #-----------------------------------------------------------------------------------------------
