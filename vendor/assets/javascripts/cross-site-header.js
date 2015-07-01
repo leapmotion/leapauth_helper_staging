@@ -2,7 +2,7 @@ $(document).ready(function () {
 
   var openDropdown = function ($menu, $container) {
     closeAllExistingDropdowns();
-    $menu.css('top', $container.outerHeight());
+    $menu.css('top', $container.outerHeight() - 2);
     var anchor = $menu.data('dropdown-anchor');
     if (anchor === 'right') {
       $menu.css('right', 0);
