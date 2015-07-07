@@ -55,7 +55,6 @@
 .cross-site-logo-area {
   float: left;
   height: 90px;
-  padding-bottom: 5px;
 }
 
 .cross-site-logo-container {
@@ -181,7 +180,7 @@ a.cross-site-button:hover {
 
 .cross-site-dropdown-menu {
   display: none;
-  width: 250px;
+  width: 310px;
   position: absolute;
   z-index: 1050;
   padding: 10px 0;
@@ -189,6 +188,13 @@ a.cross-site-button:hover {
   border-radius: 4px;
   box-shadow: 0 2px 6px #818181;
   text-align: left;
+}
+
+.cross-site-logo-area .cross-site-dropdown-menu {
+  width: 160px;
+}
+.cross-site-auth-area .cross-site-dropdown-menu {
+  width: 160px;
 }
 
 .cross-site-dropdown-menu.active {
@@ -314,6 +320,16 @@ a.cross-site-name {
 .cross-site-narrow-variant { display: none; }
 
 .cross-site-wide-variant { display: inherit; }
+
+@media screen and (min-width: 1800px) {
+  .cross-site-logo-area {
+    position: absolute;
+  }
+  .cross-site-auth-area {
+    position: absolute;
+    right: 15px;
+  }
+}
 
 @media screen and (max-width: 1999px) {
   .cross-site-nav-item {
@@ -454,6 +470,10 @@ a.cross-site-name {
   .cross-site-nav-item .cross-site-dropdown-item:hover,
   .cross-site-nav-item a.cross-site-dropdown-item:hover {
     border-left: none;
+  }
+
+  .cross-site-dropdown-menu {
+    width: 250px;
   }
 
   .cross-site-dropdown-item,
