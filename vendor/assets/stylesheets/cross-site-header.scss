@@ -74,8 +74,8 @@
 
 .cross-site-nav-item {
   position: relative;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
   font-size: 18px;
   line-height: 20px;
   text-transform: uppercase;
@@ -314,6 +314,20 @@ a.cross-site-name {
 .cross-site-narrow-variant { display: none; }
 
 .cross-site-wide-variant { display: inherit; }
+
+@media screen and (max-width: 1999px) {
+  .cross-site-nav-item {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media screen and (max-width: 1599px) {
+  .cross-site-nav-item {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
 
 @media screen and (max-width: 1349px) {
   .cross-site-name img {
