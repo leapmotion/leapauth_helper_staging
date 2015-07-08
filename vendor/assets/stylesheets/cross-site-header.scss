@@ -63,6 +63,8 @@
 
 .cross-site-logo-container img {
   height: 60px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .cross-site-nav {
@@ -373,7 +375,9 @@ a.cross-site-name {
 
 @media screen and (max-width: 1179px) {
   .cross-site-logo-container img {
-    height: 40px
+    height: 40px;
+    margin-top: 25px;
+    margin-bottom: 25px;
   }
   .cross-site-name img {
     height: 10px;
@@ -495,9 +499,6 @@ a.cross-site-name {
 }
 
 @media screen and (max-width: 549px) {
-  .cross-site-logo-container img {
-    height: 40px
-  }
   .cross-site-name {
     font-size: 15px;
   }
@@ -511,7 +512,9 @@ a.cross-site-name {
 
 @media screen and (max-width: 489px) {
   .cross-site-logo-container img {
-    height: 32px
+    height: 32px;
+    margin-top: 29px;
+    margin-bottom: 29px;
   }
   .cross-site-name img {
     height: 10px;
