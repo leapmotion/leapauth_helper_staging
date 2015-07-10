@@ -7,6 +7,11 @@
   user-select: none;
 }
 
+.cross-site-show-above-content {
+  position: absolute;
+  width: 100%;
+}
+
 .cross-site-header {
   font-family: "freightsans_pro", Helvetica, Arial, sans-serif;
   font-weight: 300;
@@ -195,6 +200,7 @@ a.cross-site-button:hover {
 .cross-site-logo-area .cross-site-dropdown-menu {
   width: 160px;
 }
+
 .cross-site-auth-area .cross-site-dropdown-menu {
   width: 160px;
 }
@@ -554,7 +560,6 @@ a.cross-site-name {
 
 @media screen and (max-width: 279px) {
   .cross-site-logo-area {
-
   }
   .cross-site-logo-container {
     line-height: 70px;
