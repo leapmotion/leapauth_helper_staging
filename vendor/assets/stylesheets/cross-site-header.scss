@@ -22,8 +22,8 @@
   position: relative;
 }
 
-.invert-colors .cross-site-header {
-  font-weight: 500;
+.cross-site-invert-colors .cross-site-header {
+  font-weight: 600;
 }
 
 .cross-site-header a:focus {
@@ -53,7 +53,7 @@
   background: #fff;
 }
 
-.invert-colors .cross-site-solid-background {
+.cross-site-invert-colors .cross-site-solid-background {
   background: #000;
 }
 
@@ -121,30 +121,30 @@ a.cross-site-name:hover,
   color: #7ad300;
 }
 
-.invert-colors .cross-site-dropdown-toggle,
-.invert-colors .cross-site-nav-item,
-.invert-colors .cross-site-nav-item a,
-.invert-colors .cross-site-text-button,
-.invert-colors a.cross-site-text-button,
-.invert-colors .cross-site-name,
-.invert-colors a.cross-site-name {
+.cross-site-invert-colors .cross-site-dropdown-toggle,
+.cross-site-invert-colors .cross-site-nav-item,
+.cross-site-invert-colors .cross-site-nav-item a,
+.cross-site-invert-colors .cross-site-text-button,
+.cross-site-invert-colors a.cross-site-text-button,
+.cross-site-invert-colors .cross-site-name,
+.cross-site-invert-colors a.cross-site-name {
   color: #fff;
 }
 
-.invert-colors .cross-site-nav-item a:hover,
-.invert-colors .cross-site-text-button:hover,
-.invert-colors a.cross-site-text-button:hover,
-.invert-colors .cross-site-name:hover,
-.invert-colors a.cross-site-name:hover,
-.invert-colors .cross-site-nav-item.active a {
+.cross-site-invert-colors .cross-site-nav-item a:hover,
+.cross-site-invert-colors .cross-site-text-button:hover,
+.cross-site-invert-colors a.cross-site-text-button:hover,
+.cross-site-invert-colors .cross-site-name:hover,
+.cross-site-invert-colors a.cross-site-name:hover,
+.cross-site-invert-colors .cross-site-nav-item.active a {
   color: #ddd;
 }
 
-.invert-colors .cross-site-nav-item.emphasis a {
+.cross-site-invert-colors .cross-site-nav-item.emphasis a {
   color: #7ad300;
 }
 
-.invert-colors .cross-site-nav-item.emphasis a:hover {
+.cross-site-invert-colors .cross-site-nav-item.emphasis a:hover {
   color: #5daa00;
 }
 
@@ -220,7 +220,7 @@ a.cross-site-dropdown-item {
   transition: 0.15s;
 }
 
-.invert-colors .cross-site-dropdown-item {
+.cross-site-invert-colors .cross-site-dropdown-item {
   font-weight: 300;
 }
 
