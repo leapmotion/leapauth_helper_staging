@@ -10,6 +10,11 @@
 .cross-site-show-above-content {
   position: absolute;
   width: 100%;
+  .cross-site-nav-item,
+  .cross-site-nav,
+  .cross-site-button {
+    z-index: 2;
+  }
 }
 
 .cross-site-header {
@@ -240,7 +245,7 @@ a.cross-site-dropdown-item:hover,
 .cross-site-dropdown-toggle {
   cursor: pointer;
   position: relative;
-  z-index: 2;
+  z-index: 3;
   padding-bottom: 5px;
 }
 
@@ -447,8 +452,8 @@ a.cross-site-name {
     clear: both;
     width: 100%;
     background: #fff;
-    border-top: 1px solid #5daa00;
-    padding-bottom: 18px;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
 
   .cross-site-name img {
@@ -469,6 +474,16 @@ a.cross-site-name {
     padding-bottom: 7px;
   }
 
+  .cross-site-invert-colors .cross-site-nav {
+    background: #000;
+  }
+  .cross-site-invert-colors .cross-site-nav-item {
+    background: #000;
+  }
+
+  .cross-site-nav-item:first-of-type {
+    border-top: 1px solid #5daa00;
+  }
   .cross-site-nav-item:last-of-type {
     border-bottom: 1px solid #5daa00;
   }
