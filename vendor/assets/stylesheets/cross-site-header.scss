@@ -10,11 +10,7 @@
 .cross-site-show-above-content {
   position: absolute;
   width: 100%;
-  .cross-site-nav-item,
-  .cross-site-nav,
-  .cross-site-button {
-    z-index: 2;
-  }
+  //.cross-site-nav-item, .cross-site-nav, .cross-site-button { z-index: 2; }
 }
 
 .cross-site-header {
@@ -253,7 +249,7 @@ a.cross-site-dropdown-item:hover,
   position: relative;
   display: inline-block;
   vertical-align: top;
-  top: 33px;
+  top: 36px;
   margin-left: 5px;
   text-transform: uppercase;
   font-size: 18px;
@@ -371,6 +367,9 @@ a.cross-site-name {
 }
 
 @media screen and (max-width: 1279px) {
+  .cross-site-name-container {
+    top: 37px;
+  }
   .cross-site-nav-item {
     font-size: 17px;
     padding-left: 5px;
@@ -394,7 +393,7 @@ a.cross-site-name {
     height: 10px;
   }
   .cross-site-name-container {
-    top: 34px;
+    top: 37px;
   }
   .cross-site-name-separator {
     margin-left: 2px;
@@ -418,7 +417,7 @@ a.cross-site-name {
 
 @media screen and (max-width: 1009px) {
   .cross-site-name-container {
-    top: 33px;
+    top: 36px;
   }
   .cross-site-name img {
     height: 12px;
@@ -559,12 +558,23 @@ a.cross-site-name {
 @media screen and (max-width: 369px) {
   .cross-site-logo-area {
     float: none;
-    height: 70px;
+    height: 55px;
     text-align: center;
+  }
+  .cross-site-logo-container {
+    line-height: 40px;
+  }
+  .cross-site-logo-container img {
+    height: 32px;
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+  .cross-site-name-container {
+    top: 18px;
   }
   .cross-site-auth-area {
     float: none;
-    padding-bottom: 22px;
+    padding-bottom: 12px;
     text-align: center;
     margin-top: 4px;
   }
@@ -573,12 +583,7 @@ a.cross-site-name {
   }
 }
 
-@media screen and (max-width: 279px) {
-  .cross-site-logo-area {
-  }
-  .cross-site-logo-container {
-    line-height: 70px;
-  }
+@media screen and (max-width: 289px) {
   .cross-site-name-container {
     display: none;
   }
