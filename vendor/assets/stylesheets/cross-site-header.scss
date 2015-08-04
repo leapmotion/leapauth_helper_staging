@@ -194,8 +194,42 @@ a.cross-site-button:hover {
   padding: 10px 0;
   background-color: #fff;
   border-radius: 4px;
-  box-shadow: 0 2px 6px #818181;
   text-align: left;
+  border: #c5c5c5 solid 1px;
+  &:before {
+    display: block;
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 0 10px 10px;
+    border-color: #c5c5c5 transparent;
+    width: 0;
+    z-index: 0;
+    top: -11px;
+    left: 6px;
+  }
+  &:after {
+    display: block;
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 0 10px 10px;
+    border-color: #fff transparent;
+    width: 0;
+    z-index: 1;
+    top: -10px;
+    left: 6px;
+  }
+  &.cross-site-right-aligned-dropdown {
+    &:before {
+      left: auto;
+      right: 6px;
+    }
+    &:after {
+      left: auto;
+      right: 6px;
+    }
+  }
 }
 
 .cross-site-logo-area .cross-site-dropdown-menu {
@@ -502,8 +536,7 @@ a.cross-site-name {
 
   .cross-site-dropdown-item,
   a.cross-site-dropdown-item {
-    font-size: 22px;
-    padding: 5px 15px;
+    padding: 10px 15px;
   }
 
   .cross-site-dropdown-toggle {

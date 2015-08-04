@@ -2,10 +2,19 @@ $(document).ready(function () {
 
   var openDropdown = function ($menu, $container) {
     closeAllExistingDropdowns();
-    $menu.css('top', $container.outerHeight() - 2);
+    $menu.css('top', $container.outerHeight() - 1);
     var anchor = $menu.data('dropdown-anchor');
     if (anchor === 'right') {
-      $menu.css('right', 0);
+      // By default, right aligned elements have -13px right offset
+      // so the arrow matches caret.
+      $menu.css('right', '-13px');
+      if (!$menu.hasClass('cross-site-right-aligned-dropdown')) {
+        $menu.addClass('cross-site-right-aligned-dropdown');
+      }
+    }
+    var rightOffset = $menu.data('dropdown-offset-right');
+    if (typeof rightOffset !== 'undefined') {
+      $menu.css('right', rightOffset);
     }
     $menu.addClass('active');
     $('<div class="cross-site-screen-action">')
