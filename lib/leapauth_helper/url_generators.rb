@@ -209,15 +209,7 @@ module LeapauthHelper
     #-----------------------------------------------------------------------------------------------
 
     def buy_root_url(item = :peripheral, options = {})
-      # caller must offer request.china? and client_region functions
-      # TODO: Add china? and client_region functions to LeapauthHelper
-      if request.china? && item == :peripheral
-        # here we make a special case, for users physically in china
-        # (not just w/ chinese lang selected) we use chinese price and store.
-        "http://item.jd.com/1174528.html"
-      else
-        "http://store-#{client_region}.leapmotion.com"
-      end
+      LeapauthHelper::UrlHelpers.buy_url("/", options)
     end
 
     #-----------------------------------------------------------------------------------------------

@@ -32,14 +32,18 @@ module LeapauthHelper
         build_url LeapauthHelper.config.community_host, path, opts
       end
 
+      def buy_url(path, opts = {})
+        build_url "store.leapmotion.com", path, opts
+      end
+
       def use_secure?
         %(production staging).include?(Rails.env)
       end
 
       def build_url(domain, path, opts = {})
         scheme = use_secure? ? "https" : "http"
-        url    = "#{scheme}://#{domain}#{path}"
-        opts   = opts.delete_if { |key, value| value.nil? }
+        url = "#{scheme}://#{domain}#{path}"
+        opts = opts.delete_if { |key, value| value.nil? }
         opts.empty? ? url : "#{url}?#{Rack::Utils.build_query(opts)}"
       end
 
