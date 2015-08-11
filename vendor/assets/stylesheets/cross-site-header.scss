@@ -201,33 +201,33 @@ a.cross-site-button:hover {
     content: '';
     position: absolute;
     border-style: solid;
-    border-width: 0 10px 10px;
+    border-width: 0 7px 7px;
     border-color: #c5c5c5 transparent;
     width: 0;
     z-index: 0;
-    top: -11px;
-    left: 6px;
+    top: -8px;
+    left: 9px;
   }
   &:after {
     display: block;
     content: '';
     position: absolute;
     border-style: solid;
-    border-width: 0 10px 10px;
+    border-width: 0 7px 7px;
     border-color: #fff transparent;
     width: 0;
     z-index: 1;
-    top: -10px;
-    left: 6px;
+    top: -7px;
+    left: 9px;
   }
   &.cross-site-right-aligned-dropdown {
     &:before {
       left: auto;
-      right: 6px;
+      right: 9px;
     }
     &:after {
       left: auto;
-      right: 6px;
+      right: 9px;
     }
   }
 }

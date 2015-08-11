@@ -2,7 +2,7 @@ $(document).ready(function () {
 
   var openDropdown = function ($menu, $container) {
     closeAllExistingDropdowns();
-    $menu.css('top', $container.outerHeight() - 1);
+    $menu.css('top', $container.outerHeight());
     var anchor = $menu.data('dropdown-anchor');
     if (anchor === 'right') {
       // By default, right aligned elements have -13px right offset
