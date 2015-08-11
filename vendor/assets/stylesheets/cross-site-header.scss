@@ -206,7 +206,7 @@ a.cross-site-button:hover {
     width: 0;
     z-index: 0;
     top: -8px;
-    left: 9px;
+    left: 16px;
   }
   &:after {
     display: block;
@@ -218,16 +218,16 @@ a.cross-site-button:hover {
     width: 0;
     z-index: 1;
     top: -7px;
-    left: 9px;
+    left: 16px;
   }
   &.cross-site-right-aligned-dropdown {
     &:before {
       left: auto;
-      right: 9px;
+      right: 16px;
     }
     &:after {
       left: auto;
-      right: 9px;
+      right: 16px;
     }
   }
 }

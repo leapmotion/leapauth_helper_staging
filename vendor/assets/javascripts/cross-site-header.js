@@ -5,9 +5,9 @@ $(document).ready(function () {
     $menu.css('top', $container.outerHeight());
     var anchor = $menu.data('dropdown-anchor');
     if (anchor === 'right') {
-      // By default, right aligned elements have -13px right offset
-      // so the arrow matches caret.
-      $menu.css('right', '-13px');
+      // By default, right aligned elements have some right offset
+      // so the arrow matches potential caret.
+      $menu.css('right', '-20px');
       if (!$menu.hasClass('cross-site-right-aligned-dropdown')) {
         $menu.addClass('cross-site-right-aligned-dropdown');
       }
