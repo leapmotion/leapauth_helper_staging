@@ -10,7 +10,6 @@
 .cross-site-show-above-content {
   position: absolute;
   width: 100%;
-  //.cross-site-nav-item, .cross-site-nav, .cross-site-button { z-index: 2; }
 }
 
 .cross-site-header {
@@ -79,10 +78,16 @@
   height: 90px;
 }
 
+// When screen size doesn't allow having the whole nav on a single row,
+// you can use potential rows to make nav go to 2 rows.
+.cross-site-nav-potential-row {
+  display: inline-block;
+}
+
 .cross-site-nav-item {
   position: relative;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 18px;
+  padding-right: 18px;
   font-size: 18px;
   line-height: 20px;
   text-transform: uppercase;
@@ -316,7 +321,8 @@ a.cross-site-name {
   font-size: 18px;
   line-height: 18px;
   max-height: 16px;
-  max-width: 110px;
+  min-width: 100px;
+  max-width: 230px;
   overflow: hidden;
   text-align: right;
   position: relative;
@@ -374,21 +380,7 @@ a.cross-site-name {
   }
 }
 
-@media screen and (max-width: 1999px) {
-  .cross-site-nav-item {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-
-@media screen and (max-width: 1599px) {
-  .cross-site-nav-item {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}
-
-@media screen and (max-width: 1349px) {
+@media screen and (max-width: 1399px) {
   .cross-site-name img {
     height: 11px;
   }
@@ -400,14 +392,14 @@ a.cross-site-name {
   }
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 1329px) {
   .cross-site-name-container {
     top: 36px;
   }
   .cross-site-nav-item {
     font-size: 17px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   .cross-site-username {
     font-size: 17px;
@@ -417,7 +409,7 @@ a.cross-site-name {
   }
 }
 
-@media screen and (max-width: 1179px) {
+@media screen and (max-width: 1239px) {
   .cross-site-logo-container img {
     height: 40px;
     margin-top: 25px;
@@ -435,8 +427,8 @@ a.cross-site-name {
   }
   .cross-site-nav-item {
     font-size: 15px;
-    padding-left: 3px;
-    padding-right: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
   .cross-site-username {
     font-size: 15px;
@@ -449,21 +441,12 @@ a.cross-site-name {
   }
 }
 
-@media screen and (max-width: 1009px) {
+@media screen and (max-width: 1059px) {
   .cross-site-name-container {
     top: 35px;
   }
   .cross-site-name img {
     height: 12px;
-  }
-  .cross-site-nav-item {
-    font-size: 17px;
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-  .cross-site-username {
-    font-size: 17px;
-    top: 2px;
   }
   .cross-site-text-button {
     font-size: 17px;
@@ -489,6 +472,10 @@ a.cross-site-name {
     padding-bottom: 15px;
   }
 
+  .cross-site-nav-potential-row {
+    display: block;
+  }
+
   .cross-site-name img {
     height: 15px;
   }
@@ -512,13 +499,6 @@ a.cross-site-name {
   }
   .cross-site-invert-colors .cross-site-nav-item {
     background: #000;
-  }
-
-  .cross-site-nav-item:first-of-type {
-    border-top: 1px solid #5daa00;
-  }
-  .cross-site-nav-item:last-of-type {
-    border-bottom: 1px solid #5daa00;
   }
 
   .cross-site-nav-item .cross-site-dropdown {
