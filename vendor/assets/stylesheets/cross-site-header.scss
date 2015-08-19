@@ -86,8 +86,8 @@
 
 .cross-site-nav-item {
   position: relative;
-  padding-left: 18px;
-  padding-right: 18px;
+  padding-left: 10px;
+  padding-right: 10px;
   font-size: 18px;
   line-height: 20px;
   text-transform: uppercase;
@@ -321,7 +321,6 @@ a.cross-site-name {
   font-size: 18px;
   line-height: 18px;
   max-height: 16px;
-  min-width: 100px;
   max-width: 230px;
   overflow: hidden;
   text-align: right;
@@ -379,11 +378,12 @@ a.cross-site-name {
     right: 15px;
   }
 }
-
-@media screen and (max-width: 1399px) {
+@media screen and (max-width: 1449px) {
   .cross-site-name img {
     height: 11px;
   }
+}
+@media screen and (max-width: 1399px) {
   .cross-site-name-separator {
     position: relative;
     top: 1px;
@@ -398,8 +398,6 @@ a.cross-site-name {
   }
   .cross-site-nav-item {
     font-size: 17px;
-    padding-left: 15px;
-    padding-right: 15px;
   }
   .cross-site-username {
     font-size: 17px;
@@ -409,26 +407,23 @@ a.cross-site-name {
   }
 }
 
-@media screen and (max-width: 1239px) {
+@media screen and (max-width: 1289px) {
   .cross-site-logo-container img {
     height: 40px;
     margin-top: 25px;
     margin-bottom: 25px;
   }
-  .cross-site-name img {
-    height: 10px;
-  }
-  .cross-site-name-container {
-    top: 36px;
-  }
   .cross-site-name-separator {
     margin-left: 2px;
     margin-right: 3px;
   }
+  .cross-site-name {
+    padding-right: 10px;
+  }
   .cross-site-nav-item {
     font-size: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
   .cross-site-username {
     font-size: 15px;
@@ -442,12 +437,6 @@ a.cross-site-name {
 }
 
 @media screen and (max-width: 1059px) {
-  .cross-site-name-container {
-    top: 35px;
-  }
-  .cross-site-name img {
-    height: 12px;
-  }
   .cross-site-text-button {
     font-size: 17px;
     top: 1px;
@@ -470,14 +459,23 @@ a.cross-site-name {
     background: #fff;
     padding-top: 15px;
     padding-bottom: 15px;
+
+    // Compensate for the header left and right padding.
+    margin-right: 20px;
+    padding-right: 20px;
+    margin-left: -20px;
+    padding-left: 20px;
   }
 
   .cross-site-nav-potential-row {
     display: block;
   }
 
-  .cross-site-name img {
-    height: 15px;
+  .cross-site-name {
+    padding-right: 0;
+    img {
+      height: 15px;
+    }
   }
 
   .cross-site-nav.active {
