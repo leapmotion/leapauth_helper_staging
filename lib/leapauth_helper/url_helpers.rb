@@ -37,6 +37,7 @@ module LeapauthHelper
       end
 
       def use_secure?
+        return true if ENV['OVERRIDE_AUTH_HOST'].to_s['https://']
         %(production staging).include?(Rails.env)
       end
 
