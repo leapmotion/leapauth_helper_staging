@@ -9,7 +9,7 @@ module LeapauthHelper
   DEFAULT_CONFIG = {
     'development' => {
       "auth_host"          => ENV['OVERRIDE_AUTH_HOST'].try(:[], %r{//(.*)}, 1) || "local.leapmotion:3010",
-      "auth_domain"        => "local.leapmotion",
+      "auth_domain"        => ENV['OVERRIDE_AUTH_HOST'].try(:[], %r{//(.*?)(:[0-9]+)?\z}, 1) || "local.leapmotion",
       "home"               => "local.leapmotion:3000",
       "cookie_auth_key"    => "_dev_auth",
       "transactions_host"  => "local.leapmotion:5001",
