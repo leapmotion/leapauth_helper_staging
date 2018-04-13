@@ -65,6 +65,7 @@ module LeapauthHelper
       "magic_string_to_disable_cluster_passwords" => MAGIC_STRING_TO_DISABLE_CLUSTER_PASSWORDS,
       "leap_motion_ips" => [
         '173.247.193.180', # Leap Motion office at 333 Bryant St. Added Oct 29th
+        '4.35.164.34', # Leap Motion office at 321 11th St
       ],
       # Allows user to make purchases on Airspace, set by Central via Signing In/Out or the Confirm Password dialog
       "cookie_purchase_key"=>  "can_purchase",
