@@ -79,7 +79,7 @@ module LeapauthHelper
       cluster_name     = ENV['LEAP_CLUSTER_NAME']
       cluster_password = ENV['LEAP_CLUSTER_PASSWORD']
       if cluster_name || cluster_password
-        raise "cluster name not in [a-z0-9]{1,15}" unless cluster_name =~ /^[a-z0-9]{1,15}$/
+        raise "cluster name not in [a-z0-9\-]{1,15}" unless cluster_name =~ /^[a-z0-9\-]{1,15}$/
         raise "cluster password not in [0-9a-f]{32,32} (hint: use SecureRandom.hex(16))" unless (cluster_password =~ /^[0-9a-f]{32,32}$/ || cluster_password == MAGIC_STRING_TO_DISABLE_CLUSTER_PASSWORDS)
 
         cluster_apps = {
