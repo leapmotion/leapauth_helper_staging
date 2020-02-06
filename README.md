@@ -148,6 +148,10 @@ and properly configured to only call GA in production environments, so integrati
 
 Put that one line into the `<head>` of your base application layout, and you're done!
 
+#### Version >= 1.8.1
+
+Decomposed and added roles for a variety of scoped functionality
+
 #### Version >= 1.1.0
 
 With version 1.1.0 we deprecated the `secure_url` method.  You should be able to upgrade without issues, but you'll get deprecation warning messages.
