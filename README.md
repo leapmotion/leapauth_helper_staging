@@ -2,7 +2,7 @@
 
 Helps you to authenticate against Leap Motion Central.
 
-## Guide 
+## Guide
 
 ### Install
 
@@ -21,7 +21,7 @@ Then Change your secret_token.rb to match the others.
 ```
 class ApplicationController < ActionController::Base
   include LeapauthHelper
-  before_filter :authenticate_auth_user
+  before_action :authenticate_auth_user
 
   def current_user
     current_user_from_auth  # or keep your own User model
@@ -33,7 +33,7 @@ end
 #### Url Generators
 
 In your app, you should use the following methods to generate the URLs that you need that talk with Central (the auth system).
-    
+
 * `auth_get_user_id_json_url(access_token)`
 * `auth_create_session_json_url`
 * `auth_update_user_json_url(user_id)`
@@ -78,7 +78,7 @@ class ApplicationController
 
   ...
 
-  before_filter :initialize_mixpanel
+  before_action :initialize_mixpanel
 
   def initialize_mixpanel
     @mixpanel ||= Mixpanel.new(site_name, current_user)
@@ -159,7 +159,7 @@ There are now pair methods for sign in/sign out.
 
 #### Version >= 1.0.0
 
-Configuration should happen with an initializer in your config/initializers folder like 
+Configuration should happen with an initializer in your config/initializers folder like
 `config/initializers/leapauth_helper.rb`.  In there, you can set configuration params as necessary like this:
 
     LeapauthHelper.configure do |cfg|
@@ -186,7 +186,7 @@ By default, Google Analytics is configured to only render in production environm
 as any other config param for LeapauthHelper.
 
 #### Version < 1.0.0
- 
+
 Before version 1.0.0,  you could configure LeapauthHelper using environment variables.
 
 
