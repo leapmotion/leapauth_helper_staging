@@ -1,6 +1,6 @@
 module LeapauthHelper
   module UserCapabilities
-    EmployeeFlags = [ :is_super_admin, :is_privacy_admin, :is_admin, :is_firmware_admin, :is_representative, :is_preorder_admin, :is_lm, :is_content_admin, :is_uservoice_admin ]
+    EmployeeFlags = [ :is_super_admin, :is_privacy_admin, :is_generics_admin, :is_admin, :is_firmware_admin, :is_representative, :is_preorder_admin, :is_lm, :is_content_admin, :is_uservoice_admin ]
     Flags = EmployeeFlags + [ :is_developer, :is_beta, :is_media, :is_consumer_beta, :is_vip ]
 
     # This is currently used in LeapDev for Forem, and it may also be used elsewhere.
