@@ -100,7 +100,7 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.secure_url("/agreements/SdkAgreement", options.merge(:_r => destination))
     end
 
-    def central_develper_profile_url(destination = current_url, options = {})
+    def central_developer_profile_url(destination = current_url, options = {})
       LeapauthHelper::UrlHelpers.secure_url("/account#developer_profile", options.merge(:_r => destination))
     end
 
