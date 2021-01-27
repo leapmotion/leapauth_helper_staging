@@ -52,7 +52,8 @@ module LeapauthHelper
       "developer_host"     =>  "developer.leapmotion.com",
       "mixpanel_token"     =>  "77d363605f0470115eb82352f14b2981",
       "google_property_id" =>  "UA-31536531-1",
-      "gtm_container_id"   =>  "GTM-WXGVFM"
+      "gtm_container_id"   =>  "GTM-WXGVFM",
+      "auth_domains"       =>  ['leapmotion.com', 'ultraleap.com']
     },
     'all' => {
       # If you're acme.uservoice.com then this value would be 'acme'.
