@@ -68,6 +68,10 @@ module LeapauthHelper
       LeapauthHelper::UrlHelpers.secure_url("/account", options)
     end
 
+    def auth_user_developer_url(options = {})
+      LeapauthHelper::UrlHelpers.secure_url("/account#developer_profile", options)
+    end
+
     def central_reauth_url(options = {})
       LeapauthHelper::UrlHelpers.secure_url("/users/confirm_password", options)
     end
