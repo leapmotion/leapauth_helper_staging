@@ -1,5 +1,6 @@
 # LeapauthHelper
 
+just a comment
 Helps you to authenticate against Leap Motion Central.
 
 ## Guide
@@ -34,18 +35,18 @@ end
 
 In your app, you should use the following methods to generate the URLs that you need that talk with Central (the auth system).
 
-* `auth_get_user_id_json_url(access_token)`
-* `auth_create_session_json_url`
-* `auth_update_user_json_url(user_id)`
-* `auth_sign_in_url(destination = current_url)` (alias `auth_create_session_url`)
-* `auth_sign_out_url(destination = current_url)` (alias `auth_destroy_session_url`)
-* `auth_forgot_password_url`
-* `auth_require_username_url`
-* `auth_edit_profile_url`
-* `auth_revert_to_admin_url`
-* `auth_admin_users_url`
-* `auth_admin_user_url(user_id)`
-* `auth_admin_user_edit_embed_url(user_id)`
+- `auth_get_user_id_json_url(access_token)`
+- `auth_create_session_json_url`
+- `auth_update_user_json_url(user_id)`
+- `auth_sign_in_url(destination = current_url)` (alias `auth_create_session_url`)
+- `auth_sign_out_url(destination = current_url)` (alias `auth_destroy_session_url`)
+- `auth_forgot_password_url`
+- `auth_require_username_url`
+- `auth_edit_profile_url`
+- `auth_revert_to_admin_url`
+- `auth_admin_users_url`
+- `auth_admin_user_url(user_id)`
+- `auth_admin_user_edit_embed_url(user_id)`
 
 #### Cross Site Header
 
@@ -115,14 +116,14 @@ Read the mixpanel API docs for more about callbacks with the `track_link`/`track
 
 To track events that may happen in controllers (calling mixpanel.track), register the events before the end of the rendered `<body>`:
 
-* In controller methods:
+- In controller methods:
 
 ```ruby
 @mixpanel.track 'my event'
 @mixpanel.track 'my event with opts', { :opt1 => 'value 1' }
 ```
 
-* In a view:
+- In a view:
 
 ```erb
 <%=
@@ -154,7 +155,7 @@ Decomposed and added roles for a variety of scoped functionality
 
 #### Version >= 1.1.0
 
-With version 1.1.0 we deprecated the `secure_url` method.  You should be able to upgrade without issues, but you'll get deprecation warning messages.
+With version 1.1.0 we deprecated the `secure_url` method. You should be able to upgrade without issues, but you'll get deprecation warning messages.
 
 There are now pair methods for sign in/sign out.
 
@@ -164,7 +165,7 @@ There are now pair methods for sign in/sign out.
 #### Version >= 1.0.0
 
 Configuration should happen with an initializer in your config/initializers folder like
-`config/initializers/leapauth_helper.rb`.  In there, you can set configuration params as necessary like this:
+`config/initializers/leapauth_helper.rb`. In there, you can set configuration params as necessary like this:
 
     LeapauthHelper.configure do |cfg|
       cfg.auth_host = 'this.host.com'
@@ -191,8 +192,7 @@ as any other config param for LeapauthHelper.
 
 #### Version < 1.0.0
 
-Before version 1.0.0,  you could configure LeapauthHelper using environment variables.
-
+Before version 1.0.0, you could configure LeapauthHelper using environment variables.
 
 ### Halp
 
