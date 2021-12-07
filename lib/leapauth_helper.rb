@@ -153,6 +153,7 @@ module LeapauthHelper
   end
 
   def current_user_from_auth
+    byebug
     unless instance_variable_defined?(:@current_user_from_auth)
       @current_user_from_auth ||= begin
         if body = auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
