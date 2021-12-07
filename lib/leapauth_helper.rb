@@ -82,9 +82,6 @@ module LeapauthHelper
   end
 
   def set_auth_cookie_from_user(user)
-    logger.debug user
-    logger.debug 'goodbye'
-=begin
     cookie_present = auth_cookie_jar.key?(LeapauthHelper.config.cookie_auth_key)
     if user
       auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key] = {
@@ -98,7 +95,6 @@ module LeapauthHelper
       auth_cookie_jar.delete(LeapauthHelper.config.cookie_auth_key, :domain => LeapauthHelper.config.auth_domain)
       cookie_present
     end
-=end
   end
 
   def set_can_purchase_cookie_from_user(user)
@@ -157,9 +153,6 @@ module LeapauthHelper
   end
 
   def current_user_from_auth
-    logger.debug 'hello'
-    logger.debug(auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key])
-=begin
     unless instance_variable_defined?(:@current_user_from_auth)
       @current_user_from_auth ||= begin
         if body = auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
@@ -172,7 +165,6 @@ module LeapauthHelper
       end
     end
     (@current_user_from_auth.nil? || @current_user_from_auth.expired?) ? nil : @current_user_from_auth
-=end
   end
 
   def auth_bar
