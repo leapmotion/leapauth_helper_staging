@@ -83,7 +83,7 @@ module LeapauthHelper
 
   def set_auth_cookie_from_user(user)
     logger.debug user
-    logger.debug hello
+    logger.debug 'goodbye'
 =begin
     cookie_present = auth_cookie_jar.key?(LeapauthHelper.config.cookie_auth_key)
     if user
