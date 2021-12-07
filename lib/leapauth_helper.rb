@@ -82,6 +82,9 @@ module LeapauthHelper
   end
 
   def set_auth_cookie_from_user(user)
+    logger.debug user
+    logger.debug hello
+=begin
     cookie_present = auth_cookie_jar.key?(LeapauthHelper.config.cookie_auth_key)
     if user
       auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key] = {
@@ -95,6 +98,7 @@ module LeapauthHelper
       auth_cookie_jar.delete(LeapauthHelper.config.cookie_auth_key, :domain => LeapauthHelper.config.auth_domain)
       cookie_present
     end
+=end
   end
 
   def set_can_purchase_cookie_from_user(user)
@@ -159,7 +163,7 @@ module LeapauthHelper
     unless instance_variable_defined?(:@current_user_from_auth)
       @current_user_from_auth ||= begin
         if body = auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
-          data = ActiveSupport::JSON.decode(body.to_json)
+          data = ActiveSupport::JSON.decode(body)
           LeapauthHelper::AuthUser.new(data)
         else
           warn "your secret_token is not set correctly" if auth_cookie_jar[LeapauthHelper.config.cookie_auth_key]
