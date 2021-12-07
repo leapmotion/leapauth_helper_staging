@@ -153,10 +153,12 @@ module LeapauthHelper
   end
 
   def current_user_from_auth
+    logger.debug 'hello'
+    logger.debug(auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key])
+=begin
     unless instance_variable_defined?(:@current_user_from_auth)
       @current_user_from_auth ||= begin
         if body = auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
-          logger.debug body
           data = ActiveSupport::JSON.decode(body.to_json)
           LeapauthHelper::AuthUser.new(data)
         else
@@ -166,6 +168,7 @@ module LeapauthHelper
       end
     end
     (@current_user_from_auth.nil? || @current_user_from_auth.expired?) ? nil : @current_user_from_auth
+=end
   end
 
   def auth_bar
