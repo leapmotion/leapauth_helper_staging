@@ -156,6 +156,7 @@ module LeapauthHelper
     unless instance_variable_defined?(:@current_user_from_auth)
       @current_user_from_auth ||= begin
         if body = auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
+          puts body
           data = ActiveSupport::JSON.decode(body.to_json)
           LeapauthHelper::AuthUser.new(data)
         else
