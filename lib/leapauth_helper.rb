@@ -155,7 +155,6 @@ module LeapauthHelper
   def current_user_from_auth
     logger.debug 'hello'
     unless instance_variable_defined?(:@current_user_from_auth)
-      logger.debug @current_user_from_auth
       @current_user_from_auth ||= begin
         if body = auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
           logger.debug "body - #{body}"
@@ -168,6 +167,8 @@ module LeapauthHelper
         end
       end
     end
+    logger.debug 'bye'
+    logger.debug @current_user_from_auth
     (@current_user_from_auth.nil? || @current_user_from_auth.expired?) ? nil : @current_user_from_auth
   end
 
