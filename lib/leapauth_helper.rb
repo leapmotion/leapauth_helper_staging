@@ -124,6 +124,7 @@ module LeapauthHelper
   def get_current_desktop_auth
     desktop_auth = {}
     if body = auth_cookie_jar.signed[LeapauthHelper.config.cookie_desktop_auth_key]
+      logger.info 'desktop auth'
       desktop_auth = ActiveSupport::JSON.decode(body)
     else
       warn "your secret_token is not set correctly" if auth_cookie_jar[LeapauthHelper.config.cookie_desktop_auth_key]
@@ -156,11 +157,11 @@ module LeapauthHelper
     logger.debug 'hello'
     unless instance_variable_defined?(:@current_user_from_auth)
       @current_user_from_auth ||= begin
-        logger.debug auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
+        logger.info auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
         if body = auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
-          logger.warning "body here"
+          logger.info "body here"
           data = ActiveSupport::JSON.decode(body)
-          logger.warning "data"
+          logger.info "data"
           LeapauthHelper::AuthUser.new(data)
         else
           warn "your secret_token is not set correctly" if auth_cookie_jar[LeapauthHelper.config.cookie_auth_key]
