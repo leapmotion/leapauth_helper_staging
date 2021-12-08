@@ -158,18 +158,19 @@ module LeapauthHelper
       @current_user_from_auth ||= begin
         logger.debug auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
         if body = auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
-          #logger.debug "body - #{body}"
+          logger.warning "body here"
           data = ActiveSupport::JSON.decode(body)
-          #logger.debug "data - #{data}"
+          logger.warning "data"
           LeapauthHelper::AuthUser.new(data)
         else
           warn "your secret_token is not set correctly" if auth_cookie_jar[LeapauthHelper.config.cookie_auth_key]
           nil
+          logger.info 'nil here'
         end
       end
     end
-    logger.debug 'bye'
-    logger.debug @current_user_from_auth
+    logger.info 'bye'
+    logger.info @current_user_from_auth
     (@current_user_from_auth.nil? || @current_user_from_auth.expired?) ? nil : @current_user_from_auth
   end
 
