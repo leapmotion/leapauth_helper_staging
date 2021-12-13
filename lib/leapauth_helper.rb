@@ -159,6 +159,7 @@ module LeapauthHelper
   def current_user_from_auth
     logger.debug 'hello'
     logger.info auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
+    logger.debug 'nothing from above'
     unless instance_variable_defined?(:@current_user_from_auth)
       @current_user_from_auth ||= begin
 
