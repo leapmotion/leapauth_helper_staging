@@ -84,6 +84,9 @@ module LeapauthHelper
   def set_auth_cookie_from_user(user)
     cookie_present = auth_cookie_jar.key?(LeapauthHelper.config.cookie_auth_key)
     if user
+      logger.debug 'user hash'
+      logger.debug(Internal.hash_for_user(user).to_json)
+
       auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key] = {
         :value => Internal.hash_for_user(user).to_json,
         :domain => LeapauthHelper.config.auth_domain,
@@ -155,9 +158,10 @@ module LeapauthHelper
 
   def current_user_from_auth
     logger.debug 'hello'
+    logger.info auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
     unless instance_variable_defined?(:@current_user_from_auth)
       @current_user_from_auth ||= begin
-        logger.info auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
+
         if body = auth_cookie_jar.signed[LeapauthHelper.config.cookie_auth_key]
           logger.info "body here"
           data = ActiveSupport::JSON.decode(body)
